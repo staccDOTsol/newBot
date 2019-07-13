@@ -867,7 +867,7 @@ if (this.pair == 'EOSBTC' || this.pair == 'BCHBTC'){
         }
 
         if (marginperc < 0.25){
-        qty = qty * 5w
+        qty = qty * 5
         }
         var qty2 = qty / 3
         qty2 = Math.round(qty2)
