@@ -728,6 +728,7 @@ setTimeout(function(){
 request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
   console.log(body);
+  refreshMargin();
   })
   })
         }
@@ -980,6 +981,7 @@ setTimeout(function(){
 request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
   console.log(body);
+  refreshMargin();
   })
   })
   }
