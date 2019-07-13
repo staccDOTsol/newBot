@@ -602,7 +602,7 @@ this.chart.series[7].data[a].remove();
 
     if (
     this.chart.series[1].data[40] != undefined){
-    console.log(this.chart.series[1].data[40].plotY)
+    console.log(this.chart.series[5].yData[26])
     }
     if(this.chart.series[5].yData[26] != undefined){
 
