@@ -22,7 +22,7 @@
         ></a>
         <div class="form-group mb8">
           <label
-            >TestNet API Key
+            >LiveNet API Key
             <span
               class="icon-info-circle"
               title="Your API Key on testnet, with Order permissions (NOT Order Cancel)"
