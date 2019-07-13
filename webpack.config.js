@@ -98,7 +98,7 @@ module.exports.plugins = (module.exports.plugins || []).concat([
       VERSION: JSON.stringify(require("./package.json").version),
       BUILD_DATE: JSON.stringify(date.getDate() + ' ' + date.toLocaleString('en-US', {month: 'short'}).toLowerCase()),
       PROXY_URL: JSON.stringify(process.env.PROXY_URL || ''),
-      API_URL: JSON.stringify(process.env.API_URL || 'https://api.35.239.130.201/{pair}/historical/{from}/{to}/{timeframe}/'),
+      API_URL: JSON.stringify(process.env.API_URL || 'https://api.34.68.94.126/{pair}/historical/{from}/{to}/{timeframe}/'),
       API_SUPPORTED_PAIRS: JSON.stringify(['BTCUSD'])
     }
   })
