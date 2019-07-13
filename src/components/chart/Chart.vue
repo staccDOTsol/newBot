@@ -982,6 +982,7 @@ request(requestOptions, function(error, response, body) {
   console.log(body);
   })
   })
+  }
         var verb = 'DELETE',
   path = '/api/v1/order/all',
   expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
