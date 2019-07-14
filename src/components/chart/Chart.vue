@@ -473,7 +473,7 @@ export default {
           this.redrawChart(range)
         })
     },
-       {
+    redrawChart(range) {
       console.log(
         `[chart.redrawChart]`,
         range ? '(& setting range to ' + range + ')' : ''
