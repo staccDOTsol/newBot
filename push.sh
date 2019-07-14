@@ -1,7 +1,7 @@
 git add .
 git commit -m "iteration..."
 git push
-cd ../aggr.trades-bitmex-sma-bot
+cd ../testnet-inter-exchange-volume-sma-crosses-trader-on-bitmex
 git add .
 git commit -m "iteration..."
 git push
