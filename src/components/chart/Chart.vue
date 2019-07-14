@@ -658,10 +658,10 @@ firsttrade++;
         }
 
         if (marginperc < 0.3){
-        qty = qty /6
+        qty = qty /2
         }
        else if (marginperc < 0.4){
-        qty = qty / 3
+        qty = qty / 1.25
         }
         if (thepair == 'ETHUSD'){
         qty = qty * 13.4852071;
@@ -961,10 +961,10 @@ if (thepair == 'EOSBTC' || thepair == 'BCHBTC'){
         }
 
         if (marginperc < 0.3){
-        qty = qty /6
+        qty = qty /2
         }
         else if (marginperc < 0.4){
-        qty = qty / 3
+        qty = qty / 1.25
         }
         if (thepair == 'ETHUSD'){
         qty = qty * 13.4852071;
