@@ -100,3 +100,4 @@ XMR 48NJj3RJDo33zMLaudQDdM8G6MfPrQbpeZU2YnRN2Ep6hbKyYRrS2ZSdiAKpkUXBcjD2pKiPqXtQ
 # 34.68.94.126s-bitmex-sma-bot
 test
 tesT
+tesT
