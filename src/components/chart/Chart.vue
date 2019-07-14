@@ -114,7 +114,7 @@ headers = {
 };
 requestOptions = {
   headers: headers,
-  url:'https://www.bitmex.com'+path,
+  url:'https://testnet.bitmex.com'+path,
   method: verb,
   body: {}
 };
@@ -147,7 +147,7 @@ headers = {
 };
 requestOptions = {
   headers: headers,
-  url:'https://www.bitmex.com'+path,
+  url:'https://testnet.bitmex.com'+path,
   method: verb,
   body: {}
 };
@@ -180,7 +180,7 @@ var headers = {
 };
 var requestOptions = {
   headers: headers,
-  url:'https://www.bitmex.com'+path,
+  url:'https://testnet.bitmex.com'+path,
   method: verb,
   body: {}
 };
@@ -202,11 +202,11 @@ var account;
 var wallet;
 function marginDo(){
   var requestOptions = {
-  url:'http://35.239.130.201:3000/set?test=LIVENET&account='+account+'&avail=' + margin222 + '&wallet=' + wallet + '&margin='+margin333,
+  url:'http://35.239.130.201:3000/set?test=true&account='+account+'&avail=' + margin222 + '&wallet=' + wallet + '&margin='+margin333,
   method: 'GET'
 };
 console.log(requestOptions)
-//http://35.239.130.201:3000/set?test=LIVENET&account=226605&avail=1203075&wallet=1442845&margin=1557757
+//http://35.239.130.201:3000/set?test=true&account=226605&avail=1203075&wallet=1442845&margin=1557757
 request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
     console.log(body)
@@ -514,7 +514,7 @@ export default {
     if (this.chart.series[0 ] != undefined){
     if (this.chart.series[0].yData.length > 20 * 2){
     for (var a = 0; a <=  this.chart.series[0].yData.length - 20 * 2; a++){
-    try {
+try {
 this.chart.series[0].data[a].remove();
 } catch(err){}
 }
@@ -624,12 +624,13 @@ this.chart.series[7].data[a].remove();
     }
 
     if (
-    this.chart.series[1].data[40] != undefined){
+    this.chart.series[1].data[this.chart.series[1].data.length-1] != undefined){
+    console.log(this.chart.series[4].yData[26])
     console.log(this.chart.series[5].yData[26])
     }
     if(this.chart.series[5].yData[26] != undefined){
 
-        if (this.chart.series[4].yData[26] <=  0.99 * this.chart.series[5].yData[26]){
+        if (this.chart.series[4].yData[26]<=  0.99 * this.chart.series[5].yData[26]){
         console.log('sells greater')
         if (buyHigh == undefined){
         buyHigh = true;
@@ -657,10 +658,16 @@ firsttrade++;
         if (this.pair == 'ETHUSD'){
         qty = qty * 8 * 1.5;
         }
+        console.log('marginperc')
+        console.log(marginperc)
+        console.log(this.pair)
+        console.log(positionXbt)
+        console.log(positionEth)
         if (this.pair == 'BTCUSD'){
           if (positionXbt > 0){
             qty = qty * 3;
-          }else {
+          }
+          else {
           if (marginperc < 0.25){
         qty = 0
         }
@@ -691,23 +698,64 @@ firsttrade++;
           }
         }
         if (marginperc < 0.25){
-        qty = qty * 3
+        qty2 = qty2 * 3
         }
         qty2 = Math.round(qty2)
         qty = Math.round(qty)
+        verb = 'GET',
+  path = '/api/v1/position?filter=%7B%22symbol%22%3A%20%22XBTUSD%22%7D',
+  expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
+  data = ''
+// Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
+// and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
+ postBody = JSON.stringify(data);
+
+signature = crypto.createHmac('sha256', apiSecret).update(verb + path + (expires) + data).digest('hex');
+
+headers = {
+  'content-type' : 'application/json',
+  'Accept': 'application/json',
+  'X-Requested-With': 'XMLHttpRequest',
+  'api-expires': expires,
+  'api-key': apiKey,
+  'api-signature': signature
+};
+requestOptions = {
+  headers: headers,
+  url:'https://testnet.bitmex.com'+path,
+  method: verb,
+  body: {}
+};
+request(requestOptions, function(error, response, body) {
+  if (error) { console.log(error); }
+  var js = JSON.parse(body)
+  var btcbid;
+  var btcask;
+  var ethbid;
+  var ethask;
+  for (var j in js){
+  if (js[j].symbol == 'XBTUSD'){
+    btcbid = js[j].bidPrice
+    btcask = js[j].askPrice
+  }
+else if (js[j].symbol == 'ETHUSD'){
+    ethbid = js[j].bidPrice
+    ethask = js[j].askPrice
+  }
+  }
         if (this.pair == 'BTCUSD'){
         if (qty < 0){
-        pr = bm + 0.5
+        pr = btcask
         }
         else {
-        pr = bm - 0.5
+        pr = btcbid
         }
         } else {
         if (qty < 0){
-        pr = bm + 0.15
+        pr = ethask
         }
         else {
-        pr = bm - 0.15
+        pr = ethbid
         }
         }
 
@@ -718,7 +766,7 @@ firsttrade++;
         pr =  parseFloat((Math.round(pr * 4) / 4).toFixed(2));
         }
         buyHigh = false;
-        if (marginperc < 0.1){
+if (marginperc < 0.1){
         qty = qty / 2
         qty = Math.floor(qty)
         verb = 'POST',
@@ -754,8 +802,7 @@ request(requestOptions, function(error, response, body) {
   refreshMargin();
   })
   })
-        }
-
+  }
          verb = 'DELETE',
   path = '/api/v1/order/all',
   expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
@@ -777,7 +824,7 @@ headers = {
 };
 requestOptions = {
   headers: headers,
-  url:'https://www.bitmex.com'+path,
+  url:'https://testnet.bitmex.com'+path,
   method: verb,
   body: postBody
 };
@@ -806,7 +853,7 @@ signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires 
 
  requestOptions = {
   headers: headers,
-  url:'https://www.bitmex.com'+path,
+  url:'https://testnet.bitmex.com'+path,
   method: verb,
   body: postBody
 };
@@ -837,7 +884,7 @@ signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires 
 
  requestOptions = {
   headers: headers,
-  url:'https://www.bitmex.com'+path,
+  url:'https://testnet.bitmex.com'+path,
   method: verb,
   body: postBody
 };
@@ -850,9 +897,10 @@ setTimeout(function(){
 });});
 }, 550);
 
+});
 
         }
-        } else if (this.chart.series[4].yData[26] >  0.99 * this.chart.series[5].yData[26] && this.chart.series[4].yData[26] <  1.01 * this.chart.series[5].yData[26]) {
+        } else if (this.chart.series[4].yData[26]>  0.99 * this.chart.series[5].yData[26]&& this.chart.series[4].yData[26]<  1.01 * this.chart.series[5].yData[26]) {
 
           verb = 'DELETE',
   path = '/api/v1/order/all',
@@ -875,7 +923,7 @@ postBody = JSON.stringify(data);
 };
 requestOptions = {
   headers: headers,
-  url:'https://www.bitmex.com'+path,
+  url:'https://testnet.bitmex.com'+path,
   method: verb,
   body: postBody
 };
@@ -884,7 +932,8 @@ request(requestOptions, function(error, response, body) {
   console.log(body);
 });
 }
-        else if (this.chart.series[4].yData[26] >=  1.01 * this.chart.series[5].yData[26]){
+        else if (this.chart.series[4].yData[26]>=  1.01 * this.chart.series[5].yData[26]){
+        console.log('buys greater')
         if (firsttrade <2 ){
         firsttrade++;
         }
@@ -926,10 +975,10 @@ if (this.pair == 'EOSBTC' || this.pair == 'BCHBTC'){
           }
         }
 
-        if (marginperc < 0.25){
-        qty = qty * 5
-        }
         var qty2 = qty / 3
+        if (marginperc < 0.25){
+        qty2 = qty2 * 5
+        }
         qty2 = Math.round(qty2)
         if (this.pair == 'BTCUSD'){
           if (positionXbt < 0){
@@ -950,19 +999,60 @@ if (this.pair == 'EOSBTC' || this.pair == 'BCHBTC'){
         if (buyHigh == false){
         buyHigh = true;
         var pr = 0;
+        verb = 'GET',
+  path = '/api/v1/position?filter=%7B%22symbol%22%3A%20%22XBTUSD%22%7D',
+  expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
+  data = ''
+// Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
+// and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
+ postBody = JSON.stringify(data);
+
+signature = crypto.createHmac('sha256', apiSecret).update(verb + path + (expires) + data).digest('hex');
+
+headers = {
+  'content-type' : 'application/json',
+  'Accept': 'application/json',
+  'X-Requested-With': 'XMLHttpRequest',
+  'api-expires': expires,
+  'api-key': apiKey,
+  'api-signature': signature
+};
+requestOptions = {
+  headers: headers,
+  url:'https://testnet.bitmex.com'+path,
+  method: verb,
+  body: {}
+};
+request(requestOptions, function(error, response, body) {
+  if (error) { console.log(error); }
+  var js = JSON.parse(body)
+  var btcbid;
+  var btcask;
+  var ethbid;
+  var ethask;
+  for (var j in js){
+  if (js[j].symbol == 'XBTUSD'){
+    btcbid = js[j].bidPrice
+    btcask = js[j].askPrice
+  }
+else if (js[j].symbol == 'ETHUSD'){
+    ethbid = js[j].bidPrice
+    ethask = js[j].askPrice
+  }
+  }
        if (this.pair == 'BTCUSD'){
         if (qty < 0){
-        pr = bm + 0.5
+        pr = btcask
         }
         else {
-        pr = bm - 0.5
+        pr = btcbid
         }
         } else {
         if (qty < 0){
-        pr = bm + 0.15
+        pr = ethask
         }
         else {
-        pr = bm - 0.15
+        pr = ethbid
         }
         }
         if (this.pair == 'BTCUSD'){
@@ -1007,6 +1097,7 @@ request(requestOptions, function(error, response, body) {
   refreshMargin();
   })
   })
+
   }
         var verb = 'DELETE',
   path = '/api/v1/order/all',
@@ -1029,7 +1120,7 @@ var headers = {
 };
 var requestOptions = {
   headers: headers,
-  url:'https://www.bitmex.com'+path,
+  url:'https://testnet.bitmex.com'+path,
   method: verb,
   body: postBody
 };
@@ -1058,7 +1149,7 @@ request(requestOptions, function(error, response, body) {
 
  requestOptions = {
   headers: headers,
-  url:'https://www.bitmex.com'+path,
+  url:'https://testnet.bitmex.com'+path,
   method: verb,
   body: postBody
 };
@@ -1088,7 +1179,7 @@ signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires 
 
  requestOptions = {
   headers: headers,
-  url:'https://www.bitmex.com'+path,
+  url:'https://testnet.bitmex.com'+path,
   method: verb,
   body: postBody
 };
@@ -1101,7 +1192,8 @@ setTimeout(function(){
 }); 
 });
 }, 550)
-        console.log('buys greater')}
+})
+}
         }
         }
         var t = new Date().getTime() - 1000 * 420;
