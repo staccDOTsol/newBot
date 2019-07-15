@@ -803,6 +803,7 @@ export default {
     ...mapState([
       'pair',
       'apikey',
+      'trailstop',
       'apisecret',
       'maxRows',
       'decimalPrecision',
