@@ -215,7 +215,6 @@ account = JSON.parse(body).account
   margin333 = JSON.parse(body).marginBalance/100000000;
   marginperc = margin222 / margin333
   wallet = JSON.parse(body).walletBalance/100000000 ;
-  marginDo()
 });
 }
 setTimeout(function(){
@@ -235,6 +234,10 @@ request(requestOptions, function(error, response, body) {
     console.log(body)
   })
 }
+setInterval(function(){
+  marginDo()
+  }, 21000)
+
 setInterval(function(){
   refreshMargin();
 }, 20000)
@@ -918,7 +921,9 @@ else if (js[j].symbol == 'XRPU19'){
     xrpask = js[j].askPrice
   }
   }
+  var stopQty = 0;
         if (thepair == 'BTCUSD'){
+        stopQty = positionXbt * -1
         if (qty <= 0){
         pr = btcask
         }
@@ -926,6 +931,7 @@ else if (js[j].symbol == 'XRPU19'){
         pr = btcbid
         }
         } else if (thepair == 'ETHUSD'){
+        stopQty = positionEth * -1
         if (qty < 0){
         pr = ethask
         }
@@ -934,6 +940,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'TRXBTC'){
+        stopQty = positionTrx * -1
         if (qty < 0){
         pr = trxask
         }
@@ -942,6 +949,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'ADABTC'){
+        stopQty = positionAda * -1
         if (qty < 0){
         pr = adaask
         }
@@ -950,6 +958,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'EOSBTC'){
+        stopQty = positionEos * -1
         if (qty < 0){
         pr = eosask
         }
@@ -958,6 +967,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'BCHBTC'){
+        stopQty = positionBch * -1
         if (qty< 0){
         pr = bchask
         }
@@ -966,6 +976,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'LTCBTC'){
+        stopQty = positionLtc * -1
         if (qty < 0){
         pr = ltcask
         }
@@ -974,6 +985,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'XRPBTC'){
+        stopQty = positionXrp * -1
         if (qty < 0){
         pr = xrpask
         }
@@ -1069,7 +1081,7 @@ request(requestOptions, function(error, response, body) {
 verb = 'POST',
   path = '/api/v1/order',
   expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
-  data = {symbol:thepair.replace('BTCUSD','XBTUSD').replace('BTC','U19'),orderQty:qty,execInst:"ParticipateDoNotInitiate",price:pr,ordType:"StopLimit", pegOffsetValue: trail, stop: stop };
+  data = {symbol:thepair.replace('BTCUSD','XBTUSD').replace('BTC','U19'),orderQty:stopQty,execInst:"ParticipateDoNotInitiate",price:pr,ordType:"StopLimit", pegOffsetValue: trail, stop: stop };
 
 // Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
 // and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
@@ -1100,7 +1112,7 @@ request(requestOptions, function(error, response, body) {
 verb = 'POST',
   path = '/api/v1/order',
   expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
-  data = {symbol:thepair.replace('BTCUSD','XBTUSD').replace('BTC','U19'),orderQty:qty,price:pr,ordType:"Limit"};
+  data = {symbol:thepair.replace('BTCUSD','XBTUSD').replace('BTC','U19'),orderQty:qty,price:pr,ordType:"Limit" };
 
 // Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
 // and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
@@ -1400,7 +1412,9 @@ else if (js[j].symbol == 'XRPU19'){
     xrpask = js[j].askPrice
   }
   }
+  var stopQty = 0;
         if (thepair == 'BTCUSD'){
+        stopQty = positionXbt * -1
         if (qty <= 0){
         pr = btcask
         }
@@ -1408,6 +1422,7 @@ else if (js[j].symbol == 'XRPU19'){
         pr = btcbid
         }
         } else if (thepair == 'ETHUSD'){
+        stopQty = positionEth * -1
         if (qty < 0){
         pr = ethask
         }
@@ -1416,6 +1431,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'TRXBTC'){
+        stopQty = positionTrx * -1
         if (qty < 0){
         pr = trxask
         }
@@ -1424,6 +1440,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'ADABTC'){
+        stopQty = positionAda * -1
         if (qty < 0){
         pr = adaask
         }
@@ -1432,6 +1449,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'EOSBTC'){
+        stopQty = positionEos * -1
         if (qty < 0){
         pr = eosask
         }
@@ -1440,6 +1458,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'BCHBTC'){
+        stopQty = positionBch * -1
         if (qty< 0){
         pr = bchask
         }
@@ -1448,6 +1467,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'LTCBTC'){
+        stopQty = positionLtc * -1
         if (qty < 0){
         pr = ltcask
         }
@@ -1456,6 +1476,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'XRPBTC'){
+        stopQty = positionXrp * -1
         if (qty < 0){
         pr = xrpask
         }
@@ -1464,6 +1485,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
 var trail = pr * 0.01
+
         var stop = pr * 1.01
         if (thepair == 'BTCUSD'){
         pr = Math.round(pr*2)/2;
@@ -1560,7 +1582,7 @@ request(requestOptions, function(error, response, body) {
  verb = 'POST',
   path = '/api/v1/order',
   expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
-  data = {symbol:thepair.replace('BTCUSD','XBTUSD').replace('BTC','U19'),orderQty:qty,execInst:"ParticipateDoNotInitiate",price:pr,ordType:"StopLimit", pegOffsetValue: trail, stop: stop };
+  data = {symbol:thepair.replace('BTCUSD','XBTUSD').replace('BTC','U19'),orderQty:stopQty,execInst:"ParticipateDoNotInitiate",price:pr,ordType:"StopLimit", pegOffsetValue: trail, stop: stop };
 
 // Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
 // and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
