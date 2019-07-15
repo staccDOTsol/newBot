@@ -850,7 +850,9 @@ firsttrade++;
           }
         }
         console.log(qty)
-        
+        if (marginperc < 0.15){
+        qty = qty / 5 
+        }
         qty = Math.round(qty)
        verb = 'GET',
   path = '/api/v1/instrument/active',
@@ -1391,6 +1393,9 @@ if (thepair.indexOf('USD') == -1){
         }
 
         
+        if (marginperc < 0.15){
+        qty = qty / 5 
+        }
         qty = Math.round(qty)
         if (buyHigh == undefined){
         buyHigh = false;
