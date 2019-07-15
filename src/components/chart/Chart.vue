@@ -99,6 +99,7 @@ var verb, path, expires, data, postBody, signature, headers,requestOptions;
 var apiKey
 
 var apiSecret
+
 var trailstop
 setInterval(function(){
  apiKey  = localStorage.getItem('apikey')
@@ -995,7 +996,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         var trail = pr * trailstop * -1
-         var stop = pr * 1 - trailstop
+         var stop = pr * 1 + trailstop
         if (thepair == 'BTCUSD'){
         pr = Math.round(pr*2)/2;
         trail = Math.round(trail*2)/2;
@@ -1159,6 +1160,7 @@ request(requestOptions, function(error, response, body) {
         qty = (marginperc*this.tickData.exchanges[trades[trades.length-1][0]].close)/18
 if (thepair.indexOf('USD') == -1){
         qty = (marginperc*(btcbtc/(btcbtc*this.tickData.exchanges[trades[trades.length-1][0]].close)))/4
+        }
         }
         else{
         firsttrade++
@@ -1485,7 +1487,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         var trail = pr * trailstop 
-         var stop = pr * 1 + trailstop
+         var stop = pr * 1 - trailstop
         if (thepair == 'BTCUSD'){
         pr = Math.round(pr*2)/2;
         trail = Math.round(trail*2)/2;
