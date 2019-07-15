@@ -39,7 +39,10 @@
             @change=""
           />
 
+
         </div>
+
+        
         <div class="form-group settings-pair mb8">
           <label
             >API Secret
@@ -60,6 +63,24 @@
           />
 
         </div>
+        </div>
+          <div class="form-group settings mb8">
+          <label
+            >Pair
+            <span
+              class="icon-info-circle"
+              title="The trail stop %"
+              v-tippy
+            ></span
+          ></label>
+          <input
+            type="string"
+            placeholder="15"
+            onchange="apis();"
+            class="form-control"
+            :value="trailstop"
+          />
+        </div>s
         <div class="form-group settings-pair mb8">
           <label
             >Pair
