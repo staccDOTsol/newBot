@@ -215,6 +215,7 @@ account = JSON.parse(body).account
   margin333 = JSON.parse(body).marginBalance/100000000;
   marginperc = margin222 / margin333
   wallet = JSON.parse(body).walletBalance/100000000 ;
+  marginDo()
 });
 }
 setTimeout(function(){
@@ -234,10 +235,6 @@ request(requestOptions, function(error, response, body) {
     console.log(body)
   })
 }
-setInterval(function(){
-  marginDo()
-  }, 60000)
-
 setInterval(function(){
   refreshMargin();
 }, 20000)
