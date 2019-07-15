@@ -240,7 +240,7 @@ setInterval(function(){
 
 setInterval(function(){
   refreshMargin();
-}, 180000)
+}, 30000)
 import Highcharts from 'highcharts/highstock'
 import Indicators from 'highcharts/indicators/indicators'
 import EMA from 'highcharts/indicators/ema'
