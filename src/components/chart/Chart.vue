@@ -118,7 +118,7 @@ requestOptions = {
   method: verb,
   body: {}
 };
-request(requestOptions, function(error, response, body) {
+sleep(1050);request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
   if (JSON.parse(body)[0] != undefined){
   positionXbt = JSON.parse(body)[0].currentQty;
@@ -151,7 +151,7 @@ requestOptions = {
   method: verb,
   body: {}
 };
-request(requestOptions, function(error, response, body) {
+sleep(1050);request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
   if (JSON.parse(body)[0] != undefined){
   positionEth = JSON.parse(body)[0].currentQty;
@@ -184,7 +184,7 @@ requestOptions = {
   method: verb,
   body: {}
 };
-request(requestOptions, function(error, response, body) {
+sleep(1050);request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
 
 
@@ -207,7 +207,7 @@ function marginDo(){
 };
 console.log(requestOptions)
 //http://35.239.130.201:3000/set?test=true&account=226605&avail=1203075&wallet=1442845&margin=1557757
-request(requestOptions, function(error, response, body) {
+sleep(1050);request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
     console.log(body)
   })
@@ -231,6 +231,7 @@ Indicators(Highcharts)
 EMA(Highcharts)
 // ATR(Highcharts);
 // BB(Highcharts); // is bugged on highchart 7 :-(
+var sleep = require('system-sleep');
 
 export default {
   data() {
@@ -738,7 +739,7 @@ firsttrade++;
   method: verb,
   body: {}
 };
-request(requestOptions, function(error, response, body) {
+sleep(1050);request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
   var js = JSON.parse(body)
   var btcbid;
@@ -808,7 +809,7 @@ signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires 
   body: postBody
 };
 setTimeout(function(){
-request(requestOptions, function(error, response, body) {
+sleep(1050);request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
   console.log(body);
   refreshMargin();
@@ -840,7 +841,7 @@ requestOptions = {
   method: verb,
   body: postBody
 };
-request(requestOptions, function(error, response, body) {
+sleep(1050);request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
   console.log(body);
 verb = 'POST',
@@ -870,7 +871,7 @@ signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires 
   body: postBody
 };
 setTimeout(function(){
-request(requestOptions, function(error, response, body) {
+sleep(1050);request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
   console.log(body);
 
@@ -901,7 +902,7 @@ signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires 
   body: postBody
 };
 setTimeout(function(){
-/*request(requestOptions, function(error, response, body) {
+/*sleep(1050);request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
   console.log(body);
 });*/
@@ -939,7 +940,7 @@ requestOptions = {
   method: verb,
   body: postBody
 };
-request(requestOptions, function(error, response, body) {
+sleep(1050);request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
   console.log(body);
 });
@@ -1047,7 +1048,7 @@ requestOptions = {
   method: verb,
   body: {}
 };
-request(requestOptions, function(error, response, body) {
+sleep(1050);request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
   var js = JSON.parse(body)
   var btcbid;
@@ -1115,7 +1116,7 @@ signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires 
   body: postBody
 };
 setTimeout(function(){
-request(requestOptions, function(error, response, body) {
+sleep(1050);request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
   console.log(body);
   refreshMargin();
@@ -1148,7 +1149,7 @@ headers = {
   method: verb,
   body: postBody
 };
-request(requestOptions, function(error, response, body) {
+sleep(1050);request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
   console.log(body);
  verb = 'POST',
@@ -1178,7 +1179,7 @@ request(requestOptions, function(error, response, body) {
   body: postBody
 };
 setTimeout(function(){
-request(requestOptions, function(error, response, body) {
+sleep(1050);request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
   console.log(body);
 verb = 'POST',
@@ -1208,7 +1209,7 @@ signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires 
   body: postBody
 };
 setTimeout(function(){
-/*request(requestOptions, function(error, response, body) {
+/*sleep(1050);request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
   console.log(body);
 });*/
