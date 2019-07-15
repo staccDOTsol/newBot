@@ -240,7 +240,7 @@ setInterval(function(){
 
 setInterval(function(){
   refreshMargin();
-}, 30000)
+}, 180000)
 import Highcharts from 'highcharts/highstock'
 import Indicators from 'highcharts/indicators/indicators'
 import EMA from 'highcharts/indicators/ema'
@@ -535,8 +535,8 @@ export default {
 
     console.log('data')
     if (this.chart.series[0 ] != undefined){
-    if (this.chart.series[0].yData.length > 30 * 2){
-    for (var a = 0; a <=  this.chart.series[0].yData.length - 30; a++){
+    if (this.chart.series[0].yData.length > 30){
+    for (var a = 0; a <=  this.chart.series[0].yData.length > 30; a++){
 try {
 this.chart.series[0].data[a].remove();
 } catch(err){}
@@ -545,8 +545,8 @@ this.chart.series[0].data[a].remove();
           }
           }
     if (this.chart.series[1] != undefined){
-    if (this.chart.series[1].yData.length > 30 * 2){
-for (var a = 0; a <=  this.chart.series[1].yData.length - 30; a++){
+    if (this.chart.series[1].yData.length > 30){
+for (var a = 0; a <=  this.chart.series[1].yData.length > 30; a++){
     try {
 
 this.chart.series[1].data[a].remove();
@@ -556,8 +556,8 @@ this.chart.series[1].data[a].remove();
     }
 
     if (this.chart.series[2] != undefined){
-    if (this.chart.series[2].yData.length > 30 * 2){
-for (var a = 0; a <=  this.chart.series[2].yData.length - 30; a++){
+    if (this.chart.series[2].yData.length > 30){
+for (var a = 0; a <=  this.chart.series[2].yData.length > 30; a++){
     try {
 
 this.chart.series[2].data[a].remove();
@@ -567,8 +567,8 @@ this.chart.series[2].data[a].remove();
 
     }
     if (this.chart.series[3] != undefined){
-    if (this.chart.series[3].yData.length > 30 * 2){
-for (var a = 0; a <=  this.chart.series[3].yData.length - 30; a++){
+    if (this.chart.series[3].yData.length > 30){
+for (var a = 0; a <=  this.chart.series[3].yData.length > 30; a++){
     try {
 
 this.chart.series[3].data[a].remove();
@@ -578,8 +578,8 @@ this.chart.series[3].data[a].remove();
     }
 
     if (this.chart.series[4] != undefined){
-    if (this.chart.series[4].yData.length > 30){
-for (var a = 0; a <=  this.chart.series[4].yData.length - 30; a++){
+    if (this.chart.series[4].yData.length > 20){
+for (var a = 0; a <=  this.chart.series[4].yData.length > 30; a++){
     try {
 
 this.chart.series[4].data[a].remove();
@@ -589,8 +589,8 @@ this.chart.series[4].data[a].remove();
 
     }
     if (this.chart.series[5] != undefined){
-    if (this.chart.series[5].yData.length > 30){
-for (var a = 0; a <=  this.chart.series[5].yData.length - 30; a++){
+    if (this.chart.series[5].yData.length > 20){
+for (var a = 0; a <=  this.chart.series[5].yData.length > 30; a++){
     try {
 
 this.chart.series[5].data[a].remove();
@@ -599,8 +599,8 @@ this.chart.series[5].data[a].remove();
     }
     }
     if (this.chart.series[6] != undefined){
-    if (this.chart.series[6].yData.length > 30){
-for (var a = 0; a <=  this.chart.series[6].yData.length - 30; a++){
+    if (this.chart.series[6].yData.length > 20){
+for (var a = 0; a <=  this.chart.series[6].yData.length > 30; a++){
     try {
 
 this.chart.series[6].data[a].remove();
@@ -610,8 +610,8 @@ this.chart.series[6].data[a].remove();
 
     }
     if (this.chart.series[7] != undefined){
-    if (this.chart.series[7].yData.length > 30){
-for (var a = 0; a <=  this.chart.series[7].yData.length - 30; a++){
+    if (this.chart.series[7].yData.length > 20){
+for (var a = 0; a <=  this.chart.series[7].yData.length > 30; a++){
     try {
 
 this.chart.series[7].data[a].remove();
@@ -667,14 +667,14 @@ firsttrade++;
         }
         if (firsttrade == 2){
         firsttrade++;
-        qty =-1*(marginperc*this.tickData.exchanges[trades[trades.length-1][0]].close)/9
+        qty = -1*(marginperc*this.tickData.exchanges[trades[trades.length-1][0]].close)/9
         if (thepair.indexOf('USD') == -1){
         qty = -1*(marginperc*this.tickData.exchanges[trades[trades.length-1][0]].close)/9
         }
         }
         else {
         firsttrade++;
-        qty =-1*(marginperc*this.tickData.exchanges[trades[trades.length-1][0]].close)/9
+        qty = -1*(marginperc*this.tickData.exchanges[trades[trades.length-1][0]].close)/9
         if (thepair.indexOf('USD') == -1){
         qty = -1*(marginperc*this.tickData.exchanges[trades[trades.length-1][0]].close)/9
         }
@@ -876,12 +876,12 @@ request(requestOptions, function(error, response, body) {
   var ethask;
   var adabid;
   var adaask;
-  var eosbid;
-  var eosask;
-  var bchbid;
-  var bchask;
   var xrpbid;
   var xrpask;
+  var bchbid;
+  var bchask;
+  var eosbid;
+  var eosask;
   var ltcbid;
   var ltcask;
   var trxbid;
@@ -984,15 +984,24 @@ else if (js[j].symbol == 'XRPU19'){
         pr = xrpbid
         }
         }
-
+        var trail = pr * 0.05 * -1
+         var stop = pr * 0.95
         if (thepair == 'BTCUSD'){
         pr = Math.round(pr*2)/2;
+        trail = Math.round(trail*2)/2;
+        stop = Math.round(stopPx*2)/2;
         }
         else if (thepair == 'ETHUSD'){
         pr =  parseFloat((Math.round(pr * 4) / 4).toFixed(2));
+         trail =  parseFloat((Math.round(trail * 4) / 4).toFixed(2));
+         stop =  parseFloat((Math.round(stopPx * 4) / 4).toFixed(2));
+        
         }
         else if (thepair == 'LTCBTC'){
         pr =   Math.round(pr*2)/2;
+       
+        trail = Math.round(trail*2)/2; 
+        stop = Math.round(stopPx*2)/2; 
         }
         buyHigh = false;
 if (marginperc < 0.095){
@@ -1063,7 +1072,7 @@ request(requestOptions, function(error, response, body) {
 verb = 'POST',
   path = '/api/v1/order',
   expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
-  data = {symbol:thepair.replace('BTCUSD','XBTUSD').replace('BTC','U19'),orderQty:qty,execInst:"ParticipateDoNotInitiate",price:pr,ordType:"Limit"};
+  data = {symbol:thepair.replace('BTCUSD','XBTUSD').replace('BTC','U19'),orderQty:qty,execInst:"ParticipateDoNotInitiate",price:pr,ordType:"StopLimit", pegOffsetValue: trail, stopPx: stop };
 
 // Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
 // and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
@@ -1094,7 +1103,7 @@ request(requestOptions, function(error, response, body) {
 verb = 'POST',
   path = '/api/v1/order',
   expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
-  data = {symbol:thepair.replace('BTCUSD','XBTUSD').replace('BTC','U19'),orderQty:qty,price:pr,ordType:"Limit"};
+  data = {symbol:thepair.replace('BTCUSD','XBTUSD').replace('BTC','U19'),orderQty:qty,price:pr,ordType:"StopLimit", pegOffsetValue: trail, stopPx: stop };
 
 // Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
 // and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
@@ -1137,14 +1146,14 @@ setTimeout(function(){
         }
         else if (firsttrade == 2){
         firsttrade++;
-        qty =(marginperc*this.tickData.exchanges[trades[trades.length-1][0]].close)/9
+        qty = (marginperc*this.tickData.exchanges[trades[trades.length-1][0]].close)/9
 if (thepair.indexOf('USD') == -1){
         qty = (marginperc*this.tickData.exchanges[trades[trades.length-1][0]].close)/9
         }
         }
         else{
         firsttrade++
-        qty =(marginperc*this.tickData.exchanges[trades[trades.length-1][0]].close)/9
+        qty = (marginperc*this.tickData.exchanges[trades[trades.length-1][0]].close)/9
         if (thepair.indexOf('USD') == -1){
         qty = (marginperc*this.tickData.exchanges[trades[trades.length-1][0]].close)/9
         }
@@ -1361,6 +1370,7 @@ request(requestOptions, function(error, response, body) {
   for (var j in js){
   if (js[j].symbol == 'XBTUSD'){
     btcbid = js[j].bidPrice
+
     btcbtc = parseFloat(js[j].midPrice)
     btcask = js[j].askPrice
   }
@@ -1456,7 +1466,25 @@ else if (js[j].symbol == 'XRPU19'){
         pr = xrpbid
         }
         }
-
+var trail = pr * 0.05
+        var stop = pr * 1.05
+        if (thepair == 'BTCUSD'){
+        pr = Math.round(pr*2)/2;
+        trail = Math.round(trail*2)/2;
+        stop = Math.round(stopPx*2)/2;
+        }
+        else if (thepair == 'ETHUSD'){
+        pr =  parseFloat((Math.round(pr * 4) / 4).toFixed(2));
+         trail =  parseFloat((Math.round(trail * 4) / 4).toFixed(2));
+         stop =  parseFloat((Math.round(stopPx * 4) / 4).toFixed(2));
+        
+        }
+        else if (thepair == 'LTCBTC'){
+        pr =   Math.round(pr*2)/2;
+       
+        trail = Math.round(trail*2)/2; 
+        stop = Math.round(stopPx*2)/2; 
+        }
         if (thepair == 'BTCUSD'){
         pr = Math.round(pr*2)/2;
         }
@@ -1535,7 +1563,7 @@ request(requestOptions, function(error, response, body) {
  verb = 'POST',
   path = '/api/v1/order',
   expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
-  data = {symbol:thepair.replace('BTCUSD','XBTUSD').replace('BTC','U19'),orderQty:qty,execInst:"ParticipateDoNotInitiate",price:pr,ordType:"Limit"};
+  data = {symbol:thepair.replace('BTCUSD','XBTUSD').replace('BTC','U19'),orderQty:qty,execInst:"ParticipateDoNotInitiate",price:pr,ordType:"StopLimit", pegOffsetValue: trail, stopPx: stop };
 
 // Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
 // and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
@@ -1565,7 +1593,7 @@ request(requestOptions, function(error, response, body) {
 verb = 'POST',
   path = '/api/v1/order',
   expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
-  data = {symbol:thepair.replace('BTCUSD','XBTUSD').replace('BTC','U19'),orderQty:qty,price:pr,ordType:"Limit"};
+  data = {symbol:thepair.replace('BTCUSD','XBTUSD').replace('BTC','U19'),orderQty:qty,price:pr,ordType:"StopLimit", pegOffsetValue: trail, stopPx: stop };
 
 // Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
 // and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
