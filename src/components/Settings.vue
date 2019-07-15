@@ -78,6 +78,7 @@
             placeholder="15"
             onchange="apis();"
             class="form-control"
+            id="trailstop"
             :value="trailstop"
           />
         </div>s
