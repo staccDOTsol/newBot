@@ -727,9 +727,6 @@ firsttrade++;
         qty = qty / 1.25
         }
 
-        if (thepair == 'ETHUSD'){
-        qty = qty * 13.4852071;
-        }
         console.log('marginperc')
         console.log(marginperc)
         console.log(thepair)
@@ -1196,9 +1193,6 @@ if (thepair.indexOf('USD') == -1){
         }
         else if (marginperc < 0.4){
         qty = qty / 1.25
-        }
-        if (thepair == 'ETHUSD'){
-        qty = qty * 13.4852071;
         }
         if (thepair == 'BTCUSD'){
           if (positionXbt < 0){
