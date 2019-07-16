@@ -1140,7 +1140,6 @@ else if (js[j].symbol == 'XRPU19'){
         stop = Math.round(stop*2)/2; 
         }
         
-        trail = math.format(trail, {exponential: {lower: -Infinity, upper: Infinity}})
 
         buyHigh = false;
 if (marginperc < 0.095){
@@ -1754,7 +1753,6 @@ else if (js[j].symbol == 'XRPU19'){
         stop = Math.round(stop*2)/2; 
         }
         
-        trail = math.format(trail, {exponential: {lower: -Infinity, upper: Infinity}})
         if (thepair == 'BTCUSD'){
         pr = Math.round(pr*2)/2;
         }
