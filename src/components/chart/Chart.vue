@@ -1077,6 +1077,9 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         }
+        if (pr == 0){
+        pr = close
+        }
         var trail = pr * trailstop * -1
          var stop = pr * 1 + trailstop
         if (thepair == 'BTCUSD'){
@@ -1470,7 +1473,6 @@ requestOptions = {
 request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
   var js = JSON.parse(body)
-  var js = JSON.parse(body)
   var btcbid;
   var btcask;
   var ethbid;
@@ -1642,6 +1644,9 @@ else if (js[j].symbol == 'XRPU19'){
         pr = xrpask
         }
         }
+        }
+        if (pr == 0){
+        pr = close
         }
         var trail = pr * trailstop * -1
          var stop = pr * 1 - trailstop
