@@ -684,7 +684,6 @@ this.chart.series[7].data[a].remove();
         buyHigh = true;
         }
         if (buyHigh == true){
-        buyHigh = false;
         console.log('buyhigh')
         if (firsttrade < 2){
         console.log('buyhigh2')
@@ -1301,6 +1300,7 @@ setTimeout(function(){
 request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
   console.log(body);
+        buyHigh = false;
 
   refreshMargin();
 });
@@ -1558,7 +1558,6 @@ request(requestOptions, function(error, response, body) {
         }
         console.log(qty)
         if (buyHigh == false){
-        buyHigh = true;
         var pr = 0;
         verb = 'GET',
   path = '/api/v1/instrument/active',
@@ -1932,6 +1931,7 @@ request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
   console.log(body);
 
+        buyHigh = true;
   refreshMargin();
 });
 }, 550);
