@@ -103,13 +103,7 @@ request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
   for (var j in JSON.parse(body)){
   var stopQty;
-  if (JSON.parse(body)[j].side == 'Sell'){
-stopQty = JSON.parse(body)[j].orderQty  * -1
-  }
-  else {
-
-stopQty = JSON.parse(body)[j].orderQty
-  }
+  if (stops.includes(JSON.parse(body)[j]['orderID'])){
   if ((stopQty < 0 &&  stopQty < pos ) || (stopQty > 0 && stopQty > pos)){
 console.error('CANCEL STOP')
 stops = stops.splice(JSON.parse(body)[j]['orderID'], 1)
@@ -145,6 +139,7 @@ request(requestOptions, function(error, response, body) {
   })
 
   refreshMargin()
+  }
   }
   }
   })
