@@ -874,7 +874,7 @@ firsttrade++;
         }
         qty = Math.round(qty)
           var dd = this.tickData.exchanges[trades[trades.length-1][0]].close / entry
-  market = false;
+  var market = false;
   if (pos < 0 && dd > 0){
   if (dd > trail / 100){
   market = true
@@ -1209,7 +1209,7 @@ request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
   console.log(body);
   var dd = this.tickData.exchanges[trades[trades.length-1][0]].close / entry
-  market = false;
+  var market = false;
   if (pos < 0 && dd > 0){
   if (dd > trail / 100){
   market = true
