@@ -1073,6 +1073,7 @@ else if (js[j].symbol == 'XRPU19'){
         trail = Math.round(trail*2)/2; 
         stop = Math.round(stop*2)/2; 
         }
+        trail = parseFloat(trail)
         buyHigh = false;
 if (marginperc < 0.095){
         qty = qty / 2
@@ -1632,6 +1633,7 @@ else if (js[j].symbol == 'XRPU19'){
         else if (thepair == 'LTCBTC'){
         pr =   Math.round(pr*2)/2;
         }
+        trail = parseFloat(trail)
 if (marginperc < 0.095){
         qty = qty / 2
         qty = Math.floor(qty)
