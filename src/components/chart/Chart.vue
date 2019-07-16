@@ -677,1249 +677,1221 @@ this.chart.series[7].data[a].remove();
         if (num == 27){
         num = 26
         }
-        if (this.chart.series[5].yData[num]<=  0.98 * this.chart.series[4].yData[num]){
+        if (this.chart.series[5].yData[0] != undefined && this.tickData.exchanges[trades[trades.length - 1][0]] != undefined) {
+    var num = this.chart.series[4].yData.length - 1
+    if (num == 27) {
+        num = 26
+    }
+    if (this.chart.series[5].yData[num] <= 0.98 * this.chart.series[4].yData[num]) {
 
         console.log('sells greater')
-        if (buyHigh == undefined){
-        buyHigh = true;
+        if (buyHigh == undefined) {
+            buyHigh = true;
         }
-        if (buyHigh == true){
-        if (firsttrade < 2){
-firsttrade++;
+        if (buyHigh == true) {
+            if (firsttrade < 2) {
+                firsttrade++;
+            }
+            if (firsttrade == 2) {
+                firsttrade++;
+                qty = -1 * (marginperc * margin222 * close) * 0.5 * 7
+                if (thepair.indexOf('USD') == -1) {
+                    qty = -1 * (marginperc * margin222 * (btcbtc / (btcbtc * close))) * 2 * 7
+                }
+            } else {
+                firsttrade++;
+                qty = -1 * (marginperc * margin222 * close) * 0.5 * 7
+                if (thepair.indexOf('USD') == -1) {
+                    qty = -1 * (marginperc * margin222 * (btcbtc / (btcbtc * close))) * 2 * 7
+                }
+            }
+            if (marginperc < 0.3) {
+                if (thepair == "ETHUSD") {
+                    if (positionEth <= 0 && qty > 0) {
+
+                        qty = 0.35 * positionEth * -1
+                    }
+                } else if (thepair == "BTCUSD") {
+                    if (positionXbt <= 0 && qty > 0) {
+
+                        qty = 0.35 * positionXbt * -1
+                    }
+                } else if (thepair == "EOSBTC") {
+                    if (positionEos <= 0 && qty > 0) {
+
+                        qty = 0.35 * positionEos * -1
+                    }
+                } else if (thepair == "TRXBTC") {
+                    if (positionTrx <= 0 && qty > 0) {
+
+                        qty = 0.35 * positionTrx * -1
+                    }
+                } else if (thepair == "BCHBTC") {
+                    if (positionBch <= 0 && qty > 0) {
+
+                        qty = 0.35 * positionBch * -1
+                    }
+                } else if (thepair == "LTCBTC") {
+                    if (positionLtc <= 0 && qty > 0) {
+
+                        qty = 0.35 * positionLtc * -1
+                    }
+                } else if (thepair == "XRPBTC") {
+                    if (positionXrp <= 0 && qty > 0) {
+
+                        qty = 0.35 * positionXrp * -1
+                    }
+                } else if (thepair == "ADABTC") {
+                    if (positionAda <= 0 && qty > 0) {
+
+                        qty = 0.35 * positionAda * -1
+                    }
+                }
+            } else if (marginperc < 0.4) {
+                qty = qty / 1.25
+            }
+            console.log(1)
+
+
+            if (thepair == 'ETHUSD') {
+                qty = (qty * 13.4852071 * 5.375)
+            } else if (thepair == 'BTCUSD') {
+                qty = (qty * 8);
+            } else {
+                qty = (qty)
+            }
+            console.log('marginperc')
+            console.log(marginperc)
+            console.log(thepair)
+            console.log(positionXbt)
+            console.log(positionEth)
+            if (thepair == 'BTCUSD') {
+                if (positionXbt < 0) {
+                    qty = qty * 2;
+                    if (qty < positionXbt) {
+                        qty = positionXbt * -1
+                    }
+                } else
+                if (marginperc < 0.175) {
+                    qty = 0
+
+                }
+            } else if (thepair == 'ETHUSD') {
+                if (positionEth > 0) {
+                    qty = qty * 2
+                    if (qty < positionEth) {
+                        qty = positionEth * -1
+                    }
+                } else
+                if (marginperc < 0.175) {
+                    qty = 0
+
+                }
+            } else if (thepair == 'ADABTC') {
+                if (positionAda > 0) {
+                    qty = qty * 2
+                    if (qty < positionAda) {
+                        qty = positionAda * -1
+                    }
+                } else
+                if (marginperc < 0.175) {
+                    qty = 0
+
+                }
+            } else if (thepair == 'EOSBTC') {
+                if (positionEos > 0) {
+                    qty = qty * 2
+                    if (qty < positionEos) {
+                        qty = positionEos * -1
+                    }
+                } else
+                if (marginperc < 0.175) {
+                    qty = 0
+
+                }
+            } else if (thepair == 'TRXBTC') {
+                if (positionTrx > 0) {
+                    qty = qty * 2
+                    if (qty < positionTrx) {
+                        qty = positionTrx * -1
+                    }
+                } else
+                if (marginperc < 0.175) {
+                    qty = 0
+
+                }
+            } else if (thepair == 'XRPBTC') {
+                if (positionXrp > 0) {
+                    qty = qty * 2
+                    if (qty < positionXrp) {
+                        qty = positionXrp * -1
+                    }
+                } else
+                if (marginperc < 0.175) {
+                    qty = 0
+
+                }
+            } else if (thepair == 'BCHBTC') {
+                if (positionBch > 0) {
+                    qty = qty * 2
+                    if (qty < positionBch) {
+                        qty = positionBch * -1
+                    }
+                } else
+                if (marginperc < 0.175) {
+                    qty = 0
+
+                }
+            } else if (thepair == 'LTCBTC') {
+                if (positionLtc > 0) {
+                    qty = qty * 2
+                    if (qty < positionLtc) {
+                        qty = positionLtc * -1
+                    }
+                } else
+                if (marginperc < 0.175) {
+                    qty = 0
+
+                }
+            }
+            console.log(qty)
+
+            if (marginperc < 0.15) {
+                qty = qty / 5
+            }
+
+            console.log(2)
+            qty = Math.round(qty)
+            var dd = close / entry
+            var market = false;
+            if (pos < 0 && dd > 0) {
+                if (dd > trail / 100) {
+                    market = true
+                }
+            } else if (pos > 0 && dd < 0) {
+                if (dd * -1 > trail / 100) {
+                    market = true
+                }
+            }
+            if (market) {
+
+                verb = 'POST',
+                    path = '/api/v1/order',
+                    expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
+                    data = {
+                        symbol: thepair.replace('BTCUSD', 'XBTUSD').replace('BTC', 'U19'),
+                        orderQty: qty,
+                        ordType: "Market"
+                    };
+
+                // Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
+                // and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
+                postBody = JSON.stringify(data);
+
+                signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires + postBody).digest('hex');
+
+                headers = {
+                    'content-type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'api-expires': expires,
+                    'api-key': apiKey,
+                    'api-signature': signature
+                };
+
+                requestOptions = {
+                    headers: headers,
+                    url: 'https://www.bitmex.com' + path,
+                    method: verb,
+                    body: postBody
+                };
+                setTimeout(function() {
+                    request(requestOptions, function(error, response, body) {
+                        if (error) {
+                            console.log(error);
+                        }
+                        console.log(body);
+                    });
+                }, 1000)
+            }
+            console.log(3)
+            verb = 'GET',
+                path = '/api/v1/instrument/active',
+                expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
+                data = ''
+            // Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
+            // and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
+            postBody = JSON.stringify(data);
+
+            signature = crypto.createHmac('sha256', apiSecret).update(verb + path + (expires) + data).digest('hex');
+
+            headers = {
+                'content-type': 'application/json',
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+                'api-expires': expires,
+                'api-key': apiKey,
+                'api-signature': signature
+            };
+            requestOptions = {
+                headers: headers,
+                url: 'https://www.bitmex.com' + path,
+                method: verb,
+                body: {}
+            };
+            request(requestOptions, function(error, response, body) {
+                if (error) {
+                    console.log(error);
+                }
+                var js = JSON.parse(body)
+                var btcbid;
+                var btcask;
+                var ethbid;
+                var ethask;
+                var adabid;
+                var adaask;
+                var xrpbid;
+                var xrpask;
+                var bchbid;
+                var bchask;
+                var eosbid;
+                var eosask;
+                var ltcbid;
+                var ltcask;
+                var trxbid;
+                var trxask;
+                for (var j in js) {
+                    if (js[j].symbol == 'XBTUSD') {
+                        btcbid = js[j].bidPrice
+                        btcbtc = parseFloat(js[j].midPrice)
+                        btcask = js[j].askPrice
+                    } else if (js[j].symbol == 'ETHUSD') {
+                        ethbid = js[j].bidPrice
+                        ethask = js[j].askPrice
+                    } else if (js[j].symbol == 'ADAU19') {
+                        adabid = js[j].bidPrice
+                        adaask = js[j].askPrice
+                    } else if (js[j].symbol == 'TRXU19') {
+                        trxbid = js[j].bidPrice
+                        trxask = js[j].askPrice
+                    } else if (js[j].symbol == 'EOSU19') {
+                        eosbid = js[j].bidPrice
+                        eosask = js[j].askPrice
+                    } else if (js[j].symbol == 'BCHU19') {
+                        bchbid = js[j].bidPrice
+                        bchask = js[j].askPrice
+                    } else if (js[j].symbol == 'LTCU19') {
+                        ltcbid = js[j].bidPrice
+                        ltcask = js[j].askPrice
+                    } else if (js[j].symbol == 'XRPU19') {
+                        xrpbid = js[j].bidPrice
+                        xrpask = js[j].askPrice
+                    }
+                }
+                var qty = 0;
+                if (thepair == 'BTCUSD') {
+                    qty = positionXbt * -1
+                    if (qty <= 0) {
+                        pr = btcask
+                        if (marginperc < 0.15) {
+                            pr = btcbid
+                        }
+                    } else {
+                        pr = btcbid
+                        if (marginperc < 0.15) {
+                            pr = btcask
+                        }
+                    }
+                } else if (thepair == 'ETHUSD') {
+                    qty = positionEth * -1
+                    if (qty < 0) {
+                        pr = ethask
+
+                        if (marginperc < 0.15) {
+                            pr = ethbid
+                        }
+                    } else {
+                        pr = ethbid
+
+                        if (marginperc < 0.15) {
+                            pr = ethask
+                        }
+                    }
+                } else if (thepair == 'TRXBTC') {
+                    qty = positionTrx * -1
+                    if (qty < 0) {
+                        pr = trxask
+                        if (marginperc < 0.15) {
+                            pr = trxbid
+                        }
+                    } else {
+                        pr = trxbid
+                        if (marginperc < 0.15) {
+                            pr = trxask
+                        }
+                    }
+                } else if (thepair == 'ADABTC') {
+                    qty = positionAda * -1
+                    if (qty < 0) {
+                        pr = adaask
+                        if (marginperc < 0.15) {
+                            pr = adabid
+                        }
+                    } else {
+                        pr = adabid
+                        if (marginperc < 0.15) {
+                            pr = adaask
+                        }
+                    }
+                } else if (thepair == 'EOSBTC') {
+                    qty = positionEos * -1
+                    if (qty < 0) {
+                        pr = eosask
+                        if (marginperc < 0.15) {
+                            pr = eosbid
+                        }
+                    } else {
+                        pr = eosbid
+                        if (marginperc < 0.15) {
+                            pr = eosask
+                        }
+                    }
+                } else if (thepair == 'BCHBTC') {
+                    qty = positionBch * -1
+                    if (qty < 0) {
+                        pr = bchask
+                        if (marginperc < 0.15) {
+                            pr = bchbid
+                        }
+                    } else {
+                        pr = bchbid
+                        if (marginperc < 0.15) {
+                            pr = bchask
+                        }
+                    }
+                } else if (thepair == 'LTCBTC') {
+                    qty = positionLtc * -1
+                    if (qty < 0) {
+                        pr = ltcask
+                        if (marginperc < 0.15) {
+                            pr = ltcbid
+                        }
+                    } else {
+                        pr = ltcbid
+                        if (marginperc < 0.15) {
+                            pr = ltcask
+                        }
+                    }
+                } else if (thepair == 'XRPBTC') {
+                    qty = positionXrp * -1
+                    if (qty < 0) {
+                        pr = xrpask
+                        if (marginperc < 0.15) {
+                            pr = xrpbid
+                        }
+                    } else {
+                        pr = xrpbid
+                        if (marginperc < 0.15) {
+                            pr = xrpask
+                        }
+                    }
+                }
+                var trail = pr * trailstop * -1
+                var stop = pr * 1 + trailstop
+                if (thepair == 'BTCUSD') {
+                    pr = Math.round(pr * 2) / 2;
+                    trail = Math.round(trail * 2) / 2;
+                    stop = Math.round(stop * 2) / 2;
+                } else if (thepair == 'ETHUSD') {
+                    pr = parseFloat((Math.round(pr * 4) / 4).toFixed(2));
+                    trail = parseFloat((Math.round(trail * 4) / 4).toFixed(2));
+                    stop = parseFloat((Math.round(stop * 4) / 4).toFixed(2));
+
+                } else if (thepair == 'LTCBTC') {
+                    pr = Math.round(pr * 2) / 2;
+
+                    trail = Math.round(trail * 2) / 2;
+                    stop = Math.round(stop * 2) / 2;
+                }
+
+
+                buyHigh = false;
+                if (marginperc < 0.095) {
+                    qty = qty / 2
+                    qty = Math.floor(qty)
+                    verb = 'POST',
+                        path = '/api/v1/order',
+                        expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
+                        data = {
+                            symbol: thepair.replace('BTCUSD', 'XBTUSD').replace('BTC', 'U19'),
+                            orderQty: qty,
+                            ordType: "Market"
+                        };
+
+                    // Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
+                    // and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
+                    postBody = JSON.stringify(data);
+
+                    signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires + postBody).digest('hex');
+
+                    headers = {
+                        'content-type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'api-expires': expires,
+                        'api-key': apiKey,
+                        'api-signature': signature
+                    };
+
+                    requestOptions = {
+                        headers: headers,
+                        url: 'https://www.bitmex.com' + path,
+                        method: verb,
+                        body: postBody
+                    };
+                    setTimeout(function() {
+                        request(requestOptions, function(error, response, body) {
+                            if (error) {
+                                console.log(error);
+                            }
+                            console.log(body);
+                            refreshMargin();
+                        })
+                    })
+                }
+                verb = 'DELETE',
+                    path = '/api/v1/order/all',
+                    expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
+                    data = {
+                        symbol: thepair.replace('BTCUSD', 'XBTUSD').replace('BTC', 'U19')
+                    };
+
+                // Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
+                // and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
+                postBody = JSON.stringify(data);
+
+                signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires + postBody).digest('hex');
+
+                headers = {
+                    'content-type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'api-expires': expires,
+                    'api-key': apiKey,
+                    'api-signature': signature
+                };
+                requestOptions = {
+                    headers: headers,
+                    url: 'https://www.bitmex.com' + path,
+                    method: verb,
+                    body: postBody
+                };
+                request(requestOptions, function(error, response, body) {
+                    if (error) {
+                        console.log(error);
+                    }
+                    console.log(body);
+                    var dd = close / entry
+                    var market = false;
+                    if (pos < 0 && dd > 0) {
+                        if (dd > trail / 100) {
+                            market = true
+                        }
+                    } else if (pos > 0 && dd < 0) {
+                        if (dd * -1 > trail / 100) {
+                            market = true
+                        }
+                    }
+                    if (market) {
+
+                        verb = 'POST',
+                            path = '/api/v1/order',
+                            expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
+                            data = {
+                                symbol: thepair.replace('BTCUSD', 'XBTUSD').replace('BTC', 'U19'),
+                                orderQty: qty,
+                                ordType: "Market"
+                            };
+
+                        // Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
+                        // and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
+                        postBody = JSON.stringify(data);
+
+                        signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires + postBody).digest('hex');
+
+                        headers = {
+                            'content-type': 'application/json',
+                            'Accept': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'api-expires': expires,
+                            'api-key': apiKey,
+                            'api-signature': signature
+                        };
+
+                        requestOptions = {
+                            headers: headers,
+                            url: 'https://www.bitmex.com' + path,
+                            method: verb,
+                            body: postBody
+                        };
+                        setTimeout(function() {
+                            request(requestOptions, function(error, response, body) {
+                                if (error) {
+                                    console.log(error);
+                                }
+                                console.log(body);
+                            });
+                        }, 1000)
+                    }
+                    verb = 'POST',
+                        path = '/api/v1/order',
+                        expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
+                        data = {
+                            symbol: thepair.replace('BTCUSD', 'XBTUSD').replace('BTC', 'U19'),
+                            orderQty: qty,
+                            price: pr,
+                            ordType: "Limit"
+                        };
+
+                    // Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
+                    // and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
+                    postBody = JSON.stringify(data);
+
+                    signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires + postBody).digest('hex');
+
+                    headers = {
+                        'content-type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'api-expires': expires,
+                        'api-key': apiKey,
+                        'api-signature': signature
+                    };
+
+                    requestOptions = {
+                        headers: headers,
+                        url: 'https://www.bitmex.com' + path,
+                        method: verb,
+                        body: postBody
+                    };
+                    setTimeout(function() {
+                        request(requestOptions, function(error, response, body) {
+                            if (error) {
+                                console.log(error);
+                            }
+                            console.log(body);
+
+                            refreshMargin();
+                        });
+                    }, 550);
+                });
+            });
+
         }
-        if (firsttrade == 2){
+} else if (this.chart.series[5].yData[num] >= 1.02 * this.chart.series[4].yData[num]) {
+    console.log('buys greater')
+    if (firsttrade < 2) {
         firsttrade++;
-        qty = -1*(marginperc*margin222*close)*0.5*7
-        if (thepair.indexOf('USD') == -1){
-        qty = -1*(marginperc*margin222*(btcbtc/(btcbtc*close)))*2*7
-        }
-        }
-        else {
+    } else if (firsttrade == 2) {
         firsttrade++;
-        qty = -1*(marginperc*margin222*close)*0.5*7
-        if (thepair.indexOf('USD') == -1){
-        qty = -1*(marginperc*margin222*(btcbtc/(btcbtc*close)))*2*7
-        }
-        }
-        if (marginperc < 0.3){
-        if (thepair == "ETHUSD"){
-        if (positionEth <= 0 && qty > 0){
-
-        qty = 0.35 * positionEth * -1
-        }
-        } else if (thepair == "BTCUSD"){
-        if (positionXbt <= 0 && qty > 0){
-
-        qty = 0.35 * positionXbt * -1
-        }
-        }
-        else if (thepair == "EOSBTC"){
-        if (positionEos <= 0 && qty > 0){
-
-        qty = 0.35 * positionEos * -1
-        }
-        }else if (thepair == "TRXBTC"){
-        if (positionTrx <= 0 && qty > 0){
-
-        qty = 0.35 * positionTrx * -1
-        }
-        }else if (thepair == "BCHBTC"){
-        if (positionBch <= 0 && qty > 0){
-
-        qty = 0.35 * positionBch * -1
-        }
-        }else if (thepair == "LTCBTC"){
-        if (positionLtc <= 0 && qty > 0){
-
-        qty = 0.35 * positionLtc * -1
-        }
-        }else if (thepair == "XRPBTC"){
-        if (positionXrp <= 0 && qty > 0){
-
-        qty = 0.35 * positionXrp * -1
-        }
-        }else if (thepair == "ADABTC"){
-        if (positionAda <= 0 && qty > 0){
-
-        qty = 0.35 * positionAda * -1
-        }
-        }
-        }
-       else if (marginperc < 0.4){
-        qty = qty / 1.25
-        }
-       console.log(1)
-
-       
-       if (thepair == 'ETHUSD'){
-        qty = (qty * 13.4852071*5.375)
-        }
-         else if (thepair == 'BTCUSD'){
-        qty = (qty * 8) ;
-        }
-        else {
-        qty = (qty)
-        }
-        console.log('marginperc')
-        console.log(marginperc)
-        console.log(thepair)
-        console.log(positionXbt)
-        console.log(positionEth)
-        if (thepair == 'BTCUSD'){
-          if (positionXbt < 0){
-            qty = qty * 2;
-            if (qty < positionXbt)
-            {
-            qty = positionXbt * -1
-            }
-          }
-          else 
-          if (marginperc < 0.175){
-        qty = 0
-        
-          }
-        }
-        else if (thepair == 'ETHUSD'){
-          if (positionEth > 0){
-            qty = qty * 2
-            if (qty < positionEth)
-            {
-            qty = positionEth * -1
-            }
-          }else 
-          if (marginperc < 0.175){
-        qty = 0
-        
-          }
-        }
-        else if (thepair == 'ADABTC'){
-          if (positionAda > 0){
-            qty = qty * 2
-            if (qty < positionAda)
-            {
-            qty = positionAda * -1
-            }
-          }else 
-          if (marginperc < 0.175){
-        qty = 0
-        
-          }
-        }
-        else if (thepair == 'EOSBTC'){
-          if (positionEos > 0){
-            qty = qty * 2
-            if (qty < positionEos)
-            {
-            qty = positionEos * -1
-            }
-          }else 
-          if (marginperc < 0.175){
-        qty = 0
-        
-          }
-        }
-        else if (thepair == 'TRXBTC'){
-          if (positionTrx > 0){
-            qty = qty * 2
-            if (qty < positionTrx)
-            {
-            qty = positionTrx * -1
-            }
-          }else 
-          if (marginperc < 0.175){
-        qty = 0
-        
-          }
-        }
-        else if (thepair == 'XRPBTC'){
-          if (positionXrp > 0){
-            qty = qty * 2
-            if (qty < positionXrp)
-            {
-            qty = positionXrp * -1
-            }
-          }else 
-          if (marginperc < 0.175){
-        qty = 0
-        
-          }
-        }
-        else if (thepair == 'BCHBTC'){
-          if (positionBch > 0){
-            qty = qty * 2
-            if (qty < positionBch)
-            {
-            qty = positionBch * -1
-            }
-          }else 
-          if (marginperc < 0.175){
-        qty = 0
-        
-          }
-        }
-        else if (thepair == 'LTCBTC'){
-          if (positionLtc > 0){
-            qty = qty * 2
-            if (qty < positionLtc)
-            {
-            qty = positionLtc * -1
-            }
-          }else 
-          if (marginperc < 0.175){
-        qty = 0
-        
-          }
-        }
-        console.log(qty)
-        
-        if (marginperc < 0.15){
-        qty = qty / 5 
-        }
-
-       console.log(2)
-        qty = Math.round(qty)
-          var dd = close / entry
-  var market = false;
-  if (pos < 0 && dd > 0){
-  if (dd > trail / 100){
-  market = true
-}  
-  }
-  else if (pos > 0 && dd < 0){
-  if (dd * -1 > trail / 100){
-  market = true
-}  
-  }
-  if (market){
-
-verb = 'POST',
-  path = '/api/v1/order',
-  expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
-  data = {symbol:thepair.replace('BTCUSD','XBTUSD').replace('BTC','U19'),orderQty:qty,ordType:"Market" };
-
-// Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
-// and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
- postBody = JSON.stringify(data);
-
-signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires + postBody).digest('hex');
-
- headers = {
-  'content-type' : 'application/json',
-  'Accept': 'application/json',
-  'X-Requested-With': 'XMLHttpRequest',
-  'api-expires': expires,
-  'api-key': apiKey,
-  'api-signature': signature
-};
-
- requestOptions = {
-  headers: headers,
-  url:'https://www.bitmex.com'+path,
-  method: verb,
-  body: postBody
-};
-setTimeout(function(){
-request(requestOptions, function(error, response, body) {
-  if (error) { console.log(error); }
-  console.log(body);
-});
-}, 1000)
-}
-       console.log(3)
-       verb = 'GET',
-  path = '/api/v1/instrument/active',
-  expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
-  data = ''
-// Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
-// and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
- postBody = JSON.stringify(data);
-
- signature = crypto.createHmac('sha256', apiSecret).update(verb + path + (expires) + data).digest('hex');
-
- headers = {
-  'content-type' : 'application/json',
-  'Accept': 'application/json',
-  'X-Requested-With': 'XMLHttpRequest',
-  'api-expires': expires,
-  'api-key': apiKey,
-  'api-signature': signature
-};
- requestOptions = {
-  headers: headers,
-  url:'https://www.bitmex.com'+path,
-  method: verb,
-  body: {}
-};
-request(requestOptions, function(error, response, body) {
-  if (error) { console.log(error); }
-  var js = JSON.parse(body)
-  var btcbid;
-  var btcask;
-  var ethbid;
-  var ethask;
-  var adabid;
-  var adaask;
-  var xrpbid;
-  var xrpask;
-  var bchbid;
-  var bchask;
-  var eosbid;
-  var eosask;
-  var ltcbid;
-  var ltcask;
-  var trxbid;
-  var trxask;
-  for (var j in js){
-  if (js[j].symbol == 'XBTUSD'){
-    btcbid = js[j].bidPrice
-    btcbtc = parseFloat(js[j].midPrice)
-    btcask = js[j].askPrice
-  }
-else if (js[j].symbol == 'ETHUSD'){
-    ethbid = js[j].bidPrice
-    ethask = js[j].askPrice
-  }
-else if (js[j].symbol == 'ADAU19'){
-    adabid = js[j].bidPrice
-    adaask = js[j].askPrice
-  }
-else if (js[j].symbol == 'TRXU19'){
-    trxbid = js[j].bidPrice
-    trxask = js[j].askPrice
-  }
-else if (js[j].symbol == 'EOSU19'){
-    eosbid = js[j].bidPrice
-    eosask = js[j].askPrice
-  }
-else if (js[j].symbol == 'BCHU19'){
-    bchbid = js[j].bidPrice
-    bchask = js[j].askPrice
-  }
-else if (js[j].symbol == 'LTCU19'){
-    ltcbid = js[j].bidPrice
-    ltcask = js[j].askPrice
-  }
-else if (js[j].symbol == 'XRPU19'){
-    xrpbid = js[j].bidPrice
-    xrpask = js[j].askPrice
-  }
-  }
-  var qty = 0;
-        if (thepair == 'BTCUSD'){
-        qty = positionXbt * -1
-        if (qty <= 0){
-        pr = btcask
-        if (marginperc < 0.15){
-        pr = btcbid
-        }
-        }
-        else {
-        pr = btcbid
-        if (marginperc < 0.15){
-        pr = btcask
-        }
-        }
-        } else if (thepair == 'ETHUSD'){
-        qty = positionEth * -1
-        if (qty < 0){
-        pr = ethask
-
-        if (marginperc < 0.15){
-        pr = ethbid
-        }
-        }
-        else {
-        pr = ethbid
-        
-        if (marginperc < 0.15){
-        pr = ethask
-        }
-        }
-        }
-        else if (thepair == 'TRXBTC'){
-        qty = positionTrx * -1
-        if (qty < 0){
-        pr = trxask
-        if (marginperc < 0.15){
-        pr = trxbid
-        }
-        }
-        else {
-        pr = trxbid
-        if (marginperc < 0.15){
-        pr = trxask
-        }
-        }
-        }
-        else if (thepair == 'ADABTC'){
-        qty = positionAda * -1
-        if (qty < 0){
-        pr = adaask
-        if (marginperc < 0.15){
-        pr = adabid
-        }
-        }
-        else {
-        pr = adabid
-        if (marginperc < 0.15){
-        pr =adaask
-        }
-        }
-        }
-        else if (thepair == 'EOSBTC'){
-        qty = positionEos * -1
-        if (qty < 0){
-        pr = eosask
-        if (marginperc < 0.15){
-        pr = eosbid
-        }
-        }
-        else {
-        pr = eosbid
-        if (marginperc < 0.15){
-        pr = eosask
-        }
-        }
-        }
-        else if (thepair == 'BCHBTC'){
-        qty = positionBch * -1
-        if (qty< 0){
-        pr = bchask
-        if (marginperc < 0.15){
-        pr = bchbid
-        }
-        }
-        else {
-        pr = bchbid
-        if (marginperc < 0.15){
-        pr = bchask
-        }
-        }
-        }
-        else if (thepair == 'LTCBTC'){
-        qty = positionLtc * -1
-        if (qty < 0){
-        pr = ltcask
-        if (marginperc < 0.15){
-        pr = ltcbid
-        }
-        }
-        else {
-        pr = ltcbid
-        if (marginperc < 0.15){
-        pr = ltcask
-        }
-        }
-        }
-        else if (thepair == 'XRPBTC'){
-        qty = positionXrp * -1
-        if (qty < 0){
-        pr = xrpask
-        if (marginperc < 0.15){
-        pr = xrpbid
-        }
-        }
-        else {
-        pr = xrpbid
-        if (marginperc < 0.15){
-        pr = xrpask
-        }
-        }
-        }
-        var trail = pr * trailstop * -1
-         var stop = pr * 1 + trailstop
-        if (thepair == 'BTCUSD'){
-        pr = Math.round(pr*2)/2;
-        trail = Math.round(trail*2)/2;
-        stop = Math.round(stop*2)/2;
-        }
-        else if (thepair == 'ETHUSD'){
-        pr =  parseFloat((Math.round(pr * 4) / 4).toFixed(2));
-         trail =  parseFloat((Math.round(trail * 4) / 4).toFixed(2));
-         stop =  parseFloat((Math.round(stop * 4) / 4).toFixed(2));
-        
-        }
-        else if (thepair == 'LTCBTC'){
-        pr =   Math.round(pr*2)/2;
-       
-        trail = Math.round(trail*2)/2; 
-        stop = Math.round(stop*2)/2; 
-        }
-        
-        
-        buyHigh = false;
-if (marginperc < 0.095){
-        qty = qty / 2
-        qty = Math.floor(qty)
-        verb = 'POST',
-  path = '/api/v1/order',
-  expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
-  data = {symbol:thepair.replace('BTCUSD','XBTUSD').replace('BTC','U19'),orderQty:qty,ordType:"Market"};
-
-// Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
-// and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
- postBody = JSON.stringify(data);
-
-signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires + postBody).digest('hex');
-
- headers = {
-  'content-type' : 'application/json',
-  'Accept': 'application/json',
-  'X-Requested-With': 'XMLHttpRequest',
-  'api-expires': expires,
-  'api-key': apiKey,
-  'api-signature': signature
-};
-
- requestOptions = {
-  headers: headers,
-  url:'https://www.bitmex.com'+path,
-  method: verb,
-  body: postBody
-};
-setTimeout(function(){
-request(requestOptions, function(error, response, body) {
-  if (error) { console.log(error); }
-  console.log(body);
-  refreshMargin();
-  })
-  })
-  }
-         verb = 'DELETE',
-  path = '/api/v1/order/all',
-  expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
-  data = {symbol:thepair.replace('BTCUSD','XBTUSD').replace('BTC','U19')};
-
-// Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
-// and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
-postBody = JSON.stringify(data);
-
-signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires + postBody).digest('hex');
-
-headers = {
-  'content-type' : 'application/json',
-  'Accept': 'application/json',
-  'X-Requested-With': 'XMLHttpRequest',
-  'api-expires': expires,
-  'api-key': apiKey,
-  'api-signature': signature
-};
-requestOptions = {
-  headers: headers,
-  url:'https://www.bitmex.com'+path,
-  method: verb,
-  body: postBody
-};
-request(requestOptions, function(error, response, body) {
-  if (error) { console.log(error); }
-  console.log(body);
-  var dd = close / entry
-  var market = false;
-  if (pos < 0 && dd > 0){
-  if (dd > trail / 100){
-  market = true
-}  
-  }
-  else if (pos > 0 && dd < 0){
-  if (dd * -1 > trail / 100){
-  market = true
-}  
-  }
-  if (market){
-
-verb = 'POST',
-  path = '/api/v1/order',
-  expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
-  data = {symbol:thepair.replace('BTCUSD','XBTUSD').replace('BTC','U19'),orderQty:qty,ordType:"Market" };
-
-// Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
-// and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
- postBody = JSON.stringify(data);
-
-signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires + postBody).digest('hex');
-
- headers = {
-  'content-type' : 'application/json',
-  'Accept': 'application/json',
-  'X-Requested-With': 'XMLHttpRequest',
-  'api-expires': expires,
-  'api-key': apiKey,
-  'api-signature': signature
-};
-
- requestOptions = {
-  headers: headers,
-  url:'https://www.bitmex.com'+path,
-  method: verb,
-  body: postBody
-};
-setTimeout(function(){
-request(requestOptions, function(error, response, body) {
-  if (error) { console.log(error); }
-  console.log(body);
-});
-}, 1000)
-}
-verb = 'POST',
-  path = '/api/v1/order',
-  expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
-  data = {symbol:thepair.replace('BTCUSD','XBTUSD').replace('BTC','U19'),orderQty:qty,price:pr,ordType:"Limit" };
-
-// Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
-// and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
- postBody = JSON.stringify(data);
-
-signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires + postBody).digest('hex');
-
- headers = {
-  'content-type' : 'application/json',
-  'Accept': 'application/json',
-  'X-Requested-With': 'XMLHttpRequest',
-  'api-expires': expires,
-  'api-key': apiKey,
-  'api-signature': signature
-};
-
- requestOptions = {
-  headers: headers,
-  url:'https://www.bitmex.com'+path,
-  method: verb,
-  body: postBody
-};
-setTimeout(function(){
-request(requestOptions, function(error, response, body) {
-  if (error) { console.log(error); }
-  console.log(body);
-
-  refreshMargin();
-});
-}, 550);
-});
-});
-
-        }
-        } 
-        }
-        else if (this.chart.series[5].yData[num]>=  1.02 * this.chart.series[4].yData[num]){
-        console.log('buys greater')
-        if (firsttrade <2 ){
-        firsttrade++;
-        }
-        else if (firsttrade == 2){
-        firsttrade++;
-        qty = (marginperc*margin222*close)*0.5*7
-if (thepair.indexOf('USD') == -1){
-        qty = (marginperc*margin222*(btcbtc/(btcbtc*close)))*2*7
-        }
-        }
-        else{
+        qty = (marginperc * margin222 * close) * 0.5 * 7
+        if (thepair.indexOf('USD') == -1) {
+            qty = (marginperc * margin222 * (btcbtc / (btcbtc * close))) * 2 * 7
+        }
+    } else {
         firsttrade++
-        qty = (marginperc*margin222*close)*0.5*7
-        if (thepair.indexOf('USD') == -1){
-        qty = (marginperc*margin222*(btcbtc/(btcbtc*close)))*2*7
+        qty = (marginperc * margin222 * close) * 0.5 * 7
+        if (thepair.indexOf('USD') == -1) {
+            qty = (marginperc * margin222 * (btcbtc / (btcbtc * close))) * 2 * 7
         }
-        }
+    }
 
-        if (marginperc < 0.3){
-        if (thepair == "ETHUSD"){
-        if (positionEth <= 0 && qty > 0){
+    if (marginperc < 0.3) {
+        if (thepair == "ETHUSD") {
+            if (positionEth <= 0 && qty > 0) {
 
-        qty = 0.35 * positionEth * -1
-        }
-        } else if (thepair == "BTCUSD"){
-        if (positionXbt <= 0 && qty > 0){
+                qty = 0.35 * positionEth * -1
+            }
+        } else if (thepair == "BTCUSD") {
+            if (positionXbt <= 0 && qty > 0) {
 
-        qty = 0.35 * positionXbt * -1
-        }
-        }
-        else if (thepair == "EOSBTC"){
-        if (positionEos <= 0 && qty > 0){
+                qty = 0.35 * positionXbt * -1
+            }
+        } else if (thepair == "EOSBTC") {
+            if (positionEos <= 0 && qty > 0) {
 
-        qty = 0.35 * positionEos * -1
-        }
-        }else if (thepair == "TRXBTC"){
-        if (positionTrx <= 0 && qty > 0){
+                qty = 0.35 * positionEos * -1
+            }
+        } else if (thepair == "TRXBTC") {
+            if (positionTrx <= 0 && qty > 0) {
 
-        qty = 0.35 * positionTrx * -1
-        }
-        }else if (thepair == "BCHBTC"){
-        if (positionBch <= 0 && qty > 0){
+                qty = 0.35 * positionTrx * -1
+            }
+        } else if (thepair == "BCHBTC") {
+            if (positionBch <= 0 && qty > 0) {
 
-        qty = 0.35 * positionBch * -1
-        }
-        }else if (thepair == "LTCBTC"){
-        if (positionLtc <= 0 && qty > 0){
+                qty = 0.35 * positionBch * -1
+            }
+        } else if (thepair == "LTCBTC") {
+            if (positionLtc <= 0 && qty > 0) {
 
-        qty = 0.35 * positionLtc * -1
-        }
-        }else if (thepair == "XRPBTC"){
-        if (positionXrp <= 0 && qty > 0){
+                qty = 0.35 * positionLtc * -1
+            }
+        } else if (thepair == "XRPBTC") {
+            if (positionXrp <= 0 && qty > 0) {
 
-        qty = 0.35 * positionXrp * -1
-        }
-        }else if (thepair == "ADABTC"){
-        if (positionAda <= 0 && qty > 0){
+                qty = 0.35 * positionXrp * -1
+            }
+        } else if (thepair == "ADABTC") {
+            if (positionAda <= 0 && qty > 0) {
 
-        qty = 0.35 * positionAda * -1
+                qty = 0.35 * positionAda * -1
+            }
         }
-        }
-        }
-        else if (marginperc < 0.4){
+    } else if (marginperc < 0.4) {
         qty = qty / 1.25
-        }
-       if (thepair == 'ETHUSD'){
-        qty = (qty * 13.4852071*5.375)
-        }
-         else if (thepair == 'BTCUSD'){
-        qty = (qty * 8) ;
-        }
-        else {
+    }
+    if (thepair == 'ETHUSD') {
+        qty = (qty * 13.4852071 * 5.375)
+    } else if (thepair == 'BTCUSD') {
+        qty = (qty * 8);
+    } else {
         qty = (qty)
-        }
-        if (thepair == 'BTCUSD'){
-          if (positionXbt < 0){
+    }
+    if (thepair == 'BTCUSD') {
+        if (positionXbt < 0) {
             qty = qty * 2;
-            if (qty > positionXbt)
-            {
-            qty = positionXbt * -1
+            if (qty > positionXbt) {
+                qty = positionXbt * -1
             }
-          }else 
-          if (marginperc < 0.175){
-        qty = 0
-        
-          }
-        }
-        else if (thepair == 'ETHUSD'){
-          if (positionEth < 0){
-            qty = qty * 2
-            if (qty > positionEth)
-            {
-            qty = positionEth * -1
-            }
-          }else 
-          if (marginperc < 0.175){
-        qty = 0
-        
-          }
-        }
-        else if (thepair == 'ADABTC'){
-          if (positionAda < 0){
-            qty = qty * 2
-            if (qty > positionAda)
-            {
-            qty = positionAda * -1
-            }
-          }else 
-          if (marginperc < 0.175){
-        qty = 0
-        
-          }
-        }
-        else if (thepair == 'EOSBTC'){
-          if (positionEos < 0){
-            qty = qty * 2
-            if (qty > positionEos)
-            {
-            qty = positionEos * -1
-            }
-          }else 
-          if (marginperc < 0.175){
-        qty = 0
-        
-          }
-        }
-        else if (thepair == 'TRXBTC'){
-          if (positionTrx < 0){
-            qty = qty * 2
-            if (qty > positionTrx)
-            {
-            qty = positionTrx * -1
-            }
-          }else 
-          if (marginperc < 0.175){
-        qty = 0
-        
-          }
-        }
-        else if (thepair == 'XRPBTC'){
-          if (positionXrp < 0){
-            qty = qty * 2
-            if (qty > positionXrp)
-            {
-            qty = positionXrp * -1
-            }
-          }else 
-          if (marginperc < 0.175){
-        qty = 0
-        
-          }
-        }
-        else if (thepair == 'BCHBTC'){
-          if (positionBch < 0){
-            qty = qty * 2
-            if (qty > positionBch)
-            {
-            qty = positionBch * -1
-            }
-          }else 
-          if (marginperc < 0.175){
-        qty = 0
-        
-          }
-        }
-        else if (thepair == 'LTCBTC'){
-          if (positionLtc < 0){
-            qty = qty * 2
-            if (qty > positionLtc)
-            {
-            qty = positionLtc * -1
-            }
-          }else 
-          if (marginperc < 0.175){
-        qty = 0
-        
-          }
-        }
+        } else
+        if (marginperc < 0.175) {
+            qty = 0
 
-        
-        if (marginperc < 0.15){
-        qty = qty / 5 
         }
-        qty = Math.round(qty)
-          var dd = close / entry
-  market = false;
-  if (pos < 0 && dd > 0){
-  if (dd > trail / 100){
-  market = true
-}  
-  }
-  else if (pos > 0 && dd < 0){
-  if (dd * -1 > trail / 100){
-  market = true
-}  
-  }
-  if (market){
+    } else if (thepair == 'ETHUSD') {
+        if (positionEth < 0) {
+            qty = qty * 2
+            if (qty > positionEth) {
+                qty = positionEth * -1
+            }
+        } else
+        if (marginperc < 0.175) {
+            qty = 0
 
-verb = 'POST',
-  path = '/api/v1/order',
-  expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
-  data = {symbol:thepair.replace('BTCUSD','XBTUSD').replace('BTC','U19'),orderQty:qty,ordType:"Market" };
+        }
+    } else if (thepair == 'ADABTC') {
+        if (positionAda < 0) {
+            qty = qty * 2
+            if (qty > positionAda) {
+                qty = positionAda * -1
+            }
+        } else
+        if (marginperc < 0.175) {
+            qty = 0
 
-// Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
-// and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
- postBody = JSON.stringify(data);
+        }
+    } else if (thepair == 'EOSBTC') {
+        if (positionEos < 0) {
+            qty = qty * 2
+            if (qty > positionEos) {
+                qty = positionEos * -1
+            }
+        } else
+        if (marginperc < 0.175) {
+            qty = 0
 
-signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires + postBody).digest('hex');
+        }
+    } else if (thepair == 'TRXBTC') {
+        if (positionTrx < 0) {
+            qty = qty * 2
+            if (qty > positionTrx) {
+                qty = positionTrx * -1
+            }
+        } else
+        if (marginperc < 0.175) {
+            qty = 0
 
- headers = {
-  'content-type' : 'application/json',
-  'Accept': 'application/json',
-  'X-Requested-With': 'XMLHttpRequest',
-  'api-expires': expires,
-  'api-key': apiKey,
-  'api-signature': signature
-};
+        }
+    } else if (thepair == 'XRPBTC') {
+        if (positionXrp < 0) {
+            qty = qty * 2
+            if (qty > positionXrp) {
+                qty = positionXrp * -1
+            }
+        } else
+        if (marginperc < 0.175) {
+            qty = 0
 
- requestOptions = {
-  headers: headers,
-  url:'https://www.bitmex.com'+path,
-  method: verb,
-  body: postBody
-};
-setTimeout(function(){
-request(requestOptions, function(error, response, body) {
-  if (error) { console.log(error); }
-  console.log(body);
-});
-}, 1000)
-}
-        if (buyHigh == undefined){
+        }
+    } else if (thepair == 'BCHBTC') {
+        if (positionBch < 0) {
+            qty = qty * 2
+            if (qty > positionBch) {
+                qty = positionBch * -1
+            }
+        } else
+        if (marginperc < 0.175) {
+            qty = 0
+
+        }
+    } else if (thepair == 'LTCBTC') {
+        if (positionLtc < 0) {
+            qty = qty * 2
+            if (qty > positionLtc) {
+                qty = positionLtc * -1
+            }
+        } else
+        if (marginperc < 0.175) {
+            qty = 0
+
+        }
+    }
+
+
+    if (marginperc < 0.15) {
+        qty = qty / 5
+    }
+    qty = Math.round(qty)
+    var dd = close / entry
+    market = false;
+    if (pos < 0 && dd > 0) {
+        if (dd > trail / 100) {
+            market = true
+        }
+    } else if (pos > 0 && dd < 0) {
+        if (dd * -1 > trail / 100) {
+            market = true
+        }
+    }
+    if (market) {
+
+        verb = 'POST',
+            path = '/api/v1/order',
+            expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
+            data = {
+                symbol: thepair.replace('BTCUSD', 'XBTUSD').replace('BTC', 'U19'),
+                orderQty: qty,
+                ordType: "Market"
+            };
+
+        // Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
+        // and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
+        postBody = JSON.stringify(data);
+
+        signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires + postBody).digest('hex');
+
+        headers = {
+            'content-type': 'application/json',
+            'Accept': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+            'api-expires': expires,
+            'api-key': apiKey,
+            'api-signature': signature
+        };
+
+        requestOptions = {
+            headers: headers,
+            url: 'https://www.bitmex.com' + path,
+            method: verb,
+            body: postBody
+        };
+        setTimeout(function() {
+            request(requestOptions, function(error, response, body) {
+                if (error) {
+                    console.log(error);
+                }
+                console.log(body);
+            });
+        }, 1000)
+    }
+    if (buyHigh == undefined) {
         buyHigh = false;
-        }
-        console.log(qty)
-        if (buyHigh == false){
+    }
+    console.log(qty)
+    if (buyHigh == false) {
         buyHigh = true;
         var pr = 0;
         verb = 'GET',
-  path = '/api/v1/instrument/active',
-  expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
-  data = ''
-// Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
-// and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
-postBody = JSON.stringify(data);
+            path = '/api/v1/instrument/active',
+            expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
+            data = ''
+        // Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
+        // and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
+        postBody = JSON.stringify(data);
 
-signature = crypto.createHmac('sha256', apiSecret).update(verb + path + (expires) + data).digest('hex');
+        signature = crypto.createHmac('sha256', apiSecret).update(verb + path + (expires) + data).digest('hex');
 
- headers = {
-  'content-type' : 'application/json',
-  'Accept': 'application/json',
-  'X-Requested-With': 'XMLHttpRequest',
-  'api-expires': expires,
-  'api-key': apiKey,
-  'api-signature': signature
-};
-requestOptions = {
-  headers: headers,
-  url:'https://www.bitmex.com'+path,
-  method: verb,
-  body: {}
-};
-request(requestOptions, function(error, response, body) {
-  if (error) { console.log(error); }
-  var js = JSON.parse(body)
-  var js = JSON.parse(body)
-  var btcbid;
-  var btcask;
-  var ethbid;
-  var ethask;
-  var adabid;
-  var adaask;
-  var eosbid;
-  var eosask;
-  var bchbid;
-  var bchask;
-  var xrpbid;
-  var xrpask;
-  var ltcbid;
-  var ltcask;
-  var trxbid;
-  var trxask;
-  for (var j in js){
-  if (js[j].symbol == 'XBTUSD'){
-    btcbid = js[j].bidPrice
+        headers = {
+            'content-type': 'application/json',
+            'Accept': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+            'api-expires': expires,
+            'api-key': apiKey,
+            'api-signature': signature
+        };
+        requestOptions = {
+            headers: headers,
+            url: 'https://www.bitmex.com' + path,
+            method: verb,
+            body: {}
+        };
+        request(requestOptions, function(error, response, body) {
+            if (error) {
+                console.log(error);
+            }
+            var js = JSON.parse(body)
+            var js = JSON.parse(body)
+            var btcbid;
+            var btcask;
+            var ethbid;
+            var ethask;
+            var adabid;
+            var adaask;
+            var eosbid;
+            var eosask;
+            var bchbid;
+            var bchask;
+            var xrpbid;
+            var xrpask;
+            var ltcbid;
+            var ltcask;
+            var trxbid;
+            var trxask;
+            for (var j in js) {
+                if (js[j].symbol == 'XBTUSD') {
+                    btcbid = js[j].bidPrice
 
-    btcbtc = parseFloat(js[j].midPrice)
-    btcask = js[j].askPrice
-  }
-else if (js[j].symbol == 'ETHUSD'){
-    ethbid = js[j].bidPrice
-    ethask = js[j].askPrice
-  }
-else if (js[j].symbol == 'ADAU19'){
-    adabid = js[j].bidPrice
-    adaask = js[j].askPrice
-  }
-else if (js[j].symbol == 'TRXU19'){
-    trxbid = js[j].bidPrice
-    trxask = js[j].askPrice
-  }
-else if (js[j].symbol == 'EOSU19'){
-    eosbid = js[j].bidPrice
-    eosask = js[j].askPrice
-  }
-else if (js[j].symbol == 'BCHU19'){
-    bchbid = js[j].bidPrice
-    bchask = js[j].askPrice
-  }
-else if (js[j].symbol == 'LTCU19'){
-    ltcbid = js[j].bidPrice
-    ltcask = js[j].askPrice
-  }
-else if (js[j].symbol == 'XRPU19'){
-    xrpbid = js[j].bidPrice
-    xrpask = js[j].askPrice
-  }
-  }
-  var qty = 0;
-        if (thepair == 'BTCUSD'){
-        qty = positionXbt * -1
-        if (qty <= 0){
-        pr = btcask
-        if (marginperc < 0.15){
-        pr = btcbid
-        }
-        }
-        else {
-        pr = btcbid
-        if (marginperc < 0.15){
-        pr = btcask
-        }
-        }
-        } else if (thepair == 'ETHUSD'){
-        qty = positionEth * -1
-        if (qty < 0){
-        pr = ethask
-        if (marginperc < 0.15){
-        pr = ethbid
-        }
-        }
-        else {
-        pr = ethbid
-        if (marginperc < 0.15){
-        pr = ethask
-        }
-        }
-        }
-        else if (thepair == 'TRXBTC'){
-        qty = positionTrx * -1
-        if (qty < 0){
-        pr = trxask
-        if (marginperc < 0.15){
-        pr = trxbid
-        }
-        }
-        else {
-        pr = trxbid
-        if (marginperc < 0.15){
-        pr = trxask
-        }
-        }
-        }
-        else if (thepair == 'ADABTC'){
-        qty = positionAda * -1
-        if (qty < 0){
-        pr = adaask
-        if (marginperc < 0.15){
-        pr = adabid
-        }
-        }
-        else {
-        pr = adabid
-        if (marginperc < 0.15){
-        pr =adaask
-        }
-        }
-        }
-        else if (thepair == 'EOSBTC'){
-        qty = positionEos * -1
-        if (qty < 0){
-        pr = eosask
-        if (marginperc < 0.15){
-        pr = eosbid
-        }
-        }
-        else {
-        pr = eosbid
-        if (marginperc < 0.15){
-        pr = eosask
-        }
-        }
-        }
-        else if (thepair == 'BCHBTC'){
-        qty = positionBch * -1
-        if (qty< 0){
-        pr = bchask
-        if (marginperc < 0.15){
-        pr = bchbid
-        }
-        }
-        else {
-        pr = bchbid
-        if (marginperc < 0.15){
-        pr = bchask
-        }
-        }
-        }
-        else if (thepair == 'LTCBTC'){
-        qty = positionLtc * -1
-        if (qty < 0){
-        pr = ltcask
-        if (marginperc < 0.15){
-        pr = ltcbid
-        }
-        }
-        else {
-        pr = ltcbid
-        if (marginperc < 0.15){
-        pr = ltcask
-        }
-        }
-        }
-        else if (thepair == 'XRPBTC'){
-        qty = positionXrp * -1
-        if (qty < 0){
-        pr = xrpask
-        if (marginperc < 0.15){
-        pr = xrpbid
-        }
-        }
-        else {
-        pr = xrpbid
-        if (marginperc < 0.15){
-        pr = xrpask
-        }
-        }
-        }
-        var trail = pr * trailstop * -1
-         var stop = pr * 1 - trailstop
-        if (thepair == 'BTCUSD'){
-        pr = Math.round(pr*2)/2;
-        trail = Math.round(trail*2)/2;
-        stop = Math.round(stop*2)/2;
-        }
-        else if (thepair == 'ETHUSD'){
-        pr =  parseFloat((Math.round(pr * 4) / 4).toFixed(2));
-         trail =  parseFloat((Math.round(trail * 4) / 4).toFixed(2));
-         stop =  parseFloat((Math.round(stop * 4) / 4).toFixed(2));
-        
-        }
-        else if (thepair == 'LTCBTC'){
-        pr =   Math.round(pr*2)/2;
-       
-        trail = Math.round(trail*2)/2; 
-        stop = Math.round(stop*2)/2; 
-        }
-        
-        if (thepair == 'BTCUSD'){
-        pr = Math.round(pr*2)/2;
-        }
-        else if (thepair == 'ETHUSD'){
-        pr =  parseFloat((Math.round(pr * 4) / 4).toFixed(2));
-        }
-        else if (thepair == 'LTCBTC'){
-        pr =   Math.round(pr*2)/2;
-        }
-if (marginperc < 0.095){
-        qty = qty / 2
-        qty = Math.floor(qty)
-        verb = 'POST',
-  path = '/api/v1/order',
-  expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
-  data = {symbol:thepair.replace('BTCUSD','XBTUSD').replace('BTC','U19'),orderQty:qty,ordType:"Market"};
+                    btcbtc = parseFloat(js[j].midPrice)
+                    btcask = js[j].askPrice
+                } else if (js[j].symbol == 'ETHUSD') {
+                    ethbid = js[j].bidPrice
+                    ethask = js[j].askPrice
+                } else if (js[j].symbol == 'ADAU19') {
+                    adabid = js[j].bidPrice
+                    adaask = js[j].askPrice
+                } else if (js[j].symbol == 'TRXU19') {
+                    trxbid = js[j].bidPrice
+                    trxask = js[j].askPrice
+                } else if (js[j].symbol == 'EOSU19') {
+                    eosbid = js[j].bidPrice
+                    eosask = js[j].askPrice
+                } else if (js[j].symbol == 'BCHU19') {
+                    bchbid = js[j].bidPrice
+                    bchask = js[j].askPrice
+                } else if (js[j].symbol == 'LTCU19') {
+                    ltcbid = js[j].bidPrice
+                    ltcask = js[j].askPrice
+                } else if (js[j].symbol == 'XRPU19') {
+                    xrpbid = js[j].bidPrice
+                    xrpask = js[j].askPrice
+                }
+            }
+            var qty = 0;
+            if (thepair == 'BTCUSD') {
+                qty = positionXbt * -1
+                if (qty <= 0) {
+                    pr = btcask
+                    if (marginperc < 0.15) {
+                        pr = btcbid
+                    }
+                } else {
+                    pr = btcbid
+                    if (marginperc < 0.15) {
+                        pr = btcask
+                    }
+                }
+            } else if (thepair == 'ETHUSD') {
+                qty = positionEth * -1
+                if (qty < 0) {
+                    pr = ethask
+                    if (marginperc < 0.15) {
+                        pr = ethbid
+                    }
+                } else {
+                    pr = ethbid
+                    if (marginperc < 0.15) {
+                        pr = ethask
+                    }
+                }
+            } else if (thepair == 'TRXBTC') {
+                qty = positionTrx * -1
+                if (qty < 0) {
+                    pr = trxask
+                    if (marginperc < 0.15) {
+                        pr = trxbid
+                    }
+                } else {
+                    pr = trxbid
+                    if (marginperc < 0.15) {
+                        pr = trxask
+                    }
+                }
+            } else if (thepair == 'ADABTC') {
+                qty = positionAda * -1
+                if (qty < 0) {
+                    pr = adaask
+                    if (marginperc < 0.15) {
+                        pr = adabid
+                    }
+                } else {
+                    pr = adabid
+                    if (marginperc < 0.15) {
+                        pr = adaask
+                    }
+                }
+            } else if (thepair == 'EOSBTC') {
+                qty = positionEos * -1
+                if (qty < 0) {
+                    pr = eosask
+                    if (marginperc < 0.15) {
+                        pr = eosbid
+                    }
+                } else {
+                    pr = eosbid
+                    if (marginperc < 0.15) {
+                        pr = eosask
+                    }
+                }
+            } else if (thepair == 'BCHBTC') {
+                qty = positionBch * -1
+                if (qty < 0) {
+                    pr = bchask
+                    if (marginperc < 0.15) {
+                        pr = bchbid
+                    }
+                } else {
+                    pr = bchbid
+                    if (marginperc < 0.15) {
+                        pr = bchask
+                    }
+                }
+            } else if (thepair == 'LTCBTC') {
+                qty = positionLtc * -1
+                if (qty < 0) {
+                    pr = ltcask
+                    if (marginperc < 0.15) {
+                        pr = ltcbid
+                    }
+                } else {
+                    pr = ltcbid
+                    if (marginperc < 0.15) {
+                        pr = ltcask
+                    }
+                }
+            } else if (thepair == 'XRPBTC') {
+                qty = positionXrp * -1
+                if (qty < 0) {
+                    pr = xrpask
+                    if (marginperc < 0.15) {
+                        pr = xrpbid
+                    }
+                } else {
+                    pr = xrpbid
+                    if (marginperc < 0.15) {
+                        pr = xrpask
+                    }
+                }
+            }
+            var trail = pr * trailstop * -1
+            var stop = pr * 1 - trailstop
+            if (thepair == 'BTCUSD') {
+                pr = Math.round(pr * 2) / 2;
+                trail = Math.round(trail * 2) / 2;
+                stop = Math.round(stop * 2) / 2;
+            } else if (thepair == 'ETHUSD') {
+                pr = parseFloat((Math.round(pr * 4) / 4).toFixed(2));
+                trail = parseFloat((Math.round(trail * 4) / 4).toFixed(2));
+                stop = parseFloat((Math.round(stop * 4) / 4).toFixed(2));
 
-// Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
-// and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
- postBody = JSON.stringify(data);
+            } else if (thepair == 'LTCBTC') {
+                pr = Math.round(pr * 2) / 2;
 
-signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires + postBody).digest('hex');
+                trail = Math.round(trail * 2) / 2;
+                stop = Math.round(stop * 2) / 2;
+            }
 
- headers = {
-  'content-type' : 'application/json',
-  'Accept': 'application/json',
-  'X-Requested-With': 'XMLHttpRequest',
-  'api-expires': expires,
-  'api-key': apiKey,
-  'api-signature': signature
-};
+            if (thepair == 'BTCUSD') {
+                pr = Math.round(pr * 2) / 2;
+            } else if (thepair == 'ETHUSD') {
+                pr = parseFloat((Math.round(pr * 4) / 4).toFixed(2));
+            } else if (thepair == 'LTCBTC') {
+                pr = Math.round(pr * 2) / 2;
+            }
+            if (marginperc < 0.095) {
+                qty = qty / 2
+                qty = Math.floor(qty)
+                verb = 'POST',
+                    path = '/api/v1/order',
+                    expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
+                    data = {
+                        symbol: thepair.replace('BTCUSD', 'XBTUSD').replace('BTC', 'U19'),
+                        orderQty: qty,
+                        ordType: "Market"
+                    };
 
- requestOptions = {
-  headers: headers,
-  url:'https://www.bitmex.com'+path,
-  method: verb,
-  body: postBody
-};
-setTimeout(function(){
-request(requestOptions, function(error, response, body) {
-  if (error) { console.log(error); }
-  console.log(body);
-  refreshMargin();
-  })
-  })
+                // Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
+                // and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
+                postBody = JSON.stringify(data);
 
-  }
-        verb = 'DELETE',
-  path = '/api/v1/order/all',
-  expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
-  data = {symbol:thepair.replace('BTCUSD','XBTUSD').replace('BTC','U19')};
+                signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires + postBody).digest('hex');
 
-// Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
-// and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
-postBody = JSON.stringify(data);
+                headers = {
+                    'content-type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'api-expires': expires,
+                    'api-key': apiKey,
+                    'api-signature': signature
+                };
 
-signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires + postBody).digest('hex');
+                requestOptions = {
+                    headers: headers,
+                    url: 'https://www.bitmex.com' + path,
+                    method: verb,
+                    body: postBody
+                };
+                setTimeout(function() {
+                    request(requestOptions, function(error, response, body) {
+                        if (error) {
+                            console.log(error);
+                        }
+                        console.log(body);
+                        refreshMargin();
+                    })
+                })
 
-headers = {
-  'content-type' : 'application/json',
-  'Accept': 'application/json',
-  'X-Requested-With': 'XMLHttpRequest',
-  'api-expires': expires,
-  'api-key': apiKey,
-  'api-signature': signature
-};
- requestOptions = {
-  headers: headers,
-  url:'https://www.bitmex.com'+path,
-  method: verb,
-  body: postBody
-};
-request(requestOptions, function(error, response, body) {
-  if (error) { console.log(error); }
-  console.log(body);
-   var dd = close / entry
-  market = false;
-  if (pos < 0 && dd > 0){
-  if (dd > trail / 100){
-  market = true
-}  
-  }
-  else if (pos > 0 && dd < 0){
-  if (dd * -1 > trail / 100){
-  market = true
-}  
-  }
-  if (market){
- verb = 'POST',
-  path = '/api/v1/order',
-  expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
-  data = {symbol:thepair.replace('BTCUSD','XBTUSD').replace('BTC','U19'),orderQty:qty,ordType:"Market" };
+            }
+            verb = 'DELETE',
+                path = '/api/v1/order/all',
+                expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
+                data = {
+                    symbol: thepair.replace('BTCUSD', 'XBTUSD').replace('BTC', 'U19')
+                };
 
-// Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
-// and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
- postBody = JSON.stringify(data);
+            // Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
+            // and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
+            postBody = JSON.stringify(data);
 
- signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires + postBody).digest('hex');
+            signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires + postBody).digest('hex');
 
- headers = {
-  'content-type' : 'application/json',
-  'Accept': 'application/json',
-  'X-Requested-With': 'XMLHttpRequest',
-  'api-expires': expires,
-  'api-key': apiKey,
-  'api-signature': signature
-};
+            headers = {
+                'content-type': 'application/json',
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+                'api-expires': expires,
+                'api-key': apiKey,
+                'api-signature': signature
+            };
+            requestOptions = {
+                headers: headers,
+                url: 'https://www.bitmex.com' + path,
+                method: verb,
+                body: postBody
+            };
+            request(requestOptions, function(error, response, body) {
+                if (error) {
+                    console.log(error);
+                }
+                console.log(body);
+                var dd = close / entry
+                market = false;
+                if (pos < 0 && dd > 0) {
+                    if (dd > trail / 100) {
+                        market = true
+                    }
+                } else if (pos > 0 && dd < 0) {
+                    if (dd * -1 > trail / 100) {
+                        market = true
+                    }
+                }
+                if (market) {
+                    verb = 'POST',
+                        path = '/api/v1/order',
+                        expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
+                        data = {
+                            symbol: thepair.replace('BTCUSD', 'XBTUSD').replace('BTC', 'U19'),
+                            orderQty: qty,
+                            ordType: "Market"
+                        };
 
- requestOptions = {
-  headers: headers,
-  url:'https://www.bitmex.com'+path,
-  method: verb,
-  body: postBody
-};
-setTimeout(function(){
-request(requestOptions, function(error, response, body) {
-  if (error) { console.log(error); }
-  console.log(body);
+                    // Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
+                    // and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
+                    postBody = JSON.stringify(data);
 
-  })
-  }, 1000)
-  }
-verb = 'POST',
-  path = '/api/v1/order',
-  expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
-  data = {symbol:thepair.replace('BTCUSD','XBTUSD').replace('BTC','U19'),orderQty:qty,price:pr,ordType:"Limit"};
+                    signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires + postBody).digest('hex');
 
-// Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
-// and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
- postBody = JSON.stringify(data);
+                    headers = {
+                        'content-type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'api-expires': expires,
+                        'api-key': apiKey,
+                        'api-signature': signature
+                    };
 
-signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires + postBody).digest('hex');
+                    requestOptions = {
+                        headers: headers,
+                        url: 'https://www.bitmex.com' + path,
+                        method: verb,
+                        body: postBody
+                    };
+                    setTimeout(function() {
+                        request(requestOptions, function(error, response, body) {
+                            if (error) {
+                                console.log(error);
+                            }
+                            console.log(body);
 
- headers = {
-  'content-type' : 'application/json',
-  'Accept': 'application/json',
-  'X-Requested-With': 'XMLHttpRequest',
-  'api-expires': expires,
-  'api-key': apiKey,
-  'api-signature': signature
-};
+                        })
+                    }, 1000)
+                }
+                verb = 'POST',
+                    path = '/api/v1/order',
+                    expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
+                    data = {
+                        symbol: thepair.replace('BTCUSD', 'XBTUSD').replace('BTC', 'U19'),
+                        orderQty: qty,
+                        price: pr,
+                        ordType: "Limit"
+                    };
 
- requestOptions = {
-  headers: headers,
-  url:'https://www.bitmex.com'+path,
-  method: verb,
-  body: postBody
-};
-setTimeout(function(){
-request(requestOptions, function(error, response, body) {
-  if (error) { console.log(error); }
-  console.log(body);
+                // Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
+                // and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
+                postBody = JSON.stringify(data);
 
-  refreshMargin();
-});
-}, 550);
-}); 
-})
+                signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires + postBody).digest('hex');
+
+                headers = {
+                    'content-type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'api-expires': expires,
+                    'api-key': apiKey,
+                    'api-signature': signature
+                };
+
+                requestOptions = {
+                    headers: headers,
+                    url: 'https://www.bitmex.com' + path,
+                    method: verb,
+                    body: postBody
+                };
+                setTimeout(function() {
+                    request(requestOptions, function(error, response, body) {
+                        if (error) {
+                            console.log(error);
+                        }
+                        console.log(body);
+
+                        refreshMargin();
+                    });
+                }, 550);
+            });
+        })
+    }
 }
-        }
+    }
         var t = new Date().getTime() - 1000 * 420;
         var tt = [];
         for (var aa in trades){
