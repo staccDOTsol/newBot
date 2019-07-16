@@ -552,9 +552,11 @@ export default {
       }
     },
     onTrades(trades) {
-    if (this.tickData != undefined){
+  if (this.tickData != undefined){
+if (this.tickData.exchanges[trades[trades.length-1][0]] != undefined){
 var close = this.tickData.exchanges[trades[trades.length-1][0]].close
-    }
+
+}    }
     console.log('data')
     if (this.chart.series[0 ] != undefined){
     if (this.chart.series[0].yData.length > 30){
