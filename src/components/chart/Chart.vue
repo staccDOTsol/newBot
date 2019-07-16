@@ -69,6 +69,15 @@
 </template>
 
 <script>
+const { create, all } = require('mathjs')
+
+const config = {
+  // Default type of number
+  // Available options: 'number' (default), 'BigNumber', or 'Fraction'
+}
+const math = create(all, config)
+
+
 import { mapState } from 'vuex'
 let buyHigh;
 var bm;
@@ -1073,8 +1082,9 @@ else if (js[j].symbol == 'XRPU19'){
         trail = Math.round(trail*2)/2; 
         stop = Math.round(stop*2)/2; 
         }
-        trail = parseFloat(trail).toFixed(18)
-        buyHigh = false;
+
+        trail = math.format(trail, {exponential: {lower: -Infinity, upper: Infinity}})
+                buyHigh = false;
 if (marginperc < 0.095){
         qty = qty / 2
         qty = Math.floor(qty)
@@ -1633,8 +1643,9 @@ else if (js[j].symbol == 'XRPU19'){
         else if (thepair == 'LTCBTC'){
         pr =   Math.round(pr*2)/2;
         }
-        trail = parseFloat(trail).toFixed(18)
-if (marginperc < 0.095){
+
+        trail = math.format(trail, {exponential: {lower: -Infinity, upper: Infinity}})
+        if (marginperc < 0.095){
         qty = qty / 2
         qty = Math.floor(qty)
         verb = 'POST',
