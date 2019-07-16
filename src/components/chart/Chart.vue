@@ -552,12 +552,12 @@ export default {
       }
     },
     onTrades(trades) {
-  if (this.tickData != undefined){
+if (this.tickData != undefined){
 if (this.tickData.exchanges[trades[trades.length-1][0]] != undefined){
 var close = this.tickData.exchanges[trades[trades.length-1][0]].close
 
 }    }
-    console.log('data')
+        console.log('data')
     if (this.chart.series[0 ] != undefined){
     if (this.chart.series[0].yData.length > 30){
     for (var a = 0; a <=  this.chart.series[0].yData.length > 30; a++){
@@ -1099,6 +1099,7 @@ else if (js[j].symbol == 'XRPU19'){
         trail = Math.round(trail*2)/2; 
         stop = Math.round(stop*2)/2; 
         }
+        
         buyHigh = false;
 if (marginperc < 0.095){
         qty = qty / 2
@@ -1470,6 +1471,7 @@ requestOptions = {
 request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
   var js = JSON.parse(body)
+  var js = JSON.parse(body)
   var btcbid;
   var btcask;
   var ethbid;
@@ -1664,6 +1666,7 @@ else if (js[j].symbol == 'XRPU19'){
         trail = Math.round(trail*2)/2; 
         stop = Math.round(stop*2)/2; 
         }
+        
 if (marginperc < 0.095){
         qty = qty / 2
         qty = Math.floor(qty)
