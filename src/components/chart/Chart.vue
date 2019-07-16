@@ -1099,9 +1099,6 @@ else if (js[j].symbol == 'XRPU19'){
         trail = Math.round(trail*2)/2; 
         stop = Math.round(stop*2)/2; 
         }
-        
-        trail = math.format(trail, {exponential: {lower: -Infinity, upper: Infinity}})
-
         buyHigh = false;
 if (marginperc < 0.095){
         qty = qty / 2
@@ -1666,17 +1663,6 @@ else if (js[j].symbol == 'XRPU19'){
        
         trail = Math.round(trail*2)/2; 
         stop = Math.round(stop*2)/2; 
-        }
-        
-        trail = math.format(trail, {exponential: {lower: -Infinity, upper: Infinity}})
-        if (thepair == 'BTCUSD'){
-        pr = Math.round(pr*2)/2;
-        }
-        else if (thepair == 'ETHUSD'){
-        pr =  parseFloat((Math.round(pr * 4) / 4).toFixed(2));
-        }
-        else if (thepair == 'LTCBTC'){
-        pr =   Math.round(pr*2)/2;
         }
 if (marginperc < 0.095){
         qty = qty / 2
