@@ -63,7 +63,6 @@
           />
 
         </div>
-        </div>
           <div class="form-group settings-pair mb8">
           <label
             >Stop loss market out
@@ -82,7 +81,7 @@
             :value="trailstop"
             @change=""
           />
-        </div>s
+        </div>
         <div class="form-group settings-pair mb8">
           <label
             >Pair

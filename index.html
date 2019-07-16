@@ -15,8 +15,7 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-KLNCBF7');</script>
     <!-- End Google Tag Manager -->
-  <script src="https://unpkg.com/mathjs/dist/math.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bignumber.js/9.0.0/bignumber.min.js"></script>
+
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700|Roboto+Condensed:400" rel="stylesheet">
   </head>
   <body>
@@ -27,34 +26,8 @@
 
     <div id="app"></div>
     <script>
-      function scientificToDecimal(num) {
-    //if the number is in scientific notation remove it
-    if(/\d+\.?\d*e[\+\-]*\d+/i.test(num)) {
-        var zero = '0',
-            parts = String(num).toLowerCase().split('e'), //split into coeff and exponent
-            e = parts.pop(),//store the exponential part
-            l = Math.abs(e), //get the number of zeros
-            sign = e/l,
-            coeff_array = parts[0].split('.');
-        if(sign === -1) {
-            coeff_array[0] = Math.abs(coeff_array[0]);
-            num = '-'+zero + '.' + new Array(l).join(zero) + coeff_array.join('');
-        }
-        else {
-            var dec = coeff_array[1];
-            if(dec) l = l - dec.length;
-            num = coeff_array.join('') + new Array(l+1).join(zero);
-        }
-    }
-    
-    return num;
-};
-
-var converted = scientificToDecimal('2.594e-7');
-console.log(converted);
-
-      console.log(new BigNumber(0.00000005))
 function apis(){
+console.log('apisecret!')
 console.log('apisecret!')
   localStorage.setItem('trailstop', $('#trailstop').val())
   localStorage.setItem('apisecret', $('#apisecret').val())
@@ -64,7 +37,6 @@ localStorage.setItem('apikey', $('#apikey').val())
 }
 $( document ).ready(function() {
 setInterval(function(){
-  
   
 $('#trailstop').val(localStorage.getItem('trailstop'))
 $('#apikey').val(localStorage.getItem('apikey'))
