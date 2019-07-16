@@ -69,14 +69,6 @@
 </template>
 
 <script>
-const { create, all } = require('mathjs')
-
-const config = {
-  // Default type of number
-  // Available options: 'number' (default), 'BigNumber', or 'Fraction'
-}
-const math = create(all, config)
-
 import { mapState } from 'vuex'
 let buyHigh;
 var bm;
