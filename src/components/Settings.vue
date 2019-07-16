@@ -66,10 +66,10 @@
         </div>
           <div class="form-group settings-pair mb8">
           <label
-            >Trailstop
+            >Stop loss market out
             <span
               class="icon-info-circle"
-              title="The trail stop %"
+              title="The Stop Loss stop %"
               v-tippy
             ></span
           ></label>

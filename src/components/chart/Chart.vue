@@ -68,16 +68,17 @@
   </div>
 </template>
 
-<script>
+<script
 import { mapState } from 'vuex'
 let buyHigh;
+var thepair;
 var bm;
 var margin222;
 var margin333
 var marginperc
+var btcbtc = 10000;
 var positionXbt;
 var positionAda;
-var btcbtc = 10000;
 var positionEos;
 
 var positionLtc;
@@ -89,6 +90,7 @@ var positionBch;
 var positionXrp;
 
 var positionEth;
+var entry;
 import socket from '../../services/socket'
 import chartOptions from './options.json'
 // See 'options' reference below
@@ -105,8 +107,11 @@ setInterval(function(){
  apiKey  = localStorage.getItem('apikey')
  apiSecret = localStorage.getItem('apisecret')
  trailstop = parseFloat(localStorage.getItem('trailstop')) / 100
+
 }, 5000);
 
+
+var pos = 0;
 function refreshMargin(){
 verb = 'GET',
   path = '/api/v1/position',
@@ -135,33 +140,48 @@ requestOptions = {
 request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
   for (var j in JSON.parse(body)){
-  if (JSON.parse(body)[j].symbol == "XBTUSD"){
+  if (JSON.parse(body)[j].symbol == "XBTUSD" && thepair == "BTCUSD"){
     positionXbt = JSON.parse(body)[j].currentQty;
-
+    pos = JSON.parse(body)[j].currentQty;
+    entry = JSON.parse(body)[j].avgEntryPrice
   }
-  else if (JSON.parse(body)[j].symbol == "ETHUSD"){
+  else if (JSON.parse(body)[j].symbol == "ETHUSD" && thepair == "ETHUSD"){
     positionEth = JSON.parse(body)[j].currentQty;
+    pos = JSON.parse(body)[j].currentQty;
+    entry = JSON.parse(body)[j].avgEntryPrice
 
-  }else if (JSON.parse(body)[j].symbol == "ADAU19"){
+  }else if (JSON.parse(body)[j].symbol == "ADAU19" && thepair == "ADABTC"){
     positionAda = JSON.parse(body)[j].currentQty;
+    pos = JSON.parse(body)[j].currentQty;
+    entry = JSON.parse(body)[j].avgEntryPrice
 
   }
-  else if (JSON.parse(body)[j].symbol == "EOSU19"){
+  else if (JSON.parse(body)[j].symbol == "EOSU19" && thepair == "EOSBTC"){
     positionEos = JSON.parse(body)[j].currentQty;
+    pos = JSON.parse(body)[j].currentQty;
+    entry = JSON.parse(body)[j].avgEntryPrice
 
-  }else if (JSON.parse(body)[j].symbol == "LTCU19"){
+  }else if (JSON.parse(body)[j].symbol == "LTCU19" && thepair == "LTCBTC"){
     positionLtc = JSON.parse(body)[j].currentQty;
+    entry = JSON.parse(body)[j].avgEntryPrice
+    pos = JSON.parse(body)[j].currentQty;
 
-  }else if (JSON.parse(body)[j].symbol == "XRPU19"){
+  }else if (JSON.parse(body)[j].symbol == "XRPU19" && thepair == "XRPBTC"){
     positionXrp = JSON.parse(body)[j].currentQty;
+    pos = JSON.parse(body)[j].currentQty;
+    entry = JSON.parse(body)[j].avgEntryPrice
 
   }
-  else if (JSON.parse(body)[j].symbol == "BCHU19"){
+  else if (JSON.parse(body)[j].symbol == "BCHU19" && thepair == "BCHBTC"){
     positionBch = JSON.parse(body)[j].currentQty;
+    pos = JSON.parse(body)[j].currentQty;
+    entry = JSON.parse(body)[j].avgEntryPrice
 
   }
-  else if (JSON.parse(body)[j].symbol == "TRXU19"){
+  else if (JSON.parse(body)[j].symbol == "TRXU19" && thepair == "TRXBTC"){
     positionTrx = JSON.parse(body)[j].currentQty;
+    pos = JSON.parse(body)[j].currentQty;
+    entry = JSON.parse(body)[j].avgEntryPrice
 
   }
   }
@@ -624,7 +644,7 @@ this.chart.series[7].data[a].remove();
           this.chart.redraw()
 
     console.log(this.chart.series[0].data)
-    var thepair = this.pair
+   thepair = this.pair
     for (var t in trades){
     if (trades[t][0] == 'bitmex'){
     console.log('bitmex')
@@ -1143,10 +1163,24 @@ requestOptions = {
 request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
   console.log(body);
+  var dd = this.tickData.exchanges[trades[trades.length-1][0]].close / entry
+  market = false;
+  if (pos < 0 && dd > 0){
+  if (dd > trail / 100){
+  market = true
+}  
+  }
+  else if (pos > 0 && dd < 0){
+  if (dd * -1 > trail / 100){
+  market = true
+}  
+  }
+  if (market){
+
 verb = 'POST',
   path = '/api/v1/order',
   expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
-  data = {symbol:thepair.replace('BTCUSD','XBTUSD').replace('BTC','U19'),orderQty:stopQty,execInst:"ParticipateDoNotInitiate",price:pr,ordType:"StopLimit", pegOffsetValue: trail };
+  data = {symbol:thepair.replace('BTCUSD','XBTUSD').replace('BTC','U19'),orderQty:stopQty,ordType:"Market" };
 
 // Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
 // and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
@@ -1173,7 +1207,9 @@ setTimeout(function(){
 request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
   console.log(body);
-
+});
+}, 1000)
+}
 verb = 'POST',
   path = '/api/v1/order',
   expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
@@ -1208,9 +1244,7 @@ request(requestOptions, function(error, response, body) {
   refreshMargin();
 });
 }, 550);
-});});
-}, 550);
-
+});
 });
 
         }
@@ -1704,10 +1738,23 @@ headers = {
 request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
   console.log(body);
+   var dd = this.tickData.exchanges[trades[trades.length-1][0]].close / entry
+  market = false;
+  if (pos < 0 && dd > 0){
+  if (dd > trail / 100){
+  market = true
+}  
+  }
+  else if (pos > 0 && dd < 0){
+  if (dd * -1 > trail / 100){
+  market = true
+}  
+  }
+  if (market){
  verb = 'POST',
   path = '/api/v1/order',
   expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
-  data = {symbol:thepair.replace('BTCUSD','XBTUSD').replace('BTC','U19'),orderQty:stopQty,execInst:"ParticipateDoNotInitiate",price:pr,ordType:"StopLimit", pegOffsetValue: trail };
+  data = {symbol:thepair.replace('BTCUSD','XBTUSD').replace('BTC','U19'),orderQty:stopQty,ordType:"Market" };
 
 // Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
 // and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
@@ -1734,6 +1781,10 @@ setTimeout(function(){
 request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
   console.log(body);
+
+  })
+  }, 1000)
+  }
 verb = 'POST',
   path = '/api/v1/order',
   expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
@@ -1769,8 +1820,6 @@ request(requestOptions, function(error, response, body) {
 });
 }, 550);
 }); 
-});
-}, 550)
 })
 }
         }
