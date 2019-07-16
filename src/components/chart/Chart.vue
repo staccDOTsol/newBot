@@ -685,6 +685,7 @@ this.chart.series[7].data[a].remove();
         buyHigh = true;
         }
         if (buyHigh == true){
+        buyHigh = false;
         console.log('buyhigh')
         if (firsttrade < 2){
         console.log('buyhigh2')
