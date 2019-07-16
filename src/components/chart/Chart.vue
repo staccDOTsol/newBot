@@ -104,6 +104,14 @@ request(requestOptions, function(error, response, body) {
   for (var j in JSON.parse(body)){
   var stopQty;
   if (stops.includes(JSON.parse(body)[j]['orderID'])){
+  var stopQty;
+  if (JSON.parse(body)[j].side == 'Sell'){
+stopQty = JSON.parse(body)[j].orderQty 
+  }
+  else {
+
+stopQty = JSON.parse(body)[j].orderQty * -1
+  }
   if ((stopQty < 0 &&  stopQty < pos ) || (stopQty > 0 && stopQty > pos)){
 console.error('CANCEL STOP')
 stops = stops.splice(JSON.parse(body)[j]['orderID'], 1)
