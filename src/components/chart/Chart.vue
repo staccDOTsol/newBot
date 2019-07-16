@@ -77,7 +77,6 @@ const config = {
 }
 const math = create(all, config)
 
-
 import { mapState } from 'vuex'
 let buyHigh;
 var bm;
@@ -859,6 +858,7 @@ firsttrade++;
           }
         }
         console.log(qty)
+        
         if (marginperc < 0.15){
         qty = qty / 5 
         }
@@ -1064,7 +1064,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         var trail = pr * trailstop * -1
-         var stop = pr * 1 + trailstop //1.15
+         var stop = pr * 1 + trailstop
         if (thepair == 'BTCUSD'){
         pr = Math.round(pr*2)/2;
         trail = Math.round(trail*2)/2;
@@ -1082,9 +1082,10 @@ else if (js[j].symbol == 'XRPU19'){
         trail = Math.round(trail*2)/2; 
         stop = Math.round(stop*2)/2; 
         }
-
+        
         trail = math.format(trail, {exponential: {lower: -Infinity, upper: Infinity}})
-                buyHigh = false;
+
+        buyHigh = false;
 if (marginperc < 0.095){
         qty = qty / 2
         qty = Math.floor(qty)
@@ -1616,7 +1617,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         var trail = pr * trailstop * -1
-         var stop = pr * 1 - trailstop // 0.85
+         var stop = pr * 1 - trailstop
         if (thepair == 'BTCUSD'){
         pr = Math.round(pr*2)/2;
         trail = Math.round(trail*2)/2;
@@ -1634,6 +1635,8 @@ else if (js[j].symbol == 'XRPU19'){
         trail = Math.round(trail*2)/2; 
         stop = Math.round(stop*2)/2; 
         }
+        
+        trail = math.format(trail, {exponential: {lower: -Infinity, upper: Infinity}})
         if (thepair == 'BTCUSD'){
         pr = Math.round(pr*2)/2;
         }
@@ -1643,9 +1646,7 @@ else if (js[j].symbol == 'XRPU19'){
         else if (thepair == 'LTCBTC'){
         pr =   Math.round(pr*2)/2;
         }
-
-        trail = math.format(trail, {exponential: {lower: -Infinity, upper: Infinity}})
-        if (marginperc < 0.095){
+if (marginperc < 0.095){
         qty = qty / 2
         qty = Math.floor(qty)
         verb = 'POST',
