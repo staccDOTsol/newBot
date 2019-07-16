@@ -950,7 +950,7 @@ firsttrade++;
         console.log(positionXbt)
         console.log(positionEth)
         if (thepair == 'BTCUSD'){
-          if (positionXbt < 0){
+          if (positionXbt > 0){
             qty = qty * 2;
             if (qty < positionXbt)
             {
