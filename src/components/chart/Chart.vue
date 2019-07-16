@@ -69,6 +69,18 @@
 </template>
 
 <script>
+Array.prototype.remove = function() {
+    var what, a = arguments, L = a.length, ax;
+    while (L && this.length) {
+        what = a[--L];
+        while ((ax = this.indexOf(what)) !== -1) {
+            this.splice(ax, 1);
+        }
+    }
+    return this;
+};
+
+
 var stops = []
 var orders = []
 var close = 0;
@@ -124,7 +136,7 @@ stopQty = stopQty - JSON.parse(body)[j].orderQty
 stopQty = stopQty -  JSON.parse(body)[j].orderQty * -1
   }
   console.error('CANCEL STOP')
-stops = stops.splice(JSON.parse(body)[j]['orderID'])
+stops.remove(JSON.parse(body)[j]['orderID'])
 verb = 'DELETE',
   path = '/api/v1/order',
   expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
@@ -245,7 +257,7 @@ setTimeout(function(){
 request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
   console.log(body);
-orders = orders.splice(orders[o]);
+orders.remove(orders[o]);
 stops.push(JSON.parse(body)['orderID'])
 
   });
