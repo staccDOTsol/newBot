@@ -26,7 +26,7 @@
             >LiveNet API Key
             <span
               class="icon-info-circle"
-              title="Your API Key on testnet, with Order permissions (NOT Order Cancel)"
+              title="Your API Key on livenet, with Order permissions (NOT Order Cancel)"
               v-tippy
             ></span
           ></label>
