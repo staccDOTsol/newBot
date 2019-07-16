@@ -69,18 +69,18 @@
 </template>
 
 <script>
-var qty = 0
-var close = 0;
+var pos = 0;
+var entry = 0;
+var thepair;
 import { mapState } from 'vuex'
 let buyHigh;
-var thepair;
 var bm;
 var margin222;
 var margin333
 var marginperc
-var btcbtc = 10000;
 var positionXbt;
 var positionAda;
+var btcbtc = 10000;
 var positionEos;
 
 var positionLtc;
@@ -92,7 +92,6 @@ var positionBch;
 var positionXrp;
 
 var positionEth;
-var entry;
 import socket from '../../services/socket'
 import chartOptions from './options.json'
 // See 'options' reference below
@@ -109,11 +108,8 @@ setInterval(function(){
  apiKey  = localStorage.getItem('apikey')
  apiSecret = localStorage.getItem('apisecret')
  trailstop = parseFloat(localStorage.getItem('trailstop')) / 100
-
 }, 5000);
 
-
-var pos = 0;
 function refreshMargin(){
 verb = 'GET',
   path = '/api/v1/position',
@@ -299,6 +295,8 @@ export default {
   computed: {
     ...mapState([
       'pair',
+      'apikey',
+      'apisecret',
       'timeframe',
       'actives',
       'exchanges',
@@ -497,7 +495,7 @@ export default {
           : this.$refs.chartContainer.offsetWidth) -
           20 * 0.1) /
         this.chartCandleWidth
-      const range = timeframe * 2 * count / 10
+      const range = timeframe / 6 * count
 
       socket
         .fetchRange(range, clear)
@@ -554,19 +552,8 @@ export default {
       }
     },
     onTrades(trades) {
-if (this.tickData != undefined){
-    if (this.tickData.exchanges[trades[trades.length-1][0]] != undefined){
-    close = this.tickData.exchanges[trades[trades.length-1][0]].close
-    console.log(this.tickData.exchanges[trades[trades.length-1][0]])
-    var test =((margin222*1.25*((margin222*close)*50))/2)
-    console.log('close: ' + close)
-    test = test *2;
-        test = test * 10 * 10
-        if (thepair == 'ETHUSD'){
-       // test = test * 3
-        }
-        //console.log(test)
-    }
+    if (this.tickData != undefined){
+var close = this.tickData.exchanges[trades[trades.length-1][0]].close
     }
     console.log('data')
     if (this.chart.series[0 ] != undefined){
@@ -657,7 +644,7 @@ this.chart.series[7].data[a].remove();
           this.chart.redraw()
 
     console.log(this.chart.series[0].data)
-   thepair = this.pair
+    thepair = this.pair
     for (var t in trades){
     if (trades[t][0] == 'bitmex'){
     console.log('bitmex')
@@ -665,7 +652,21 @@ this.chart.series[7].data[a].remove();
     console.log(bm)
     }
     }
+        var qty = 0;
+    if (this.tickData != undefined){
+    if (this.tickData.exchanges[trades[trades.length-1][0]] != undefined){
     
+    console.log(this.tickData.exchanges[trades[trades.length-1][0]])
+    var test =((margin222*1.25*((margin222*this.tickData.exchanges[trades[trades.length-1][0]].close)*50))/2)
+    console.log(test)
+    test = test *2;
+        test = test * 10 * 10
+        if (thepair == 'ETHUSD'){
+       // test = test * 3
+        }
+        //console.log(test)
+    }
+    }
 
     if (
     this.chart.series[1].data[this.chart.series[1].data.length-1] != undefined){
@@ -678,39 +679,26 @@ this.chart.series[7].data[a].remove();
         num = 26
         }
         if (this.chart.series[5].yData[num]<=  0.98 * this.chart.series[4].yData[num]){
-
         console.log('sells greater')
         if (buyHigh == undefined){
         buyHigh = true;
         }
         if (buyHigh == true){
-        console.log('buyhigh')
         if (firsttrade < 2){
-        console.log('buyhigh2')
 firsttrade++;
         }
         if (firsttrade == 2){
-        console.log('buyhigh3')
-        console.log('marginperc: ' + marginperc.toString())
-        console.log('margin222: ' + margin222.toString())
-        console.log('close: ' + close.toString())
-        console.log('btcbtc: ' + btcbtc.toString())
         firsttrade++;
-        qty = -1*(marginperc*margin222*close)*0.5*7
+        qty = -1*(marginperc*margin222*this.tickData.exchanges[trades[trades.length-1][0]].close)*0.5*7
         if (thepair.indexOf('USD') == -1){
-        qty = -1*(marginperc*margin222*(btcbtc/(btcbtc*close)))*2*7
+        qty = -1*(marginperc*margin222*(btcbtc/(btcbtc*this.tickData.exchanges[trades[trades.length-1][0]].close)))*2*7
         }
         }
         else {
-        console.log('buyhigh4')
-        console.log('marginperc: ' + marginperc.toString())
-        console.log('margin222: ' + margin222.toString())
-        console.log('close: ' + close.toString())
-        console.log('btcbtc: ' + btcbtc.toString())
         firsttrade++;
-        qty = -1*(marginperc*margin222*close)*0.5*7
+        qty = -1*(marginperc*margin222*this.tickData.exchanges[trades[trades.length-1][0]].close)*0.5*7
         if (thepair.indexOf('USD') == -1){
-        qty = -1*(marginperc*margin222*(btcbtc/(btcbtc*close)))*2*7
+        qty = -1*(marginperc*margin222*(btcbtc/(btcbtc*this.tickData.exchanges[trades[trades.length-1][0]].close)))*2*7
         }
         }
         if (marginperc < 0.3){
@@ -760,7 +748,6 @@ firsttrade++;
        else if (marginperc < 0.4){
         qty = qty / 1.25
         }
-       console.log(1)
 
        
        if (thepair == 'ETHUSD'){
@@ -887,57 +874,7 @@ firsttrade++;
         if (marginperc < 0.15){
         qty = qty / 5 
         }
-
-       console.log(2)
         qty = Math.round(qty)
-          var dd = close / entry
-  var market = false;
-  if (pos < 0 && dd > 0){
-  if (dd > trail / 100){
-  market = true
-}  
-  }
-  else if (pos > 0 && dd < 0){
-  if (dd * -1 > trail / 100){
-  market = true
-}  
-  }
-  if (market){
-
-verb = 'POST',
-  path = '/api/v1/order',
-  expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
-  data = {symbol:thepair.replace('BTCUSD','XBTUSD').replace('BTC','U19'),orderQty:qty,ordType:"Market" };
-
-// Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
-// and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
- postBody = JSON.stringify(data);
-
-signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires + postBody).digest('hex');
-
- headers = {
-  'content-type' : 'application/json',
-  'Accept': 'application/json',
-  'X-Requested-With': 'XMLHttpRequest',
-  'api-expires': expires,
-  'api-key': apiKey,
-  'api-signature': signature
-};
-
- requestOptions = {
-  headers: headers,
-  url:'https://www.bitmex.com'+path,
-  method: verb,
-  body: postBody
-};
-setTimeout(function(){
-request(requestOptions, function(error, response, body) {
-  if (error) { console.log(error); }
-  console.log(body);
-});
-}, 1000)
-}
-       console.log(3)
        verb = 'GET',
   path = '/api/v1/instrument/active',
   expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
@@ -1016,8 +953,9 @@ else if (js[j].symbol == 'XRPU19'){
     xrpask = js[j].askPrice
   }
   }
+  var stopQty = 0;
         if (thepair == 'BTCUSD'){
-        qty = positionXbt * -1
+        stopQty = positionXbt * -1
         if (qty <= 0){
         pr = btcask
         if (marginperc < 0.15){
@@ -1031,7 +969,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         } else if (thepair == 'ETHUSD'){
-        qty = positionEth * -1
+        stopQty = positionEth * -1
         if (qty < 0){
         pr = ethask
 
@@ -1048,7 +986,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'TRXBTC'){
-        qty = positionTrx * -1
+        stopQty = positionTrx * -1
         if (qty < 0){
         pr = trxask
         if (marginperc < 0.15){
@@ -1063,7 +1001,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'ADABTC'){
-        qty = positionAda * -1
+        stopQty = positionAda * -1
         if (qty < 0){
         pr = adaask
         if (marginperc < 0.15){
@@ -1078,7 +1016,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'EOSBTC'){
-        qty = positionEos * -1
+        stopQty = positionEos * -1
         if (qty < 0){
         pr = eosask
         if (marginperc < 0.15){
@@ -1093,7 +1031,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'BCHBTC'){
-        qty = positionBch * -1
+        stopQty = positionBch * -1
         if (qty< 0){
         pr = bchask
         if (marginperc < 0.15){
@@ -1108,7 +1046,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'LTCBTC'){
-        qty = positionLtc * -1
+        stopQty = positionLtc * -1
         if (qty < 0){
         pr = ltcask
         if (marginperc < 0.15){
@@ -1123,7 +1061,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'XRPBTC'){
-        qty = positionXrp * -1
+        stopQty = positionXrp * -1
         if (qty < 0){
         pr = xrpask
         if (marginperc < 0.15){
@@ -1157,7 +1095,9 @@ else if (js[j].symbol == 'XRPU19'){
         stop = Math.round(stop*2)/2; 
         }
         
-        
+        trail = math.format(trail, {exponential: {lower: -Infinity, upper: Infinity}})
+
+        buyHigh = false;
 if (marginperc < 0.095){
         qty = qty / 2
         qty = Math.floor(qty)
@@ -1236,11 +1176,10 @@ request(requestOptions, function(error, response, body) {
 }  
   }
   if (market){
-
 verb = 'POST',
   path = '/api/v1/order',
   expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
-  data = {symbol:thepair.replace('BTCUSD','XBTUSD').replace('BTC','U19'),orderQty:qty,ordType:"Market" };
+  data = {symbol:thepair.replace('BTCUSD','XBTUSD').replace('BTC','U19'),orderQty:qty,ordType:"Market"};
 
 // Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
 // and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
@@ -1266,9 +1205,8 @@ signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires 
 setTimeout(function(){
 request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
-  console.log(body);
-});
-}, 1000)
+  console.log(body);});
+}, 550);
 }
 verb = 'POST',
   path = '/api/v1/order',
@@ -1300,16 +1238,16 @@ setTimeout(function(){
 request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
   console.log(body);
-        buyHigh = false;
 
   refreshMargin();
 });
 }, 550);
 });
+
 });
 
         }
-        }
+        } 
         else if (this.chart.series[5].yData[num]>=  1.02 * this.chart.series[4].yData[num]){
         console.log('buys greater')
         if (firsttrade <2 ){
@@ -1317,26 +1255,16 @@ request(requestOptions, function(error, response, body) {
         }
         else if (firsttrade == 2){
         firsttrade++;
-        console.log('buyhigh5')
-        console.log('marginperc: ' + marginperc.toString())
-        console.log('margin222: ' + margin222.toString())
-        console.log('close: ' + close.toString())
-        console.log('btcbtc: ' + btcbtc.toString())
-        qty = (marginperc*margin222*close)*0.5*7
+        qty = (marginperc*margin222*this.tickData.exchanges[trades[trades.length-1][0]].close)*0.5*7
 if (thepair.indexOf('USD') == -1){
-        qty = (marginperc*margin222*(btcbtc/(btcbtc*close)))*2*7
+        qty = (marginperc*margin222*(btcbtc/(btcbtc*this.tickData.exchanges[trades[trades.length-1][0]].close)))*2*7
         }
         }
         else{
-        console.log('buyhigh6')
-        console.log('marginperc: ' + marginperc.toString())
-        console.log('margin222: ' + margin222.toString())
-        console.log('close: ' + close.toString())
-        console.log('btcbtc: ' + btcbtc.toString())
         firsttrade++
-        qty = (marginperc*margin222*close)*0.5*7
+        qty = (marginperc*margin222*this.tickData.exchanges[trades[trades.length-1][0]].close)*0.5*7
         if (thepair.indexOf('USD') == -1){
-        qty = (marginperc*margin222*(btcbtc/(btcbtc*close)))*2*7
+        qty = (marginperc*margin222*(btcbtc/(btcbtc*this.tickData.exchanges[trades[trades.length-1][0]].close)))*2*7
         }
         }
 
@@ -1506,58 +1434,12 @@ if (thepair.indexOf('USD') == -1){
         qty = qty / 5 
         }
         qty = Math.round(qty)
-          var dd = close / entry
-  market = false;
-  if (pos < 0 && dd > 0){
-  if (dd > trail / 100){
-  market = true
-}  
-  }
-  else if (pos > 0 && dd < 0){
-  if (dd * -1 > trail / 100){
-  market = true
-}  
-  }
-  if (market){
-
-verb = 'POST',
-  path = '/api/v1/order',
-  expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
-  data = {symbol:thepair.replace('BTCUSD','XBTUSD').replace('BTC','U19'),orderQty:qty,ordType:"Market" };
-
-// Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
-// and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
- postBody = JSON.stringify(data);
-
-signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires + postBody).digest('hex');
-
- headers = {
-  'content-type' : 'application/json',
-  'Accept': 'application/json',
-  'X-Requested-With': 'XMLHttpRequest',
-  'api-expires': expires,
-  'api-key': apiKey,
-  'api-signature': signature
-};
-
- requestOptions = {
-  headers: headers,
-  url:'https://www.bitmex.com'+path,
-  method: verb,
-  body: postBody
-};
-setTimeout(function(){
-request(requestOptions, function(error, response, body) {
-  if (error) { console.log(error); }
-  console.log(body);
-});
-}, 1000)
-}
         if (buyHigh == undefined){
         buyHigh = false;
         }
         console.log(qty)
         if (buyHigh == false){
+        buyHigh = true;
         var pr = 0;
         verb = 'GET',
   path = '/api/v1/instrument/active',
@@ -1639,8 +1521,9 @@ else if (js[j].symbol == 'XRPU19'){
     xrpask = js[j].askPrice
   }
   }
+  var stopQty = 0;
         if (thepair == 'BTCUSD'){
-        qty = positionXbt * -1
+        stopQty = positionXbt * -1
         if (qty <= 0){
         pr = btcask
         if (marginperc < 0.15){
@@ -1654,7 +1537,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         } else if (thepair == 'ETHUSD'){
-        qty = positionEth * -1
+        stopQty = positionEth * -1
         if (qty < 0){
         pr = ethask
         if (marginperc < 0.15){
@@ -1669,7 +1552,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'TRXBTC'){
-        qty = positionTrx * -1
+        stopQty = positionTrx * -1
         if (qty < 0){
         pr = trxask
         if (marginperc < 0.15){
@@ -1684,7 +1567,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'ADABTC'){
-        qty = positionAda * -1
+        stopQty = positionAda * -1
         if (qty < 0){
         pr = adaask
         if (marginperc < 0.15){
@@ -1699,7 +1582,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'EOSBTC'){
-        qty = positionEos * -1
+        stopQty = positionEos * -1
         if (qty < 0){
         pr = eosask
         if (marginperc < 0.15){
@@ -1714,7 +1597,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'BCHBTC'){
-        qty = positionBch * -1
+        stopQty = positionBch * -1
         if (qty< 0){
         pr = bchask
         if (marginperc < 0.15){
@@ -1729,7 +1612,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'LTCBTC'){
-        qty = positionLtc * -1
+        stopQty = positionLtc * -1
         if (qty < 0){
         pr = ltcask
         if (marginperc < 0.15){
@@ -1744,7 +1627,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'XRPBTC'){
-        qty = positionXrp * -1
+        stopQty = positionXrp * -1
         if (qty < 0){
         pr = xrpask
         if (marginperc < 0.15){
@@ -1778,6 +1661,7 @@ else if (js[j].symbol == 'XRPU19'){
         stop = Math.round(stop*2)/2; 
         }
         
+        trail = math.format(trail, {exponential: {lower: -Infinity, upper: Infinity}})
         if (thepair == 'BTCUSD'){
         pr = Math.round(pr*2)/2;
         }
@@ -1853,8 +1737,8 @@ headers = {
 request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
   console.log(body);
-   var dd = close / entry
-  market = false;
+  var dd = close / entry
+  var market = false;
   if (pos < 0 && dd > 0){
   if (dd > trail / 100){
   market = true
@@ -1895,11 +1779,10 @@ request(requestOptions, function(error, response, body) {
 setTimeout(function(){
 request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
-  console.log(body);
+  console.log(body);});
+}, 550)
 
-  })
-  }, 1000)
-  }
+}
 verb = 'POST',
   path = '/api/v1/order',
   expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
@@ -1931,14 +1814,14 @@ request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
   console.log(body);
 
-        buyHigh = true;
   refreshMargin();
 });
 }, 550);
 }); 
+
 })
 }
-        } 
+        }
         }
         var t = new Date().getTime() - 1000 * 420;
         var tt = [];
@@ -1994,7 +1877,7 @@ request(requestOptions, function(error, response, body) {
           open: tick.open,
           high: tick.high,
           low: tick.low,
-          close: tick.close,
+          close: tick.close
         }
 
         if (
@@ -2741,6 +2624,7 @@ request(requestOptions, function(error, response, body) {
         this.chart.series[4].update({ visible: false })
         this.chart.series[5].update({ visible: false })
       } else if (this.chartVolumeAverageLength) {
+
         this.chart.series[4].update({
           params: { period: this.chartVolumeAverageLength },
         })
