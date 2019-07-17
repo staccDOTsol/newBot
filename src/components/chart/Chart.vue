@@ -954,7 +954,7 @@ firsttrade++;
             qty = qty * 2;
             if (qty < positionXbt)
             {
-            qty = positionXbt * -1
+            ////qty = positionXbt * -1
             }
           }
           else 
@@ -968,7 +968,7 @@ firsttrade++;
             qty = qty * 2
             if (qty < positionEth)
             {
-            qty = positionEth * -1
+            ////qty = positionEth * -1
             }
           }else 
           if (marginperc < 0.175){
@@ -981,7 +981,7 @@ firsttrade++;
             qty = qty * 2
             if (qty < positionAda)
             {
-            qty = positionAda * -1
+            ////qty = positionAda * -1
             }
           }else 
           if (marginperc < 0.175){
@@ -994,7 +994,7 @@ firsttrade++;
             qty = qty * 2
             if (qty < positionEos)
             {
-            qty = positionEos * -1
+            ////qty = positionEos * -1
             }
           }else 
           if (marginperc < 0.175){
@@ -1007,7 +1007,7 @@ firsttrade++;
             qty = qty * 2
             if (qty < positionTrx)
             {
-            qty = positionTrx * -1
+            ////qty = positionTrx * -1
             }
           }else 
           if (marginperc < 0.175){
@@ -1020,7 +1020,7 @@ firsttrade++;
             qty = qty * 2
             if (qty < positionXrp)
             {
-            qty = positionXrp * -1
+            ////qty = positionXrp * -1
             }
           }else 
           if (marginperc < 0.175){
@@ -1033,7 +1033,7 @@ firsttrade++;
             qty = qty * 2
             if (qty < positionBch)
             {
-            qty = positionBch * -1
+            ////qty = positionBch * -1
             }
           }else 
           if (marginperc < 0.175){
@@ -1046,7 +1046,7 @@ firsttrade++;
             qty = qty * 2
             if (qty < positionLtc)
             {
-            qty = positionLtc * -1
+            ////qty = positionLtc * -1
             }
           }else 
           if (marginperc < 0.175){
@@ -1140,7 +1140,7 @@ else if (js[j].symbol == 'XRPU19'){
   }
   var stopQty = 0;
         if (thepair == 'BTCUSD'){
-        stopQty = positionXbt * -1
+        stop////qty = positionXbt * -1
         if (qty <= 0){
         pr = btcask
         if (marginperc < 0.15){
@@ -1154,7 +1154,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         } else if (thepair == 'ETHUSD'){
-        stopQty = positionEth * -1
+        stop////qty = positionEth * -1
         if (qty < 0){
         pr = ethask
 
@@ -1171,7 +1171,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'TRXBTC'){
-        stopQty = positionTrx * -1
+        stop////qty = positionTrx * -1
         if (qty < 0){
         pr = trxask
         if (marginperc < 0.15){
@@ -1186,7 +1186,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'ADABTC'){
-        stopQty = positionAda * -1
+        stop////qty = positionAda * -1
         if (qty < 0){
         pr = adaask
         if (marginperc < 0.15){
@@ -1201,7 +1201,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'EOSBTC'){
-        stopQty = positionEos * -1
+        stop////qty = positionEos * -1
         if (qty < 0){
         pr = eosask
         if (marginperc < 0.15){
@@ -1216,7 +1216,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'BCHBTC'){
-        stopQty = positionBch * -1
+        stop////qty = positionBch * -1
         if (qty< 0){
         pr = bchask
         if (marginperc < 0.15){
@@ -1231,7 +1231,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'LTCBTC'){
-        stopQty = positionLtc * -1
+        stop////qty = positionLtc * -1
         if (qty < 0){
         pr = ltcask
         if (marginperc < 0.15){
@@ -1246,7 +1246,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'XRPBTC'){
-        stopQty = positionXrp * -1
+        stop////qty = positionXrp * -1
         if (qty < 0){
         pr = xrpask
         if (marginperc < 0.15){
@@ -1479,7 +1479,7 @@ if (thepair.indexOf('USD') == -1){
             qty = qty * 2;
             if (qty > positionXbt)
             {
-            qty = positionXbt * -1
+            ////qty = positionXbt * -1
             }
           }else 
           if (marginperc < 0.175){
@@ -1492,7 +1492,7 @@ if (thepair.indexOf('USD') == -1){
             qty = qty * 2
             if (qty > positionEth)
             {
-            qty = positionEth * -1
+            ////qty = positionEth * -1
             }
           }else 
           if (marginperc < 0.175){
@@ -1505,7 +1505,7 @@ if (thepair.indexOf('USD') == -1){
             qty = qty * 2
             if (qty > positionAda)
             {
-            qty = positionAda * -1
+            ////qty = positionAda * -1
             }
           }else 
           if (marginperc < 0.175){
@@ -1518,7 +1518,7 @@ if (thepair.indexOf('USD') == -1){
             qty = qty * 2
             if (qty > positionEos)
             {
-            qty = positionEos * -1
+            ////qty = positionEos * -1
             }
           }else 
           if (marginperc < 0.175){
@@ -1531,7 +1531,7 @@ if (thepair.indexOf('USD') == -1){
             qty = qty * 2
             if (qty > positionTrx)
             {
-            qty = positionTrx * -1
+            ////qty = positionTrx * -1
             }
           }else 
           if (marginperc < 0.175){
@@ -1544,7 +1544,7 @@ if (thepair.indexOf('USD') == -1){
             qty = qty * 2
             if (qty > positionXrp)
             {
-            qty = positionXrp * -1
+            ////qty = positionXrp * -1
             }
           }else 
           if (marginperc < 0.175){
@@ -1557,7 +1557,7 @@ if (thepair.indexOf('USD') == -1){
             qty = qty * 2
             if (qty > positionBch)
             {
-            qty = positionBch * -1
+            ////qty = positionBch * -1
             }
           }else 
           if (marginperc < 0.175){
@@ -1570,7 +1570,7 @@ if (thepair.indexOf('USD') == -1){
             qty = qty * 2
             if (qty > positionLtc)
             {
-            qty = positionLtc * -1
+            ////qty = positionLtc * -1
             }
           }else 
           if (marginperc < 0.175){
@@ -1673,7 +1673,7 @@ else if (js[j].symbol == 'XRPU19'){
   }
   var stopQty = 0;
         if (thepair == 'BTCUSD'){
-        stopQty = positionXbt * -1
+        stop////qty = positionXbt * -1
         if (qty <= 0){
         pr = btcask
         if (marginperc < 0.15){
@@ -1687,7 +1687,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         } else if (thepair == 'ETHUSD'){
-        stopQty = positionEth * -1
+        stop////qty = positionEth * -1
         if (qty < 0){
         pr = ethask
         if (marginperc < 0.15){
@@ -1702,7 +1702,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'TRXBTC'){
-        stopQty = positionTrx * -1
+        stop////qty = positionTrx * -1
         if (qty < 0){
         pr = trxask
         if (marginperc < 0.15){
@@ -1717,7 +1717,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'ADABTC'){
-        stopQty = positionAda * -1
+        stop////qty = positionAda * -1
         if (qty < 0){
         pr = adaask
         if (marginperc < 0.15){
@@ -1732,7 +1732,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'EOSBTC'){
-        stopQty = positionEos * -1
+        stop////qty = positionEos * -1
         if (qty < 0){
         pr = eosask
         if (marginperc < 0.15){
@@ -1747,7 +1747,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'BCHBTC'){
-        stopQty = positionBch * -1
+        stop////qty = positionBch * -1
         if (qty< 0){
         pr = bchask
         if (marginperc < 0.15){
@@ -1762,7 +1762,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'LTCBTC'){
-        stopQty = positionLtc * -1
+        stop////qty = positionLtc * -1
         if (qty < 0){
         pr = ltcask
         if (marginperc < 0.15){
@@ -1777,7 +1777,7 @@ else if (js[j].symbol == 'XRPU19'){
         }
         }
         else if (thepair == 'XRPBTC'){
-        stopQty = positionXrp * -1
+        stop////qty = positionXrp * -1
         if (qty < 0){
         pr = xrpask
         if (marginperc < 0.15){
