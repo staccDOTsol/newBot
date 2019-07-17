@@ -343,10 +343,16 @@ if (!lalafirst){
            ma = JSON.parse(event.data).data[0];
 
 account = ma.account
+if (ma.availableMargin){
   margin222 = ma.availableMargin/100000000;
+  }
+  if (ma.marginBalance){
   margin333 = ma.marginBalance/100000000;
+  }
   marginperc = margin222 / margin333
+  if (ma.walletBalance){
   wallet = ma.walletBalance/100000000 ;
+  }
   marginDo()
 }
   ws.onclose = function(e) {
