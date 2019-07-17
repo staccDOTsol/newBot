@@ -313,7 +313,7 @@ var trailstop
 var aold
 var sold
 var ma;
-var wss = 'wss://testnet.bitmex.com/realtime'
+var wss = 'wss://www.bitmex.com/realtime'
 var lalafirst = true;
 var ws;
 var subs = false;
