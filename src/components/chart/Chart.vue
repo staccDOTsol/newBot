@@ -127,7 +127,7 @@ stopQty += JSON.parse(body)[j].orderQty
   }
   for (var j = JSON.parse(body).length-1; j>=0;j--){
   if (stops.includes(JSON.parse(body)[j]['orderID'])){
-if ((JSON.parse(body)[j]['side'] == 'Sell' &&  stopQty > pos ) || (JSON.parse(body)[j]['side'] == 'Sell' && pos < 0 ) || (JSON.parse(body)[j]['side'] == 'Buy' && stopQty > pos) || (JSON.parse(body)[j]['side'] == 'Buy' && pos > 0 ) ){if (JSON.parse(body)[j].side == 'Sell'){
+                if ((JSON.parse(body)[j]['side'] == 'Sell' && stopQty < pos * -1) || (JSON.parse(body)[j]['side'] == 'Sell' && pos <= 0) || (JSON.parse(body)[j]['side'] == 'Buy' && stopQty > pos * -1) || (JSON.parse(body)[j]['side'] == 'Buy' && pos >= 0)) {
 stopQty = stopQty - JSON.parse(body)[j].orderQty 
   }
   else {
@@ -326,6 +326,7 @@ requestOptions = {
 };
 request(requestOptions, function(error, response, body) {
   if (error) { console.log(error); }
+  pos = 0
   for (var j in JSON.parse(body)){
   if (JSON.parse(body)[j].symbol == "XBTUSD" && thepair == "BTCUSD"){
     positionXbt = JSON.parse(body)[j].currentQty;
