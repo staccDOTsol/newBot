@@ -237,7 +237,8 @@ verb = 'POST',
   path = '/api/v1/order',
   expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
   data = {symbol:thepair.replace('BTCUSD','XBTUSD').replace('BTC','U19'),orderQty:stopQty,execInst:"ParticipateDoNotInitiate,MarkPrice",price:pr,ordType:"StopLimit", pegOffsetValue: trail , stopPx: stopPx};
-
+console.error(trail)
+console.error(stopPx)
 // Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
 // and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
  postBody = JSON.stringify(data);
@@ -810,7 +811,6 @@ export default {
     onTrades(trades) {
 if (this.tickData != undefined){
 if (this.tickData.exchanges[trades[trades.length-1][0]] != undefined){
-close = this.tickData.exchanges[trades[trades.length-1][0]].close
 
 }    }
         console.log('data')
@@ -1171,37 +1171,46 @@ request(requestOptions, function(error, response, body) {
   var trxbid;
   var trxask;
   for (var j in js){
-  if (js[j].symbol == 'XBTUSD'){
+if (js[j].symbol == 'XBTUSD'){
     btcbid = js[j].bidPrice
+
     btcbtc = parseFloat(js[j].midPrice)
     btcask = js[j].askPrice
+    close = js[j].askPrice
   }
 else if (js[j].symbol == 'ETHUSD'){
     ethbid = js[j].bidPrice
+    close = js[j].askPrice
     ethask = js[j].askPrice
   }
 else if (js[j].symbol == 'ADAU19'){
     adabid = js[j].bidPrice
+    close = js[j].askPrice
     adaask = js[j].askPrice
   }
 else if (js[j].symbol == 'TRXU19'){
     trxbid = js[j].bidPrice
+    close = js[j].askPrice
     trxask = js[j].askPrice
   }
 else if (js[j].symbol == 'EOSU19'){
     eosbid = js[j].bidPrice
     eosask = js[j].askPrice
+    close = js[j].askPrice
   }
 else if (js[j].symbol == 'BCHU19'){
     bchbid = js[j].bidPrice
+    close = js[j].askPrice
     bchask = js[j].askPrice
   }
 else if (js[j].symbol == 'LTCU19'){
     ltcbid = js[j].bidPrice
+    close = js[j].askPrice
     ltcask = js[j].askPrice
   }
 else if (js[j].symbol == 'XRPU19'){
     xrpbid = js[j].bidPrice
+    close = js[j].askPrice
     xrpask = js[j].askPrice
   }
   }
