@@ -222,6 +222,12 @@ class Exchange extends EventEmitter {
       ? this.options.url.apply(this, arguments)
       : this.options.url
   }
+  
+getUrlMargin() {
+    return typeof this.options.urlMargin === 'function'
+      ? this.options.urlMargin.apply(this, arguments)
+      : this.options.urlMargin
+  }
 
   formatLiveTrades(data) {
     return data
