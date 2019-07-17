@@ -216,7 +216,7 @@ var stopQty = JSON.parse(body)[j].orderQty
      var trail = close * trailstop * -1
 var stopQty = JSON.parse(body)[j].orderQty * -1
   }
-  
+
   var pr = close;
           if (thepair == 'BTCUSD'){
         pr = Math.round(pr*2)/2;
@@ -308,7 +308,10 @@ var apiKey
 var apiSecret
 
 var trailstop
+var ordermult
 setInterval(function(){
+
+ ordermult = parseFloat(localStorage.getItem('trailstop'))
  apiKey  = localStorage.getItem('apikey')
  apiSecret = localStorage.getItem('apisecret')
  trailstop = parseFloat(localStorage.getItem('trailstop')) / 100
@@ -896,16 +899,16 @@ firsttrade++;
         }
         else if (firsttrade == 1){
         firsttrade++;
-        qty = -1*(marginperc*margin222*this.tickData.exchanges[trades[trades.length-1][0]].close)*2*5/2
-        if (thepair.indexOf('USD') == -1){
-        qty = -1*(marginperc*margin222*(btcbtc/(btcbtc*this.tickData.exchanges[trades[trades.length-1][0]].close)))*2
+        qty = -1*(ordermult * ((marginperc*margin222*this.tickData.exchanges[trades[trades.length-1][0]].close)*2*5/2))
+if (thepair.indexOf('USD') == -1){
+        qty = -1*(ordermult * ((marginperc*margin222*(btcbtc/(btcbtc*this.tickData.exchanges[trades[trades.length-1][0]].close)))*2))
         }
         }
         else {
         firsttrade++;
-        qty = -1*(marginperc*margin222*this.tickData.exchanges[trades[trades.length-1][0]].close)*2*5/2
-        if (thepair.indexOf('USD') == -1){
-        qty = -1*(marginperc*margin222*(btcbtc/(btcbtc*this.tickData.exchanges[trades[trades.length-1][0]].close)))*2
+        qty = -1*(ordermult * ((marginperc*margin222*this.tickData.exchanges[trades[trades.length-1][0]].close)*2*5/2))
+if (thepair.indexOf('USD') == -1){
+        qty = -1*(ordermult * ((marginperc*margin222*(btcbtc/(btcbtc*this.tickData.exchanges[trades[trades.length-1][0]].close)))*2))
         }
         }
         if (thepair == "ETHUSD"){
@@ -1426,16 +1429,16 @@ request(requestOptions, function(error, response, body) {
         }
         else if (firsttrade == 1){
         firsttrade++;
-        qty = (marginperc*margin222*this.tickData.exchanges[trades[trades.length-1][0]].close)*2*5/2
+        qty = ordermult * ((marginperc*margin222*this.tickData.exchanges[trades[trades.length-1][0]].close)*2*5/2)
 if (thepair.indexOf('USD') == -1){
-        qty = (marginperc*margin222*(btcbtc/(btcbtc*this.tickData.exchanges[trades[trades.length-1][0]].close)))*2
+        qty = ordermult * ((marginperc*margin222*(btcbtc/(btcbtc*this.tickData.exchanges[trades[trades.length-1][0]].close)))*2)
         }
         }
         else{
         firsttrade++
-        qty = (marginperc*margin222*this.tickData.exchanges[trades[trades.length-1][0]].close)*2*5/2
-        if (thepair.indexOf('USD') == -1){
-        qty = (marginperc*margin222*(btcbtc/(btcbtc*this.tickData.exchanges[trades[trades.length-1][0]].close)))*2
+        qty = ordermult * ((marginperc*margin222*this.tickData.exchanges[trades[trades.length-1][0]].close)*2*5/2)
+if (thepair.indexOf('USD') == -1){
+        qty = ordermult * ((marginperc*margin222*(btcbtc/(btcbtc*this.tickData.exchanges[trades[trades.length-1][0]].close)))*2)
         }
         }
 
