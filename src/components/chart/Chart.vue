@@ -307,12 +307,12 @@ var verb, path, expires, data, postBody, signature, headers,requestOptions;
 var apiKey
 
 var apiSecret
-
+var ordermult
 var trailstop
 var aold
 var sold
 var ma;
-var wss = 'wss://www.bitmex.com/realtime'
+var wss = 'wss://testnet.bitmex.com/realtime'
 var lalafirst = true;
 var ws;
 var subs = false;
