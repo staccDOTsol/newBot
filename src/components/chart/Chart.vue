@@ -908,7 +908,7 @@ this.chart.series[7].data[a].remove();
         var qty = 0;
     if (this.tickData != undefined){
     if (this.tickData.exchanges[trades[trades.length-1][0]] != undefined){
-    
+    close = this.tickData.exchanges[trades[trades.length-1][0]].close
     console.log(this.tickData.exchanges[trades[trades.length-1][0]])
     var test =((margin222*1.25*((margin222*this.tickData.exchanges[trades[trades.length-1][0]].close)*50))/2)
     console.log(test)
