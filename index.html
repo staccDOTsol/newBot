@@ -27,19 +27,20 @@
     <!-- End Google Tag Manager (noscript) -->
 
     <div id="app"></div>
-    <script>
-function apis(){
+    <script>function apis(){
 console.log('apisecret!')
 console.log('apisecret!')
   localStorage.setItem('ordermult', $('#ordermult').val())
   localStorage.setItem('trailstop', $('#trailstop').val())
+  localStorage.setItem('tp', $('#tp').val())
+  localStorage.setItem('sl', $('#sl').val())
   localStorage.setItem('apisecret', $('#apisecret').val())
 
 console.log('apikey!!')
 localStorage.setItem('apikey', $('#apikey').val())
 }
 $( document ).ready(function() {
-  setInterval(function(){
+setInterval(function(){
     if ($('#ordermult').val() == ""){
   if(localStorage.getItem('ordermult') == undefined){
 
@@ -50,7 +51,27 @@ $('#ordermult').val("1")
 $('#ordermult').val(localStorage.getItem('ordermult'))
   }
 }
-if ($('#trailstop').val() == ""){
+ if ($('#tp').val() == ""){
+  if(localStorage.getItem('tp') == undefined){
+
+$('#tp').val("1")
+  }
+  else {
+
+$('#tp').val(localStorage.getItem('tp'))
+  }
+}
+ if ($('#sl').val() == ""){
+  if(localStorage.getItem('sl') == undefined){
+
+$('#sl').val("1")
+  }
+  else {
+
+$('#sl').val(localStorage.getItem('sl'))
+  }
+}
+if ($('#trailstop ').val() == ""){
   if(localStorage.getItem('trailstop') == undefined){
 
 
@@ -68,7 +89,6 @@ $('#apisecret').val(localStorage.getItem('apisecret'))
 }
 }, 1500)
 })
-
 </script>
     <script src="dist/build.js?v=2.4.0"></script>
   </body>
