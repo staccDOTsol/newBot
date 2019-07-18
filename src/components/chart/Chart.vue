@@ -2221,7 +2221,7 @@ else if (js[j].symbol == 'XRPU19'){
         else if (thepair == 'ETHUSD'){
         pr =  parseFloat((Math.round(pr * 4) / 4).toFixed(2));
          trail =  parseFloat((Math.round(trail * 4) / 4).toFixed(2));
-         stop =  parseFloat((Math.round(stopLoss * 4) / 4).toFixed(2));
+         stopLoss =  parseFloat((Math.round(stopLoss * 4) / 4).toFixed(2));
         
         }
         else if (thepair == 'LTCBTC'){
