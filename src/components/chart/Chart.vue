@@ -652,9 +652,8 @@ setInterval(function(){
 getVars()
 }, 5000);
 function getVars(){
-  
- tp = parseFloat(localStorage.getItem('tp'))
- sl = parseFloat(localStorage.getItem('sl'))
+ tp = parseFloat(localStorage.getItem('tp')) / 100
+ sl = parseFloat(localStorage.getItem('sl')) / 100
  ordermult = parseFloat(localStorage.getItem('trailstop'))
  if ((aold == null ) && (sold == null)){
  console.error('keys start')
