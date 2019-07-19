@@ -66,10 +66,10 @@
         </div>
           <div class="form-group settings-pair mb8">
           <label
-            >Trailing Stop
+            >Trail Stop
             <span
               class="icon-info-circle"
-              title="The Trailing Stop %"
+              title="The Trail Stop %"
               v-tippy
             ></span
           ></label>
@@ -82,7 +82,9 @@
             :value="trailstop"
             @change=""
           />
-                    <div class="form-group settings-pair mb8">
+        </div>
+
+        <div class="form-group settings-pair mb8">
           <label
             >Stop loss
             <span
