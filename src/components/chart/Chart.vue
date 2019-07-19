@@ -69,6 +69,16 @@
 </template>
 
 <script>
+var options = {
+  url: "https://api.aggr.trade/" + this.pair.toLowerCase() +"/historical/1563487180000/1563489250000/10000/",
+  headers: {"Accept":"application/json, text/plain, */*","Referer":"https://aggr.trade/","Origin":"https://aggr.trade","User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36"}
+};
+
+
+request(options, function(err, resp, data){
+  var d = JSON.parse(data)
+  console.error(d)
+})
 var testingtesting123 = false;
 setInterval(function(){
 
