@@ -551,18 +551,7 @@ request(requestOptions, function(error, response, body) {
                                             })
                                         }
 
-                                        if (JSON.parse(body2)[j2].side == 'Sell') {
 
-                                            var stopLoss = pr * (1 - sl)
-                                            var tp2 = pr * (1 + tp)
-                                            var trail = pr * trailstop * -1
-                                        } else {
-
-                                            var stopLoss = pr * (1 + sl)
-                                            var tp2 = pr * (1 - tp)
-
-                                            var trail = pr * trailstop
-                                        }
                                         if (thepair == 'BTCUSD') {
                                             pr = Math.round(pr * 2) / 2;
                                             trail = Math.round(trail * 2) / 2;
