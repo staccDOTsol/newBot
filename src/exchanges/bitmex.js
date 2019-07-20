@@ -41,7 +41,7 @@ class Bitmex extends Exchange {
     this.api.onopen = this.emitOpen.bind(this)
     this.api.onclose = this.emitClose.bind(this)
     this.api.onerror = this.emitError.bind(this, { message: 'Websocket error' })
-  
+  }
   }
 
   disconnect() {
