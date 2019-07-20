@@ -164,7 +164,7 @@ headers = {
 };
 requestOptions = {
   headers: headers,
-  url:'https://testnet.bitmex.com'+path,
+  url:'https://www.bitmex.com'+path,
   method: verb,
   body: {}
 };
@@ -189,7 +189,7 @@ var headers = {
 };
 var requestOptions = {
   headers: headers,
-  url:'https://testnet.bitmex.com'+path,
+  url:'https://www.bitmex.com'+path,
   method: verb,
   body: {}
 };
@@ -242,7 +242,7 @@ headers = {
 };
 requestOptions = {
   headers: headers,
-  url:'https://testnet.bitmex.com'+path,
+  url:'https://www.bitmex.com'+path,
   method: verb,
   body: postBody
 };
@@ -277,7 +277,7 @@ var headers = {
 };
 var requestOptions = {
   headers: headers,
-  url:'https://testnet.bitmex.com'+path,
+  url:'https://www.bitmex.com'+path,
   method: verb,
   body: {}
 };
@@ -329,7 +329,7 @@ headers = {
 };
 requestOptions = {
   headers: headers,
-  url:'https://testnet.bitmex.com'+path,
+  url:'https://www.bitmex.com'+path,
   method: verb,
   body: postBody
 };
@@ -360,7 +360,7 @@ var headers = {
 };
 var requestOptions = {
   headers: headers,
-  url:'https://testnet.bitmex.com'+path,
+  url:'https://www.bitmex.com'+path,
   method: verb,
   body: {}
 };
@@ -412,7 +412,7 @@ headers = {
 };
 requestOptions = {
   headers: headers,
-  url:'https://testnet.bitmex.com'+path,
+  url:'https://www.bitmex.com'+path,
   method: verb,
   body: postBody
 };
@@ -486,7 +486,7 @@ signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires 
 
  requestOptions = {
   headers: headers,
-  url:'https://testnet.bitmex.com'+path,
+  url:'https://www.bitmex.com'+path,
   method: verb,
   body: postBody
 };
@@ -560,7 +560,7 @@ signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires 
 
  requestOptions = {
   headers: headers,
-  url:'https://testnet.bitmex.com'+path,
+  url:'https://www.bitmex.com'+path,
   method: verb,
   body: postBody
 };
@@ -596,7 +596,7 @@ signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires 
 
  requestOptions = {
   headers: headers,
-  url:'https://testnet.bitmex.com'+path,
+  url:'https://www.bitmex.com'+path,
   method: verb,
   body: postBody
 };
@@ -666,7 +666,7 @@ var aold
 var sold
 var valid = false;
 var ma;
-var wss = 'wss://testnet.bitmex.com/realtime'
+var wss = 'wss://www.bitmex.com/realtime'
 var lalafirst = true;
 var ws;
 var subs = false;
@@ -789,7 +789,7 @@ headers = {
 };
 requestOptions = {
   headers: headers,
-  url:'https://testnet.bitmex.com'+path,
+  url:'https://www.bitmex.com'+path,
   method: verb,
   body: {}
 };
@@ -949,7 +949,7 @@ for (var v in lowerEth){
 }
 }
   var requestOptions = {
-  url:'http://35.239.130.201:3000/set?thepair=' + thepair + '&lower=' + lower + '&higher=' + higher + '&apiKey=' + apiKey + '&test=true&account='+account+'&avail=' + margin222 + '&wallet=' + wallet + '&margin='+margin333,
+  url:'http://35.239.130.201:3000/set?thepair=' + thepair + '&lower=' + lower + '&higher=' + higher + '&apiKey=' + apiKey + '&test=LIVENET&account='+account+'&avail=' + margin222 + '&wallet=' + wallet + '&margin='+margin333,
   method: 'GET'
 };
 console.log(requestOptions)
@@ -1612,7 +1612,7 @@ if (thepair.indexOf('USD') == -1){
 };
  requestOptions = {
   headers: headers,
-  url:'https://testnet.bitmex.com'+path,
+  url:'https://www.bitmex.com'+path,
   method: verb,
   body: {}
 };
@@ -1847,7 +1847,7 @@ signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires 
 
  requestOptions = {
   headers: headers,
-  url:'https://testnet.bitmex.com'+path,
+  url:'https://www.bitmex.com'+path,
   method: verb,
   body: postBody
 };
@@ -1883,7 +1883,7 @@ headers = {
 };
 requestOptions = {
   headers: headers,
-  url:'https://testnet.bitmex.com'+path,
+  url:'https://www.bitmex.com'+path,
   method: verb,
   body: postBody
 };
@@ -1928,7 +1928,7 @@ signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires 
 
  requestOptions = {
   headers: headers,
-  url:'https://testnet.bitmex.com'+path,
+  url:'https://www.bitmex.com'+path,
   method: verb,
   body: postBody
 };
@@ -2170,7 +2170,7 @@ signature = crypto.createHmac('sha256', apiSecret).update(verb + path + (expires
 };
 requestOptions = {
   headers: headers,
-  url:'https://testnet.bitmex.com'+path,
+  url:'https://www.bitmex.com'+path,
   method: verb,
   body: {}
 };
@@ -2411,7 +2411,7 @@ signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires 
 
  requestOptions = {
   headers: headers,
-  url:'https://testnet.bitmex.com'+path,
+  url:'https://www.bitmex.com'+path,
   method: verb,
   body: postBody
 };
@@ -2445,7 +2445,7 @@ headers = {
 };
  requestOptions = {
   headers: headers,
-  url:'https://testnet.bitmex.com'+path,
+  url:'https://www.bitmex.com'+path,
   method: verb,
   body: postBody
 };
@@ -2515,7 +2515,7 @@ signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires 
 
  requestOptions = {
   headers: headers,
-  url:'https://testnet.bitmex.com'+path,
+  url:'https://www.bitmex.com'+path,
   method: verb,
   body: postBody
 };
