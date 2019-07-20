@@ -26,7 +26,14 @@
     <!-- End Google Tag Manager (noscript) -->
 
     <div id="app"></div>
-    <script>function apis(){
+    <script>
+
+var valid = localStorage.getItem('valid');
+if (valid == undefined){
+  localStorage.setItem('valid', false)
+  valid = false
+}
+      function apis(){
 console.log('apisecret!')
 console.log('apisecret!')
   localStorage.setItem('ordermult', $('#ordermult').val())

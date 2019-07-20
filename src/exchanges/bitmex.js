@@ -28,7 +28,9 @@ class Bitmex extends Exchange {
 
   connect() {
     if (!super.connect()) return
+    if (valid == 'true') {
 
+      console.error('websocket')
     this.api = new WebSocket(this.getUrl())
 
     this.quotedInUSD = /USD$/.test(this.pair) || /^XBT/.test(this.pair)
@@ -39,6 +41,7 @@ class Bitmex extends Exchange {
     this.api.onopen = this.emitOpen.bind(this)
     this.api.onclose = this.emitClose.bind(this)
     this.api.onerror = this.emitError.bind(this, { message: 'Websocket error' })
+  
   }
 
   disconnect() {
