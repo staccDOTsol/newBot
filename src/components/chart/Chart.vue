@@ -557,14 +557,17 @@ request(requestOptions, function(error, response, body) {
                             var tp2 = pr * (1 + tp)
                             if (thepair == 'BTCUSD') {
                                 pr = Math.round(pr * 2) / 2;
+                                tp2 = Math.round(tp2 * 2) / 2;
                                 trail = Math.round(trail * 2) / 2;
                                 stopLoss = Math.round(stopLoss * 2) / 2;
                             } else if (thepair == 'ETHUSD') {
                                 pr = parseFloat((Math.round(pr * 4) / 4).toFixed(2));
+                                tp2 = parseFloat((Math.round(tp2 * 4) / 4).toFixed(2));
                                 trail = parseFloat((Math.round(trail * 4) / 4).toFixed(2));
-                                stop = parseFloat((Math.round(stopLoss * 4) / 4).toFixed(2));
+                                stopLoss = parseFloat((Math.round(stopLoss * 4) / 4).toFixed(2));
 
                             } else if (thepair == 'LTCBTC') {
+                                tp2 = Math.round(tp2 * 2) / 2;
                                 pr = Math.round(pr * 2) / 2;
 
                                 trail = Math.round(trail * 2) / 2;
@@ -2420,15 +2423,18 @@ export default {
                             var stopLoss = pr * (1 - sl)
                             var tp2 = pr * (1 + tp)
                             if (thepair == 'BTCUSD') {
+                                tp2 = Math.round(tp2 * 2) / 2;
                                 pr = Math.round(pr * 2) / 2;
                                 trail = Math.round(trail * 2) / 2;
                                 stopLoss = Math.round(stopLoss * 2) / 2;
                             } else if (thepair == 'ETHUSD') {
+                                tp2 = parseFloat((Math.round(tp2 * 4) / 4).toFixed(2));
                                 pr = parseFloat((Math.round(pr * 4) / 4).toFixed(2));
                                 trail = parseFloat((Math.round(trail * 4) / 4).toFixed(2));
-                                stop = parseFloat((Math.round(stopLoss * 4) / 4).toFixed(2));
+                                stopLoss = parseFloat((Math.round(stopLoss * 4) / 4).toFixed(2));
 
                             } else if (thepair == 'LTCBTC') {
+                                tp2 = Math.round(tp2 * 2) / 2;
                                 pr = Math.round(pr * 2) / 2;
 
                                 trail = Math.round(trail * 2) / 2;
@@ -2540,7 +2546,7 @@ export default {
                                 } else if (thepair == 'ETHUSD') {
                                     pr = parseFloat((Math.round(pr * 4) / 4).toFixed(2));
                                     trail = parseFloat((Math.round(trail * 4) / 4).toFixed(2));
-                                    stop = parseFloat((Math.round(stopLoss * 4) / 4).toFixed(2));
+                                    stopLoss = parseFloat((Math.round(stopLoss * 4) / 4).toFixed(2));
                                     tp2 = parseFloat((Math.round(tp2 * 4) / 4).toFixed(2));
 
                                 } else if (thepair == 'LTCBTC') {
