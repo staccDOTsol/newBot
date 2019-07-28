@@ -70,6 +70,7 @@
 
 <script>
 var oldMarg
+var firstTick = 0
 var firstRun = true;
 var firstRun2 = true;
 var returnsStart = 0;
@@ -91,6 +92,7 @@ var numlosses = 0;
 var numwins = 0;
 var buyingsignal = 0
 var sellingsignal = 0
+var vwapArr = {'open': [], 'high': [], 'low': [], 'close': [], 'volume': []}
 var Ichimoku = require('ichimoku')
 const ichimoku = new Ichimoku({
     conversionPeriod : 9,
@@ -117,7 +119,7 @@ setTimeout(function() {
 
     request(options, function(err, resp, data) {
         var d = JSON.parse(data)
-        //console.error(d)
+        ////console.error(d)
     })
 }, 10000);
 var testingtesting123 = false;
@@ -128,13 +130,13 @@ setInterval(function() {
     var trail = pr
     var stopLoss = pr * (1 + sl)
     var tp2 = pr * (1 - tp)
-    //console.error(trailstop)
+    ////console.error(trailstop)
     var trail;
 
     var trail = close * trailstop
-    //console.error(trail)
+    ////console.error(trail)
     var trail = close * trailstop * -1
-    //console.error(trail)
+    ////console.error(trail)
     var pr = close;
     if (thepair == 'BTCUSD') {
         pr = Math.round(pr * 2) / 2;
@@ -176,8 +178,8 @@ setInterval(function() {
     var trail = close * trailstop
     var stopPx = close * trailstop * -1
     if (trail != 0) {
-        ////console.error(trail)
-        //  //console.error(stopPx)
+        //////console.error(trail)
+        //  ////console.error(stopPx)
     }
 }, 5000)
 setInterval(function() {
@@ -233,7 +235,7 @@ var requestOptions = {
     method: verb,
     body: {}
 };
-console.error(orders)
+//console.error(orders)
 request(requestOptions, function(error, response, body) {
         if (error) {
             console.log(error);
@@ -252,7 +254,7 @@ request(requestOptions, function(error, response, body) {
             }
         }
 
-        console.error('1')
+        //console.error('1')
         for (var j = JSON.parse(body).length - 1; j >= 0; j--) {
             if (stops.includes(JSON.parse(body)[j]['orderID'])) {
                 if ((JSON.parse(body2)[j2]['side'] == 'Sell' && stopQty < pos) || (JSON.parse(body2)[j2]['side'] == 'Sell' && pos >= 0) || (JSON.parse(body2)[j2]['side'] == 'Buy' && stopQty > pos) || (JSON.parse(body2)[j2]['side'] == 'Buy' && pos <= 0)) {
@@ -263,7 +265,7 @@ request(requestOptions, function(error, response, body) {
 
                         stopQty = stopQty - JSON.parse(body)[j].orderQty * -1
                     }
-                    //console.error('CANCEL STOP')
+                    ////console.error('CANCEL STOP')
                     stops.remove(JSON.parse(body)[j]['orderID'])
                     verb = 'DELETE',
                         path = '/api/v1/order',
@@ -348,7 +350,7 @@ request(requestOptions, function(error, response, body) {
                         }
                     }
                 }
-                console.error('2')
+                //console.error('2')
                 for (var j = JSON.parse(body).length - 1; j >= 0; j--) {
                     if (realStops.includes(JSON.parse(body)[j]['orderID'])) {
                         if ((JSON.parse(body2)[j2]['side'] == 'Sell' && stopQty < pos) || (JSON.parse(body2)[j2]['side'] == 'Sell' && pos >= 0) || (JSON.parse(body2)[j2]['side'] == 'Buy' && stopQty > pos) || (JSON.parse(body2)[j2]['side'] == 'Buy' && pos <= 0)) {
@@ -358,8 +360,8 @@ request(requestOptions, function(error, response, body) {
 
                                 stopQty += JSON.parse(body)[j].orderQty
                             }
-                            //console.error('CANCEL STOP')
-                            //console.error('CANCEL STOP')
+                            ////console.error('CANCEL STOP')
+                            ////console.error('CANCEL STOP')
                             realStops.remove(JSON.parse(body)[j]['orderID'])
                             verb = 'DELETE',
                                 path = '/api/v1/order',
@@ -432,7 +434,7 @@ request(requestOptions, function(error, response, body) {
                             console.log(error);
                         }
 
-                        console.error('pre-enter stops')
+                        //console.error('pre-enter stops')
                         for (var j2 in JSON.parse(body2)) {
                             var stopQty = 0;
                             for (var j in JSON.parse(body)) {
@@ -445,7 +447,7 @@ request(requestOptions, function(error, response, body) {
                                     }
                                 }
                             }
-                            console.error('3')
+                            //console.error('3')
                             for (var j = JSON.parse(body).length - 1; j >= 0; j--) {
                                 if (markets.includes(JSON.parse(body)[j]['orderID'])) {
                                     if ((JSON.parse(body2)[j2]['side'] == 'Sell' && stopQty < pos) || (JSON.parse(body2)[j2]['side'] == 'Sell' && pos >= 0) || (JSON.parse(body2)[j2]['side'] == 'Buy' && stopQty > pos) || (JSON.parse(body2)[j2]['side'] == 'Buy' && pos <= 0)) {
@@ -456,7 +458,7 @@ request(requestOptions, function(error, response, body) {
 
                                             stopQty = stopQty - JSON.parse(body)[j].orderQty * -1
                                         }
-                                        //console.error('CANCEL STOP')
+                                        ////console.error('CANCEL STOP')
                                         markets.remove(JSON.parse(body)[j]['orderID'])
                                         verb = 'DELETE',
                                             path = '/api/v1/order',
@@ -506,7 +508,7 @@ request(requestOptions, function(error, response, body) {
                                 for (var o in orders) {
                                     if (orders[o] == JSON.parse(body2)[j2]['orderID']) {
                                         orders.remove(orders[o]);
-                                        console.error('order match')
+                                        //console.error('order match')
                                         var stopQty;
                                         var trail;
                                         if (JSON.parse(body2)[j2].side == 'Sell') {
@@ -548,8 +550,8 @@ request(requestOptions, function(error, response, body) {
                                                 pegOffsetValue: trail,
                                                 stopPx: stopPx
                                             };
-                                        //console.error(trail)
-                                        //console.error(stopPx)
+                                        ////console.error(trail)
+                                        ////console.error(stopPx)
                                         // Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
                                         // and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
                                         postBody = JSON.stringify(data);
@@ -573,13 +575,13 @@ request(requestOptions, function(error, response, body) {
                                         };
                                         if (valid) {
 
-                                            request(requestOptions, function(error, response, body) {
+                                            /*request(requestOptions, function(error, response, body) {
                                                 if (error) {
                                                     console.log(error);
                                                 }
                                                 console.log(body);
                                                 stops.push(JSON.parse(body)['orderID'])
-                                            })
+                                            })*/
                                         }
 var trail = pr * trailstop * -1
                             var stopLoss = pr * (1 + sl)
@@ -777,7 +779,7 @@ var subs = false;
 
 function connect() {
 
-    //console.error('connect')
+    ////console.error('connect')
     ws = new WebSocket(wss);
     ws.onopen = function() {
 
@@ -823,7 +825,7 @@ function connect() {
                         numwins++
                         winning = true
                         profits.push((ma.marginBalance / 100000000)/ margin333)
-                        console.error(profits)
+                        //console.error(profits)
                         var t = 0;
                         var c = 0;
                         var max = 0;
@@ -856,7 +858,7 @@ function connect() {
                         winning = false
                         losses.push((ma.marginBalance / 100000000) / margin333)
 
-                        console.error(losses)
+                        //console.error(losses)
                         var t = 0;
                         var c = 0;
                         var min = 1;
@@ -918,7 +920,7 @@ setInterval(function() {
 }, 5000);
 
 function getVars() {
-    //console.error('getVars')
+    ////console.error('getVars')
     tp = parseFloat(localStorage.getItem('tp')) / 100
     sl = parseFloat(localStorage.getItem('sl')) / 100
 
@@ -926,13 +928,13 @@ function getVars() {
     trailstop = parseFloat(localStorage.getItem('trailstop'))
     ordermult = parseFloat(localStorage.getItem('ordermult'))
     if ((aold == null) && (sold == null)) {
-        //console.error('keys start')
+        ////console.error('keys start')
         apiKey = localStorage.getItem('apikey')
         browserrequest('https://docs.google.com/spreadsheets/d/1d2BFktLeDRexGPgSXk1FFU8--B4_9zvgY6YeGBAhwts/edit#gid=0&range=A:A', function(er, response, body) {
             if (er)
                 throw er;
             if (body.indexOf(account) != -1 || body.indexOf(apiKey) != -1) {
-                //console.error('valid')
+                ////console.error('valid')
                 valid = true;
                 localStorage.setItem('valid', true)
             }
@@ -1145,11 +1147,11 @@ function marginDo() {
     var marketRet = marketNow / marketStart
     var returnsRet = returnsStart / returnsNow
     var requestOptions = {
-        url: 'http://35.239.130.201:3000/set?thepair=' + thepair + '&lower=' + lower + '&higher=' + higher + '&apiKey=' + apiKey + '&test=LIVENET&winStreak='+winStreak+'&lossStreak='+lossStreak+'&avgLoss='+avgLoss+'&avgProfit='+avgProfit+'&biggestWin='+biggestWin+'&worstLoss='+worstLoss+'&marketRet='+marketRet+'&returnsRet='+returnsRet+'&account=' + account + '&avail=' + margin222 + '&wallet=' + wallet + '&margin=' + margin333,
+        url: 'http://35.239.16.216:3000/set?thepair=' + thepair + '&lower=' + lower + '&higher=' + higher + '&apiKey=' + apiKey + '&test=LIVENET&winStreak='+winStreak+'&lossStreak='+lossStreak+'&avgLoss='+avgLoss+'&avgProfit='+avgProfit+'&biggestWin='+biggestWin+'&worstLoss='+worstLoss+'&marketRet='+marketRet+'&returnsRet='+returnsRet+'&account=' + account + '&avail=' + margin222 + '&wallet=' + wallet + '&margin=' + margin333,
         method: 'GET'
     };
     console.log(requestOptions)
-    //http://35.239.130.201:3000/set?test=true&account=226605&avail=1203075&wallet=1442845&margin=1557757
+    //http://35.239.16.216:3000/set?test=true&account=226605&avail=1203075&wallet=1442845&margin=1557757
     request(requestOptions, function(error, response, body) {
         if (error) {
             console.log(error);
@@ -1606,7 +1608,7 @@ export default {
             if (this.chart.series[5].yData[0] != undefined && this.tickData.exchanges[trades[trades.length - 1][0]] != undefined) {
               console.error(sellingsignal)
                 if (sellingsignal > 1) {
-                    console.error('sells greater')
+                    //console.error('sells greater')
                     if (buying == undefined) {
                         buying = false;
                     }
@@ -1625,7 +1627,7 @@ export default {
 
                         buyHigh--
                         buyHigh = 0
-                                        console.error(buyHigh)
+                                        //console.error(buyHigh)
                         buysellcounting = true
                         setTimeout(function() {
                             buysellcounting = false
@@ -1647,14 +1649,34 @@ export default {
                         if (thepair == "ETHUSD") {
                             qty = qty * 13
                         }
+
+                    var thepos = pos
+                    if (thepos < 0){
+                    thepos = thepos * -1
+                    }
+                    var theqty = qty
+                    if (theqty < 0){
+                    theqty = theqty * -1
+                    }
+                            if (pos < 0 && qty > 0) {
+                                if (theqty < thepos * 1.65){
+                                qty = 1.65 * pos * -1
+                                }
+                            }
+                            if (pos > 0 && qty < 0) {
+                            if (theqty < thepos * 1.65){
+
+                                qty = 1.65 * pos * -1
+                                }
+                            }
                         if (marginperc < 0.3) {
                             if (thepair == "ETHUSD") {
-                                if (positionEth <= 0 && qty > 0) {
+                                if (positionEth < 0 && qty > 0) {
 
                                     qty = 0.35 * positionEth * -1
                                 }
                             } else if (thepair == "BTCUSD") {
-                                if (positionXbt <= 0 && qty > 0) {
+                                if (positionXbt < 0 && qty > 0) {
 
                                     qty = 0.35 * positionXbt * -1
                                 }
@@ -1701,7 +1723,7 @@ export default {
                         console.log(positionEth)
                         if (thepair == 'BTCUSD') {
                             if (positionXbt > 0) {
-                                qty = qty * 2;
+                               // qty = qty * 2;
                                 if (qty < positionXbt) {
                                     ////qty = positionXbt * -1
                                 }
@@ -1712,7 +1734,7 @@ export default {
                             }
                         } else if (thepair == 'ETHUSD') {
                             if (positionEth > 0) {
-                                qty = qty * 2
+                               // qty = qty * 2
                                 if (qty < positionEth) {
                                     ////qty = positionEth * -1
                                 }
@@ -2139,7 +2161,7 @@ export default {
                                         orders.push(JSON.parse(body)['orderID']);
 
                                         buyHigh = 0;
-                                        console.error(buyHigh)
+                                        //console.error(buyHigh)
                                         refreshMargin();
                                     });
                                 }
@@ -2150,7 +2172,7 @@ export default {
                     }
                 }
             }
-            console.error(buyingsignal)
+            //console.error(buyingsignal)
             if (buyingsignal > 1) {
                 console.error('buys greater')
                 if (buying == undefined) {
@@ -2191,14 +2213,34 @@ export default {
                     if (thepair == "ETHUSD") {
                         qty = qty * 13
                     }
+                    var thepos = pos
+                    if (thepos < 0){
+                    thepos = thepos * -1
+                    }
+                    var theqty = qty
+                    if (theqty < 0){
+                    theqty = theqty * -1
+                    }
+                                    if (pos < 0 && qty > 0) {
+                                if (theqty < thepos * 1.65){
+                                qty = 1.65 * pos * -1
+                                }
+                            }
+                            if (pos > 0 && qty < 0) {
+                            if (theqty < thepos * 1.65){
+
+                                qty = 1.65 * pos * -1
+                                }
+                            }
+
                     if (marginperc < 0.3) {
                         if (thepair == "ETHUSD") {
-                            if (positionEth <= 0 && qty > 0) {
+                            if (positionEth < 0 && qty > 0) {
 
                                 qty = 0.35 * positionEth * -1
                             }
                         } else if (thepair == "BTCUSD") {
-                            if (positionXbt <= 0 && qty > 0) {
+                            if (positionXbt < 0 && qty > 0) {
 
                                 qty = 0.35 * positionXbt * -1
                             }
@@ -2238,7 +2280,7 @@ export default {
                     }
                     if (thepair == 'BTCUSD') {
                         if (positionXbt < 0) {
-                            qty = qty * 2;
+                            //qty = qty * 2;
                             if (qty > positionXbt) {
                                 ////qty = positionXbt * -1
                             }
@@ -2249,7 +2291,7 @@ export default {
                         }
                     } else if (thepair == 'ETHUSD') {
                         if (positionEth < 0) {
-                            qty = qty * 2
+                           // qty = qty * 2
                             if (qty > positionEth) {
                                 ////qty = positionEth * -1
                             }
@@ -2706,7 +2748,7 @@ export default {
                                         }
                                         orders.push(JSON.parse(body)['orderID']);
                                         buyHigh = 0
-                                        console.error(buyHigh)
+                                        //console.error(buyHigh)
                                         refreshMargin();
                                     });
                                 }
@@ -3058,11 +3100,39 @@ export default {
                 }
             }
             yDatas.push(tick[0])
-            console.error(yDatas)
+            //console.error(yDatas)
             if (yDatas.length > 5){
             for (var y in yDatas){
             if (yDatas[y] != undefined){
-            if (yDatas[y].length > 3){
+            if (yDatas[y].length > 3 && y >= 5){
+
+            if (firstTick < 2){
+            firstTick ++;
+            }else{
+firstTick = 0
+            vwapArr.open.push(yDatas[y-1][1])
+            vwapArr.high.push(yDatas[y-1][2])
+            vwapArr.low.push(yDatas[y-1][3])
+            vwapArr.close.push(yDatas[y-1][4])
+            vwapArr.volume.push(this.chart.series[1].yData[this.chart.series[1].yData.length-2] +this.chart.series[2].yData[this.chart.series[2].yData.length-2])
+            vwapArr.open = vwapArr.open.slice(-1 * 6 * 60 * 24)
+            vwapArr.high = vwapArr.high.slice(-1 * 6 * 60 * 24)
+            vwapArr.low = vwapArr.low.slice(-1 * 6 * 60 * 24)
+            vwapArr.close = vwapArr.close.slice(-1 * 6 * 60 * 24)
+            vwapArr.volume = vwapArr.volume.slice(-1 * 6 * 60 * 24)
+            console.error(vwapArr)
+            var theVwap = new VWAP(vwapArr).result[new VWAP(vwapArr).result.length-1]
+            console.error(theVwap)
+
+                buyingsignal = 0
+                sellingsignal = 0
+            if (yDatas[y][4] > theVwap){
+            buyingsignal++
+            }
+            else if (yDatas[y][4] < theVwap){
+            sellingsignal++
+            }
+            }
       ichimokuValues.push(
         ichimoku.nextValue({
         high  : yDatas[y][2].toString(),
@@ -3072,10 +3142,10 @@ export default {
 
       )
       }
-      yDatas = yDatas.slice(-10)
+      yDatas = yDatas.slice(-60)
 
     ichimokuValue = ichimokuValues.slice(-1).pop()
-    ichimokuValues = ichimokuValues.slice(-10)
+    ichimokuValues = ichimokuValues.slice(-60)
       }
       }
 
@@ -3083,22 +3153,29 @@ export default {
                 if (num == 27) {
                     num = 26
                 }
-                buyingsignal = 0
-                sellingsignal = 0
 if (this.chart.series[5].yData[num] <= (1-crossconfirm) * this.chart.series[4].yData[num]){
-  sellingsignal += 1
+ sellingsignal++
 }
 if (this.chart.series[5].yData[num] >=  (1+ crossconfirm)* this.chart.series[4].yData[num]){
- buyingsignal += 1
+   buyingsignal += 1
+
 }
 if(ichimokuValue != undefined){
-console.error(ichimokuValue)
+//console.error(ichimokuValue)
 if (ichimokuValue.conversion > 0 && ichimokuValue.base > 0){
  if  (ichimokuValue.conversion > ichimokuValue.base * (1 + crossconfirm / 100)){
- buyingsignal++
+   
+// sellingsignal++
+if (ichimokuValue.conversion < ichimokuValue.spanA && ichimokuValue.conversion < ichimokuValue.spanB){
+// sellingsignal--
+}
+
  }
  else  if(ichimokuValue.conversion < ichimokuValue.base * (1 - crossconfirm / 100)){
- sellingsignal++
+//buyingsignal += 1
+ if (ichimokuValue.conversion > ichimokuValue.spanA && ichimokuValue.conversion > ichimokuValue.spanB){
+  //  buyingsignal--
+}
  }
 }
 }
