@@ -490,7 +490,7 @@ if (JSON.parse(body2)[j].side == 'Sell'){
          var stopLoss = pr * (1 + sl) 
          var tp2 = pr * (1 - tp)
 
-        var trail = pr * trailstop f
+        var trail = pr * trailstop
   }
         if (thepair == 'BTCUSD'){
         pr = Math.round(pr*2)/2;
@@ -769,6 +769,7 @@ else if (js[j].symbol == 'XRPU19'&& thepair == "XRPBTC"){
     xrpask = js[j].askPrice
   }
   }
+
   }
   }
   }
@@ -819,26 +820,7 @@ ws.send(JSON.stringify(request));
   }
 }
 }
-  if (positionXbt == undefined){
-  positionXbt = 0;
-  }
-  if (positionEth == undefined){
-  positionEth = 0;
-  }if (positionTrx == undefined){
-  positionTrx = 0;
-  }if (positionBch == undefined){
-  positionBch = 0;
-  }if (positionXrp == undefined){
-  positionXrp = 0;
-  }if (positionLtc == undefined){
-  positionLtc = 0;
-  }if (positionEos == undefined){
-  positionEos = 0;
-  }if (positionAda == undefined){
-  positionAda = 0;
-  }
 
-}
 
  var sl
  var tp
@@ -1815,7 +1797,7 @@ buyHigh = 0;
 });
 }
 });
-
+}
 });
 
         }
@@ -2405,7 +2387,7 @@ request(requestOptions, function(error, response, body) {
 })
 }
 }
-        }
+}
         
         var t = new Date().getTime() - 1000 * 420;
         var tt = [];
