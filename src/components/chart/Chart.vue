@@ -178,7 +178,7 @@ setInterval(function() {
 
     marginDo()
 }, 10000)
-
+ 
 setTimeout(function() {
     var options = {
         url: "https://api.aggr.trade/" + thepair.toLowerCase() + "/historical/1563487180000/1563489250000/10000/",
@@ -851,6 +851,7 @@ var lalafirst = true;
 var ws;
 var subs = false;
 connect()
+var unsubbed = true
 function connect() {
 
     console.error('connect')
@@ -859,12 +860,12 @@ function connect() {
 
     }
     ws.onmessage = function(event) {
-        if (JSON.parse(event.data).info) {
             console.error(JSON.parse(event.data))
+        if (JSON.parse(event.data).info) {
             if (JSON.parse(event.data).info.includes('Welcome')) {
                 var expires = (Math.round(new Date().getTime() / 1000) + 60)
                 signature = crypto.createHmac('sha256', apiSecret).update('GET' + '/realtime' + expires + '').digest('hex');
-
+if (unsubbed){ unsubbed = false
                 var request = {
                     "op": "authKeyExpires",
                     "args": [apiKey, expires, signature]
@@ -874,20 +875,35 @@ function connect() {
                     "op": "subscribe",
                     "args": "quote"
                 }
+                setTimeout(function(){
                 ws.send(JSON.stringify(request));
+                }, 1000)
+                setTimeout(function(){
                 request = {
                     "op": "subscribe",
                     "args": "order"
                 }
+
                 ws.send(JSON.stringify(request));
-                request = {
+                }, 2000)             
+
+                setTimeout(function(){
+                   request = {
                     "op": "subscribe",
                     "args": "position"
                 }
                 ws.send(JSON.stringify(request));
+                }, 3000)
 
-
+}
+                setTimeout(function(){
+                request = {
+                "op": "subscribe",
+                "args": "margin"
             }
+
+                ws.send(JSON.stringify(request));
+                }, 400)            }
         } else
         if (JSON.parse(event.data).table == 'position') {
             var js = JSON.parse(event.data).data
@@ -1079,12 +1095,7 @@ function connect() {
                 ws.close()
             };
         } else {
-            request = {
-                "op": "subscribe",
-                "args": "margin"
-            }
-
-            ws.send(JSON.stringify(request));
+            
             lalafirst = false;
             subs = true;
         }
