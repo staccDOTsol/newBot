@@ -1746,6 +1746,7 @@ export default {
                 console.log(this.chart.series[5].yData[26])
             }
             if (this.chart.series[5].yData[0] != undefined && this.tickData.exchanges[trades[trades.length - 1][0]] != undefined) {
+            console.error('Selling...')
                 console.error(sellingsignal)
                 if (sellingsignal > 1) {
                     //console.error('sells greater')
@@ -2296,7 +2297,8 @@ export default {
                     }
                 }
             }
-            //console.error(buyingsignal)
+            console.error('buying...')
+            console.error(buyingsignal)
             if (buyingsignal > 1) {
                 console.error('buys greater')
                 if (buying == undefined) {
