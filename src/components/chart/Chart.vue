@@ -1904,7 +1904,7 @@ export default {
                             }
                         }
                         if (thepair == "ETHUSD") {
-                           //  qty = qty * 17
+                           qty = qty * (btcbtc / close)
                         }
 
                         var thepos = pos
@@ -2461,7 +2461,7 @@ export default {
 
 
                     if (thepair == "ETHUSD") {
-                       //  qty = qty * 17
+                         qty = qty * (btcbtc / close)
                     }
                     var thepos = pos
                     if (thepos < 0) {
