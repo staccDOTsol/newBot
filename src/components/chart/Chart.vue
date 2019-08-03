@@ -245,7 +245,7 @@ var stops = []
 var orders = []
 var markets = []
 var realStops = []
-var close = 0;
+var close =0;
 var ethcloses = []
 var btccloses = []
 setInterval(function() {
@@ -956,42 +956,48 @@ if (unsubbed){ unsubbed = false
 
         } else if (JSON.parse(event.data).table == 'quote') {
             var js = JSON.parse(event.data).data
-            
+            console.error(((margin222 * riskstop) / (close / (close * ((close * (1-sl))) - 1))))
+            console.error(margin222)
+            console.error(riskstop)
+            console.error(close)
+            console.error(sl)
             for (var j in js) {
-
+                if (js[j].symbol == 'XBTUSD'){
+                btcbtc = parseFloat(js[j].midPrice)
+                }
                 if (js[j].symbol == 'XBTUSD' && thepair == "BTCUSD") {
                     btcbid = js[j].bidPrice
 
                     btcbtc = parseFloat(js[j].midPrice)
                     btcask = js[j].askPrice
-                    close = js[j].askPrice
+                    close =js[j].askPrice
                 } else if (js[j].symbol == 'ETHUSD' && thepair == "ETHUSD") {
                     ethbid = js[j].bidPrice
-                    close = js[j].askPrice
+                    close =js[j].askPrice
                     ethask = js[j].askPrice
                 } else if (js[j].symbol == 'ADAU19' && thepair == "ADABTC") {
                     adabid = js[j].bidPrice
-                    close = js[j].askPrice
+                    close =js[j].askPrice
                     adaask = js[j].askPrice
                 } else if (js[j].symbol == 'TRXU19' && thepair == "TRXBTC") {
                     trxbid = js[j].bidPrice
-                    close = js[j].askPrice
+                    close =js[j].askPrice
                     trxask = js[j].askPrice
                 } else if (js[j].symbol == 'EOSU19' && thepair == "EOSBTC") {
                     eosbid = js[j].bidPrice
                     eosask = js[j].askPrice
-                    close = js[j].askPrice
+                    close =js[j].askPrice
                 } else if (js[j].symbol == 'BCHU19' && thepair == "BCHBTC") {
                     bchbid = js[j].bidPrice
-                    close = js[j].askPrice
+                    close =js[j].askPrice
                     bchask = js[j].askPrice
                 } else if (js[j].symbol == 'LTCU19' && thepair == "LTCBTC") {
                     ltcbid = js[j].bidPrice
-                    close = js[j].askPrice
+                    close =js[j].askPrice
                     ltcask = js[j].askPrice
                 } else if (js[j].symbol == 'XRPU19' && thepair == "XRPBTC") {
                     xrpbid = js[j].bidPrice
-                    close = js[j].askPrice
+                    close =js[j].askPrice
                     xrpask = js[j].askPrice
                 }
             }
@@ -1001,10 +1007,10 @@ if (unsubbed){ unsubbed = false
                 ma = JSON.parse(event.data).data[0];
 
                 account = ma.account
-                if (ma.availableMargin) {
+                if (ma.availableMargin > 0) {
                     margin222 = ma.availableMargin / 100000000;
                 }
-                if (ma.marginBalance) {
+                if (ma.marginBalance > 0) {
                     if (oldMarg != ma.marginBalance / 100000000 && oldMarg != undefined) {
                         if (oldMarg < (ma.marginBalance / 100000000) * 0.995) {
                             oldMarg = (ma.marginBalance / 100000000)
@@ -1085,7 +1091,7 @@ if (unsubbed){ unsubbed = false
                 }
                 marginDo()
             }
-            ws.onclose = function(e) {
+            ws.onclose =function(e) {
                 setTimeout(function() {
                     connect();
                 }, 1000);
@@ -1140,7 +1146,6 @@ function getVars() {
         subs = false
         connect();
     }
-    riskstop = parseFloat(localStorage.getItem('riskstop')) / 100
 }
 var startBtc;
 var startEth;
@@ -1150,6 +1155,120 @@ var upperEth = []
 var lowerEth = []
 
 function refreshMargin() {
+
+    verb = 'GET',
+        path = '/api/v1/user/margin?currency=XBt',
+        expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
+        data = ''
+    // Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
+    // and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
+    postBody = JSON.stringify(data);
+
+    signature = crypto.createHmac('sha256', apiSecret).update(verb + path + (expires) + data).digest('hex');
+
+    headers = {
+        'content-type': 'application/json',
+        'Accept': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+        'api-expires': expires,
+        'api-key': apiKey,
+        'api-signature': signature
+    };
+    requestOptions = {
+        headers: headers,
+        url: 'https://www.bitmex.com' + path,
+        method: verb,
+        body: {}
+    };
+    request(requestOptions, function(error, response, body) {
+        if (error) {
+            console.log(error);
+        }
+        var ma = JSON.parse(body)
+        account = ma.account
+                if (ma.availableMargin > 0) {
+                    margin222 = ma.availableMargin / 100000000;
+                }
+                if (ma.marginBalance > 0) {
+                    if (oldMarg != ma.marginBalance / 100000000 && oldMarg != undefined) {
+                        if (oldMarg < (ma.marginBalance / 100000000) * 0.995) {
+                            oldMarg = (ma.marginBalance / 100000000)
+                            if (winning == undefined) {
+                                winning = true;
+                            }
+                            if (!winning) {
+                                if (numlosses > lossStreak) {
+                                    lossStreak = numlosses;
+
+                                }
+                                numlosses = 0;
+                            }
+                            numwins++
+                            winning = true
+                            profits.push((ma.marginBalance / 100000000) / margin333)
+                            //console.error(profits)
+                            var t = 0;
+                            var c = 0;
+                            var max = 0;
+                            for (var l in profits) {
+                                if (parseFloat(profits[l]) > 0) {
+                                    if (profits[l] > max) {
+                                        max = profits[l]
+                                    }
+                                    t += profits[l]
+                                    c++
+                                }
+                                avgProfit = t / c
+                                biggestWin = max
+                            }
+
+                        } else if (oldMarg > (ma.marginBalance / 100000000) * 1.005) {
+                            oldMarg = (ma.marginBalance / 100000000)
+                            if (winning == undefined) {
+                                winning = false;
+                            }
+                            if (winning) {
+                                if (numwins > winStreak) {
+                                    winStreak = numwins;
+                                }
+                                numwins = 0;
+
+                            }
+                            numlosses++
+                            winning = false
+                            losses.push((ma.marginBalance / 100000000) / margin333)
+
+                            //console.error(losses)
+                            var t = 0;
+                            var c = 0;
+                            var min = 1;
+                            for (var l in losses) {
+                                if (parseFloat(losses[l]) > 0) {
+                                    if (losses[l] < min) {
+                                        min = losses[l]
+                                    }
+                                    t += losses[l]
+                                    c++
+                                }
+                                avgLoss = t / c
+                                worstLoss = min
+                            }
+                        }
+                    }
+                    margin333 = ma.marginBalance / 100000000;
+                    if (firstRun2) {
+                        firstRun2 = false;
+                        returnsStart = margin333;
+                        oldMarg = margin333;
+                    }
+
+                    returnsNow = margin333;
+                }
+                marginperc = margin222 / margin333
+                if (ma.walletBalance) {
+                    wallet = ma.walletBalance / 100000000;
+                }
+        })
     verb = 'GET',
         path = '/api/v1/position',
         expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
@@ -1610,6 +1729,10 @@ export default {
             }
         },
         onTrades(trades) {
+        if (parseFloat(this.tickData.close > 0)){
+                close =parseFloat(this.tickData.close)
+
+        }
             if (this.tickData != undefined) {
                 if (this.tickData.exchanges[trades[trades.length - 1][0]] != undefined) {
 
@@ -1702,7 +1825,12 @@ export default {
                 }
             }
             this.chart.redraw()
-
+            console.error('stuff')
+            console.error(((margin222 * riskstop) / (close / (close * ((close * (1-sl))) - 1))))
+            console.error(margin222)
+            console.error(riskstop)
+            console.error(close)
+            console.error(sl)
             console.log(this.chart.series[0].data)
             thepair = this.pair
             for (var t in trades) {
@@ -1715,8 +1843,9 @@ export default {
             var qty = 0;
             if (this.tickData != undefined) {
                 if (this.tickData.exchanges[trades[trades.length - 1][0]] != undefined) {
-
-                    close = this.tickData.exchanges[trades[trades.length - 1][0]].close
+                    if (this.tickData.exchanges[trades[trades.length - 1][0]].close > 0){
+                    close =this.tickData.exchanges[trades[trades.length - 1][0]].close
+                    }
                     if (firstRun == true) {
                         firstRun = false;
 
@@ -1987,40 +2116,48 @@ export default {
                                 console.log(error);
                             }
                             var js = JSON.parse(body)
+            console.error(((margin222 * riskstop) / (close / (close * ((close * (1-sl))) - 1))))
+            console.error(margin222)
+            console.error(riskstop)
+            console.error(close)
+            console.error(sl)
                             for (var j in js) {
+                                if (js[j].symbol == 'XBTUSD'){
+                                btcbtc = parseFloat(js[j].midPrice)
+                                }
                                 if (js[j].symbol == 'XBTUSD' && thepair == "BTCUSD") {
                                     btcbid = js[j].bidPrice
 
                                     btcbtc = parseFloat(js[j].midPrice)
                                     btcask = js[j].askPrice
-                                    close = js[j].askPrice
+                                    close =js[j].askPrice
                                 } else if (js[j].symbol == 'ETHUSD' && thepair == "ETHUSD") {
                                     ethbid = js[j].bidPrice
-                                    close = js[j].askPrice
+                                    close =js[j].askPrice
                                     ethask = js[j].askPrice
                                 } else if (js[j].symbol == 'ADAU19' && thepair == "ADABTC") {
                                     adabid = js[j].bidPrice
-                                    close = js[j].askPrice
+                                    close =js[j].askPrice
                                     adaask = js[j].askPrice
                                 } else if (js[j].symbol == 'TRXU19' && thepair == "TRXBTC") {
                                     trxbid = js[j].bidPrice
-                                    close = js[j].askPrice
+                                    close =js[j].askPrice
                                     trxask = js[j].askPrice
                                 } else if (js[j].symbol == 'EOSU19' && thepair == "EOSBTC") {
                                     eosbid = js[j].bidPrice
                                     eosask = js[j].askPrice
-                                    close = js[j].askPrice
+                                    close =js[j].askPrice
                                 } else if (js[j].symbol == 'BCHU19' && thepair == "BCHBTC") {
                                     bchbid = js[j].bidPrice
-                                    close = js[j].askPrice
+                                    close =js[j].askPrice
                                     bchask = js[j].askPrice
                                 } else if (js[j].symbol == 'LTCU19' && thepair == "LTCBTC") {
                                     ltcbid = js[j].bidPrice
-                                    close = js[j].askPrice
+                                    close =js[j].askPrice
                                     ltcask = js[j].askPrice
                                 } else if (js[j].symbol == 'XRPU19' && thepair == "XRPBTC") {
                                     xrpbid = js[j].bidPrice
-                                    close = js[j].askPrice
+                                    close =js[j].askPrice
                                     xrpask = js[j].askPrice
                                 }
                             }
@@ -2550,6 +2687,11 @@ export default {
                             var ltcask;
                             var trxbid;
                             var trxask;
+            console.error(((margin222 * riskstop) / (close / (close * ((close * (1-sl))) - 1))))
+            console.error(margin222)
+            console.error(riskstop)
+            console.error(close)
+            console.error(sl)
                             for (var j in js) {
                                 if (js[j].symbol == 'XBTUSD') {
                                     btcbid = js[j].bidPrice
@@ -3071,7 +3213,7 @@ export default {
                             this.tickData.exchanges[trades[i][0]].low,
                             +trades[i][2]
                         )
-                        this.tickData.exchanges[trades[i][0]].close = +trades[i][2]
+                        this.tickData.exchanges[trades[i][0]].close =+trades[i][2]
                         this.tickData.exchanges[trades[i][0]].size += +trades[i][3]
 
                         if (
@@ -3152,7 +3294,7 @@ export default {
                 this.tickData.open = parseFloat(this.tickData.close)
                 this.tickData.high = null
                 this.tickData.low = null
-                this.tickData.close = 0
+                this.tickData.close =0
                 this.tickData.liquidations = 0
                 this.tickData.buys = 0
                 this.tickData.sells = 0
@@ -3245,7 +3387,7 @@ export default {
                                 vwapArr.open = vwapArr.open.slice(-1 * 6 * 60 * 2)
                                 vwapArr.high = vwapArr.high.slice(-1 * 6 * 60 * 2)
                                 vwapArr.low = vwapArr.low.slice(-1 * 6 * 60 * 2)
-                                vwapArr.close = vwapArr.close.slice(-1 * 6 * 60 * 2)
+                                vwapArr.close =vwapArr.close.slice(-1 * 6 * 60 * 2)
                                 vwapArr.volume = vwapArr.volume.slice(-1 * 6 * 60 * 2)
                                 console.error(vwapArr)
                                 var theVwap = new VWAP(vwapArr).result[new VWAP(vwapArr).result.length - 1]
@@ -3348,7 +3490,7 @@ export default {
             let high = 0
             let low = 0
 
-            tickData.close = 0
+            tickData.close =0
 
             for (let exchange in exchanges) {
                 let exchangeWeight = 1
