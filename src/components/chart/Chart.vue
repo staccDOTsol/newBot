@@ -1936,51 +1936,7 @@ console.error((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-s
                                 qty = 1.65 * pos * -1
                             }
                         }
-                        if (marginperc < 0.3) {
-                            if (thepair == "ETHUSD") {
-                                if (positionEth < 0 && qty > 0) {
 
-                                    qty = 0.35 * positionEth * -1
-                                }
-                            } else if (thepair == "BTCUSD") {
-                                if (positionXbt < 0 && qty > 0) {
-
-                                    qty = 0.35 * positionXbt * -1
-                                }
-                            } else if (thepair == "EOSBTC") {
-                                if (positionEos <= 0 && qty > 0) {
-
-                                    qty = 0.35 * positionEos * -1
-                                }
-                            } else if (thepair == "TRXBTC") {
-                                if (positionTrx <= 0 && qty > 0) {
-
-                                    qty = 0.35 * positionTrx * -1
-                                }
-                            } else if (thepair == "BCHBTC") {
-                                if (positionBch <= 0 && qty > 0) {
-
-                                    qty = 0.35 * positionBch * -1
-                                }
-                            } else if (thepair == "LTCBTC") {
-                                if (positionLtc <= 0 && qty > 0) {
-
-                                    qty = 0.35 * positionLtc * -1
-                                }
-                            } else if (thepair == "XRPBTC") {
-                                if (positionXrp <= 0 && qty > 0) {
-
-                                    qty = 0.35 * positionXrp * -1
-                                }
-                            } else if (thepair == "ADABTC") {
-                                if (positionAda <= 0 && qty > 0) {
-
-                                    qty = 0.35 * positionAda * -1
-                                }
-                            }
-                        } else if (marginperc < 0.4) {
-                            qty = qty / 1.25
-                        }
 
 
                         console.log('marginperc')
@@ -2482,71 +2438,25 @@ console.error((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-s
 
 
                     }
-                    var thepos = pos
-                    if (thepos < 0) {
-                        thepos = thepos * -1
-                    }
-                    var theqty = qty
-                    if (theqty < 0) {
-                        theqty = theqty * -1
-                    }
-                    if (pos < 0 && qty > 0) {
-                        if (theqty < thepos * 1.65) {
-                            qty = 1.65 * pos * -1
+                                            var thepos = pos
+                        if (thepos < 0) {
+                            thepos = thepos * -1
                         }
-                    }
-                    if (pos > 0 && qty < 0) {
-                        if (theqty < thepos * 1.65) {
-
-                            qty = 1.65 * pos * -1
+                        var theqty = qty
+                        if (theqty < 0) {
+                            theqty = theqty * -1
                         }
-                    }
-
-                    if (marginperc < 0.3) {
-                        if (thepair == "ETHUSD") {
-                            if (positionEth < 0 && qty > 0) {
-
-                                qty = 0.35 * positionEth * -1
-                            }
-                        } else if (thepair == "BTCUSD") {
-                            if (positionXbt < 0 && qty > 0) {
-
-                                qty = 0.35 * positionXbt * -1
-                            }
-                        } else if (thepair == "EOSBTC") {
-                            if (positionEos <= 0 && qty > 0) {
-
-                                qty = 0.35 * positionEos * -1
-                            }
-                        } else if (thepair == "TRXBTC") {
-                            if (positionTrx <= 0 && qty > 0) {
-
-                                qty = 0.35 * positionTrx * -1
-                            }
-                        } else if (thepair == "BCHBTC") {
-                            if (positionBch <= 0 && qty > 0) {
-
-                                qty = 0.35 * positionBch * -1
-                            }
-                        } else if (thepair == "LTCBTC") {
-                            if (positionLtc <= 0 && qty > 0) {
-
-                                qty = 0.35 * positionLtc * -1
-                            }
-                        } else if (thepair == "XRPBTC") {
-                            if (positionXrp <= 0 && qty > 0) {
-
-                                qty = 0.35 * positionXrp * -1
-                            }
-                        } else if (thepair == "ADABTC") {
-                            if (positionAda <= 0 && qty > 0) {
-
-                                qty = 0.35 * positionAda * -1
+                        if (pos < 0 && qty > 0) {
+                            if (theqty < thepos * 1.65) {
+                                qty = 1.65 * pos * -1
                             }
                         }
-                    } else if (marginperc < 0.4) {
-                        qty = qty / 1.25
-                    }
+                        if (pos > 0 && qty < 0) {
+                            if (theqty < thepos * 1.65) {
+
+                                qty = 1.65 * pos * -1
+                            }
+                        }
                     if (thepair == 'BTCUSD') {
                         if (positionXbt < 0) {
                             //qty = qty * 2;
