@@ -1776,16 +1776,16 @@ export default {
                         firsttrade++;
                         if (firsttrade == 2) {
                             firsttrade++;
-                            qty = (margin222 * riskstop) / (close / (close * ((close * (1+sl))) - 1)
+                            qty = ((margin222 * riskstop) / (close / (close * ((close * (1+sl))) - 1)))
 
                             if (thepair.indexOf('USD') == -1) {
-                                qty = (margin222 * riskstop) / (close / (close * ((close * (1+sl))) - 1)
+                                qty = ((margin222 * riskstop) / (close / (close * ((close * (1+sl))) - 1)))
                             }
                         } else {
                             firsttrade++;
-                            qty = (margin222 * riskstop) / (close / (close * ((close * (1+sl))) - 1)
+                            qty = ((margin222 * riskstop) / (close / (close * ((close * (1+sl))) - 1)))
                             if (thepair.indexOf('USD') == -1) {
-                                qty = (margin222 * riskstop) / (close / (close * ((close * (1+sl))) - 1)
+                                qty = ((margin222 * riskstop) / (close / (close * ((close * (1+sl))) - 1)))
                             }
                         }
                         if (thepair == "ETHUSD") {
@@ -2324,15 +2324,15 @@ export default {
 
                     if (firsttrade == 2) {
                         firsttrade++;
-                        qty = ordermult * ((marginperc * margin222 * this.tickData.exchanges[trades[trades.length - 1][0]].close) * 2 * 5 / 2)
+                        qty = ((margin222 * riskstop) / (close / (close * ((close * (1-sl))) - 1)))
                         if (thepair.indexOf('USD') == -1) {
-                            qty = ordermult * ((marginperc * margin222 * (btcbtc / (btcbtc * this.tickData.exchanges[trades[trades.length - 1][0]].close))) * 2)
+                            qty = ((margin222 * riskstop) / (close / (close * ((close * (1-sl))) - 1)))
                         }
                     } else {
                         firsttrade++
-                        qty = ordermult * ((marginperc * margin222 * this.tickData.exchanges[trades[trades.length - 1][0]].close) * 2 * 5 / 2)
+                        qty = ((margin222 * riskstop) / (close / (close * ((close * (1-sl))) - 1)))
                         if (thepair.indexOf('USD') == -1) {
-                            qty = ordermult * ((marginperc * margin222 * (btcbtc / (btcbtc * this.tickData.exchanges[trades[trades.length - 1][0]].close))) * 2)
+                            qty = ((margin222 * riskstop) / (close / (close * ((close * (1-sl))) - 1)))
                         }
                     }
 
