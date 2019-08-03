@@ -1904,7 +1904,7 @@ export default {
                             }
                         }
                         if (thepair == "ETHUSD") {
-                           qty = qty * (close / btcbtc)
+                           qty = (margin222 * btcbtc * riskstop) / (close / (close * ((close * (1+sl))) - 1)) * (close / btcbtc) * (0.0002 * btcbtc)
                         }
 
                         var thepos = pos
@@ -2461,7 +2461,9 @@ export default {
 
 
                     if (thepair == "ETHUSD") {
-                         qty = qty * (close / btcbtc)
+                         
+                         qty = (margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-sl))) - 1)) * (close / btcbtc) * (0.0002 * btcbtc)
+
                     }
                     var thepos = pos
                     if (thepos < 0) {
