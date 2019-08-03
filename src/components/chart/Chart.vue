@@ -956,8 +956,13 @@ if (unsubbed){ unsubbed = false
 
         } else if (JSON.parse(event.data).table == 'quote') {
             var js = JSON.parse(event.data).data
+            if (thepair == 'ETHUSD'){
+console.error((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-sl))) - 1)) * (close / btcbtc) * (0.0002 * btcbtc))
+            }
+            else {
             console.error(((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-sl))) - 1))))
-            console.error(margin222)
+
+            }            console.error(margin222)
             console.error(riskstop)
             console.error(close)
             console.error(sl)
@@ -1820,8 +1825,13 @@ export default {
             }
             this.chart.redraw()
             console.error('stuff')
+            if (thepair == 'ETHUSD'){
+console.error((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-sl))) - 1)) * (close / btcbtc) * (0.0002 * btcbtc))
+            }
+            else {
             console.error(((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-sl))) - 1))))
-            console.error(margin222)
+
+            }            console.error(margin222)
             console.error(riskstop)
             console.error(close)
             console.error(sl)
@@ -2102,7 +2112,13 @@ export default {
                                 console.log(error);
                             }
                             var js = JSON.parse(body)
+                            if (thepair == 'ETHUSD'){
+            console.error((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-sl))) - 1)) * (close / btcbtc) * (0.0002 * btcbtc))
+            }
+            else {
             console.error(((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-sl))) - 1))))
+
+            }
             console.error(margin222)
             console.error(riskstop)
             console.error(close)
@@ -2675,8 +2691,13 @@ export default {
                             var ltcask;
                             var trxbid;
                             var trxask;
+                            if (thepair == 'ETHUSD'){
+console.error((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-sl))) - 1)) * (close / btcbtc) * (0.0002 * btcbtc))
+            }
+            else {
             console.error(((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-sl))) - 1))))
-            console.error(margin222)
+
+            }            console.error(margin222)
             console.error(riskstop)
             console.error(close)
             console.error(sl)
