@@ -1729,11 +1729,9 @@ export default {
             }
         },
         onTrades(trades) {
-        
+
             if (this.tickData != undefined) {
-                if (this.tickData.exchanges[trades[trades.length - 1][0]] != undefined) {
-close =parseFloat(this.tickData.close)
-                }
+                XS
             }
             console.log('data')
             if (this.chart.series[0] != undefined) {
@@ -1854,15 +1852,7 @@ close =parseFloat(this.tickData.close)
                     } else if (thepair == "ETHUSD") {
                         ethcloses.push(close)
                     }
-                    console.log(this.tickData.exchanges[trades[trades.length - 1][0]])
-                    var test = ((margin222 * 1.25 * ((margin222 * this.tickData.exchanges[trades[trades.length - 1][0]].close) * 50)) / 2)
-                    console.log(test)
-                    test = test * 2;
-                    test = test * 10 * 10
-                    if (thepair == 'ETHUSD') {
-                        // test = test * 3
-                    }
-                    //console.log(test)
+                   
                 }
             }
 
