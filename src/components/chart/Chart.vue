@@ -1729,13 +1729,10 @@ export default {
             }
         },
         onTrades(trades) {
-        if (parseFloat(this.tickData.close > 0)){
-                close =parseFloat(this.tickData.close)
-
-        }
+        
             if (this.tickData != undefined) {
                 if (this.tickData.exchanges[trades[trades.length - 1][0]] != undefined) {
-
+close =parseFloat(this.tickData.close)
                 }
             }
             console.log('data')
