@@ -1779,13 +1779,13 @@ export default {
                             qty = ((margin222 * riskstop) / (close / (close * ((close * (1+sl))) - 1)))
 
                             if (thepair.indexOf('USD') == -1) {
-                                qty = ((margin222 * riskstop) / (close / (close * ((close * (1+sl))) - 1)))
+                                qty = (((margin222 * riskstop) / (close / (close * ((close * (1+sl))) - 1)))) / (close * btcbtc)
                             }
                         } else {
                             firsttrade++;
                             qty = ((margin222 * riskstop) / (close / (close * ((close * (1+sl))) - 1)))
                             if (thepair.indexOf('USD') == -1) {
-                                qty = ((margin222 * riskstop) / (close / (close * ((close * (1+sl))) - 1)))
+                                qty = (((margin222 * riskstop) / (close / (close * ((close * (1+sl))) - 1)))) / (close * btcbtc)
                             }
                         }
                         if (thepair == "ETHUSD") {
@@ -2326,13 +2326,13 @@ export default {
                         firsttrade++;
                         qty = ((margin222 * riskstop) / (close / (close * ((close * (1-sl))) - 1)))
                         if (thepair.indexOf('USD') == -1) {
-                            qty = ((margin222 * riskstop) / (close / (close * ((close * (1-sl))) - 1)))
+                            qty = (((margin222 * riskstop) / (close / (close * ((close * (1-sl))) - 1)))) / (close * btcbtc)
                         }
                     } else {
                         firsttrade++
                         qty = ((margin222 * riskstop) / (close / (close * ((close * (1-sl))) - 1)))
                         if (thepair.indexOf('USD') == -1) {
-                            qty = ((margin222 * riskstop) / (close / (close * ((close * (1-sl))) - 1)))
+                            qty = (((margin222 * riskstop) / (close / (close * ((close * (1-sl))) - 1)))) / (close * btcbtc)
                         }
                     }
 

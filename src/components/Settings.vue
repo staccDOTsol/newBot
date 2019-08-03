@@ -79,7 +79,15 @@
             <br><br>(availbal * risk) / (price / (price * ((price * (1+sl))) - 1)
 
             <br>(1000 * 0.03) / ((6500 / ((6500 * (1 + 0.0154)))) - 1) = -1978
+            <br><br>if ethusd, that * .48 or so
 
+            <br><br>if buying alts:
+            <br>((availbal * risk) / (close / (close * ((close * (1-sl))) - 1)) / (price * btcusd)
+            <br>((1000 * 0.03) / ((0.0003970 / ((0.0003970 * (1 - 0.0154)))) - 1)) / ( (0.0003970* 10000))
+
+            <br><br>if selling alts:
+            <br>((availbal * risk) / (close / (close * ((close * (1+sl))) - 1)) / (price * btcusd)
+            <br>((1000 * 0.03) / ((0.00000200/ ((0.00000200* (1 + 0.0154)))) - 1)) / ( (0.00000200* 10000))
           <label
             >
             Risk %
