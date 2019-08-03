@@ -204,12 +204,12 @@ setInterval(function() {
     var trail = pr
     var stopLoss = pr * (1 + sl)
     var tp2 = pr * (1 - tp)
-    ////console.error(trailstop)
+    ////console.error(riskstop)
     var trail;
 
-    var trail = close * trailstop
+    var trail = close * riskstop
     ////console.error(trail)
-    var trail = close * trailstop * -1
+    var trail = close * riskstop * -1
     ////console.error(trail)
     var pr = close;
     if (thepair == 'BTCUSD') {
@@ -249,8 +249,8 @@ var close = 0;
 var ethcloses = []
 var btccloses = []
 setInterval(function() {
-    var trail = close * trailstop
-    var stopPx = close * trailstop * -1
+    var trail = close * riskstop
+    var stopPx = close * riskstop * -1
     if (trail != 0) {
         //////console.error(trail)
         //  ////console.error(stopPx)
@@ -588,12 +588,12 @@ setInterval(function() {
                                     if (JSON.parse(body2)[j2].side == 'Sell') {
                                         var stopQty = JSON.parse(body2)[j2].orderQty
 
-                                        var trail = close * trailstop
-                                        var stopPx = close * trailstop
+                                        var trail = close * riskstop
+                                        var stopPx = close * riskstop
                                     } else {
 
-                                        var trail = close * trailstop * -1
-                                        var stopPx = close * trailstop
+                                        var trail = close * riskstop * -1
+                                        var stopPx = close * riskstop
                                         var stopQty = JSON.parse(body2)[j2].orderQty * -1
                                     }
                                     var pr = close;
@@ -657,7 +657,7 @@ setInterval(function() {
                                             stops.push(JSON.parse(body)['orderID'])
                                         })*/
                                     }
-                                    var trail = pr * trailstop * -1
+                                    var trail = pr * riskstop * -1
                                     var stopLoss = pr * (1 + sl)
                                     var tp2 = pr * (1 - tp)
                                     if (thepair == 'BTCUSD') {
@@ -831,7 +831,7 @@ var apiKey
 var apiSecret
 var ordermult
 var crossconfirm
-var trailstop
+var riskstop
 var aold
 var sold
 var valid = localStorage.getItem('valid')
@@ -1115,7 +1115,7 @@ function getVars() {
     sl = parseFloat(localStorage.getItem('sl')) / 100
 
     crossconfirm = parseFloat(localStorage.getItem('crossconfirm')) / 100
-    trailstop = parseFloat(localStorage.getItem('trailstop'))
+    riskstop = parseFloat(localStorage.getItem('risk')) / 100
     ordermult = parseFloat(localStorage.getItem('ordermult'))
     if ((aold == null) && (sold == null)) {
         ////console.error('keys start')
@@ -1140,7 +1140,7 @@ function getVars() {
         subs = false
         connect();
     }
-    trailstop = parseFloat(localStorage.getItem('trailstop')) / 100
+    riskstop = parseFloat(localStorage.getItem('riskstop')) / 100
 }
 var startBtc;
 var startEth;
@@ -1776,19 +1776,20 @@ export default {
                         firsttrade++;
                         if (firsttrade == 2) {
                             firsttrade++;
-                            qty = -1 * (ordermult * ((marginperc * margin222 * this.tickData.exchanges[trades[trades.length - 1][0]].close) * 2 * 5 / 2))
+                            qty = (margin222 * riskstop) / (close / (close * ((close * (1+sl))) - 1)
+
                             if (thepair.indexOf('USD') == -1) {
-                                qty = -1 * (ordermult * ((marginperc * margin222 * (btcbtc / (btcbtc * this.tickData.exchanges[trades[trades.length - 1][0]].close))) * 2))
+                                qty = (margin222 * riskstop) / (close / (close * ((close * (1+sl))) - 1)
                             }
                         } else {
                             firsttrade++;
-                            qty = -1 * (ordermult * ((marginperc * margin222 * this.tickData.exchanges[trades[trades.length - 1][0]].close) * 2 * 5 / 2))
+                            qty = (margin222 * riskstop) / (close / (close * ((close * (1+sl))) - 1)
                             if (thepair.indexOf('USD') == -1) {
-                                qty = -1 * (ordermult * ((marginperc * margin222 * (btcbtc / (btcbtc * this.tickData.exchanges[trades[trades.length - 1][0]].close))) * 2))
+                                qty = (margin222 * riskstop) / (close / (close * ((close * (1+sl))) - 1)
                             }
                         }
                         if (thepair == "ETHUSD") {
-                            qty = qty * 13
+                            qty = qty * 0.412284678
                         }
 
                         var thepos = pos
@@ -2134,8 +2135,8 @@ export default {
                             if (pr == 0) {
                                 pr = close
                             }
-                            var stop = pr * (1 + trailstop)
-                            var trail = pr * trailstop * -1
+                            var stop = pr * (1 + riskstop)
+                            var trail = pr * riskstop * -1
 
                             if (thepair == 'BTCUSD') {
                                 pr = Math.round(pr * 2) / 2;
@@ -2337,7 +2338,7 @@ export default {
 
 
                     if (thepair == "ETHUSD") {
-                        qty = qty * 13
+                        qty = qty * 0.412284678
                     }
                     var thepos = pos
                     if (thepos < 0) {
@@ -2699,7 +2700,7 @@ export default {
                             if (pr == 0) {
                                 pr = close
                             }
-                            var trail = pr * trailstop * -1
+                            var trail = pr * riskstop * -1
                             var stopLoss = pr * (1 + sl)
                             var tp2 = pr * (1 - tp)
                             if (thepair == 'BTCUSD') {
@@ -2812,7 +2813,7 @@ export default {
 
                                 }
 
-                                var trail = pr * trailstop
+                                var trail = pr * riskstop
                                 var stopLoss = pr * (1 + sl)
                                 var tp2 = pr * (1 - tp)
                                 if (thepair == 'BTCUSD') {

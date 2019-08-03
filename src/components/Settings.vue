@@ -64,22 +64,38 @@
           />
 
         </div>
+
           <div class="form-group settings-pair mb8">
+            
+            Order size is a function of available balance, your risk %, the price, and your stoploss %.
+
+           <br><br> if buying
+
+            <br><br>(availbal * risk) / (price / (price * ((price * (1-sl))) - 1)
+            <br>(1000 * 0.03) / ((6500 / ((6500 * (1 - 0.0154)))) - 1) = 1918
+
+            <br><br>if selling
+
+            <br><br>(availbal * risk) / (price / (price * ((price * (1+sl))) - 1)
+
+            <br>(1000 * 0.03) / ((6500 / ((6500 * (1 + 0.0154)))) - 1) = -1978
+
           <label
-            >Trail Stop
+            >
+            Risk %
             <span
               class="icon-info-circle"
-              title="The Trail Stop %"
+              title="The Risk %"
               v-tippy
             ></span
           ></label>
           <input
-            id="trailstop"
+            id="risk"
             onchange="apis();"
             type="string"
             placeholder=""
             class="form-control"
-            :value="trailstop"
+            :value="risk"
             @change=""
           />
         </div>
@@ -902,7 +918,7 @@ export default {
       'sl',
       'maxRows',
       'decimalPrecision',
-      'trailstop',
+      'risk',
       'showLogos',
       'liquidationsOnlyList',
       'aggregationLag',

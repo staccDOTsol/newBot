@@ -45902,7 +45902,7 @@ console.log('apisecret!')
 console.log('apisecret!')
   localStorage.setItem('ordermult', $('#ordermult').val())
   localStorage.setItem('crossconfirm', $('#crossconfirm').val())
-  localStorage.setItem('trailstop', $('#trailstop').val())
+  localStorage.setItem('risk', $('#risk').val())
   localStorage.setItem('tp', $('#tp').val())
   localStorage.setItem('sl', $('#sl').val())
   localStorage.setItem('apisecret', $('#apisecret').val())
@@ -45943,16 +45943,16 @@ $('#sl').val("1")
 $('#sl').val(localStorage.getItem('sl'))
   }
 }
-if ($('#trailstop ').val() == ""){
-  if(localStorage.getItem('trailstop') == undefined){
+if ($('#risk ').val() == ""){
+  if(localStorage.getItem('risk') == undefined){
 
 
-$('#trailstop').val("3")
+$('#risk').val("3")
   
   }
   else{
 
-$('#trailstop').val(localStorage.getItem('trailstop'))
+$('#risk').val(localStorage.getItem('risk'))
   }
 }
 if ($('#apikey').val() == ""){
