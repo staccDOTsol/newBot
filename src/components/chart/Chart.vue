@@ -956,7 +956,7 @@ if (unsubbed){ unsubbed = false
 
         } else if (JSON.parse(event.data).table == 'quote') {
             var js = JSON.parse(event.data).data
-            console.error(((margin222 * riskstop) / (close / (close * ((close * (1-sl))) - 1))))
+            console.error(((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-sl))) - 1))))
             console.error(margin222)
             console.error(riskstop)
             console.error(close)
@@ -1820,7 +1820,7 @@ export default {
             }
             this.chart.redraw()
             console.error('stuff')
-            console.error(((margin222 * riskstop) / (close / (close * ((close * (1-sl))) - 1))))
+            console.error(((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-sl))) - 1))))
             console.error(margin222)
             console.error(riskstop)
             console.error(close)
@@ -1891,20 +1891,20 @@ export default {
                         firsttrade++;
                         if (firsttrade == 2) {
                             firsttrade++;
-                            qty = -1 * ((margin222 * riskstop) / (close / (close * ((close * (1+sl))) - 1))) 
+                            qty = -1 * ((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1+sl))) - 1))) 
 
                             if (thepair.indexOf('USD') == -1) {
-                                qty = -1 * (((margin222 * riskstop) / (close / (close * ((close * (1+sl))) - 1)))) / (close * btcbtc)
+                                qty = (((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1+sl))) - 1)))) / (close * btcbtc)
                             }
                         } else {
                             firsttrade++;
-                            qty = -1 * ((margin222 * riskstop) / (close / (close * ((close * (1+sl))) - 1)))
+                            qty = -1 * ((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1+sl))) - 1)))
                             if (thepair.indexOf('USD') == -1) {
-                                qty = -1 * (((margin222 * riskstop) / (close / (close * ((close * (1+sl))) - 1)))) / (close * btcbtc)
+                                qty = (((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1+sl))) - 1)))) / (close * btcbtc)
                             }
                         }
                         if (thepair == "ETHUSD") {
-                            qty = qty * 0.412284678
+                            qty = qty * 17
                         }
 
                         var thepos = pos
@@ -2102,7 +2102,7 @@ export default {
                                 console.log(error);
                             }
                             var js = JSON.parse(body)
-            console.error(((margin222 * riskstop) / (close / (close * ((close * (1-sl))) - 1))))
+            console.error(((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-sl))) - 1))))
             console.error(margin222)
             console.error(riskstop)
             console.error(close)
@@ -2447,21 +2447,21 @@ export default {
 
                     if (firsttrade == 2) {
                         firsttrade++;
-                        qty = ((margin222 * riskstop) / (close / (close * ((close * (1-sl))) - 1)))
+                        qty = ((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-sl))) - 1)))
                         if (thepair.indexOf('USD') == -1) {
-                            qty = (((margin222 * riskstop) / (close / (close * ((close * (1-sl))) - 1)))) / (close * btcbtc)
+                            qty = -1 * (((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-sl))) - 1)))) / (close * btcbtc)
                         }
                     } else {
                         firsttrade++
-                        qty = ((margin222 * riskstop) / (close / (close * ((close * (1-sl))) - 1)))
+                        qty = ((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-sl))) - 1)))
                         if (thepair.indexOf('USD') == -1) {
-                            qty = (((margin222 * riskstop) / (close / (close * ((close * (1-sl))) - 1)))) / (close * btcbtc)
+                            qty = -1 * (((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-sl))) - 1)))) / (close * btcbtc)
                         }
                     }
 
 
                     if (thepair == "ETHUSD") {
-                        qty = qty * 0.412284678
+                        qty = qty * 17
                     }
                     var thepos = pos
                     if (thepos < 0) {
@@ -2673,7 +2673,7 @@ export default {
                             var ltcask;
                             var trxbid;
                             var trxask;
-            console.error(((margin222 * riskstop) / (close / (close * ((close * (1-sl))) - 1))))
+            console.error(((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-sl))) - 1))))
             console.error(margin222)
             console.error(riskstop)
             console.error(close)
