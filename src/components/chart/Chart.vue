@@ -1731,7 +1731,6 @@ export default {
         onTrades(trades) {
 
             if (this.tickData != undefined) {
-                XS
             }
             console.log('data')
             if (this.chart.series[0] != undefined) {
