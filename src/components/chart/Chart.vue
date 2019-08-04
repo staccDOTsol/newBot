@@ -2035,9 +2035,7 @@ console.error((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-s
                         }
                         console.log(qty)
 
-                        if (marginperc < 0.15) {
-                            qty = qty / 5
-                        }
+
                         qty = Math.round(qty)
                         verb = 'GET',
                             path = '/api/v1/instrument/active',
@@ -2246,52 +2244,7 @@ console.error((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-s
                                 trail = Math.round(trail * 2) / 2;
                             }
 
-                            if (marginperc < 0.095) {
-                                qty = qty / 2
-                                qty = Math.floor(qty)
-                                verb = 'POST',
-                                    path = '/api/v1/order',
-                                    expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
-                                    data = {
-                                        symbol: thepair.replace('BTCUSD', 'XBTUSD').replace('BTC', 'U19'),
-                                        orderQty: qty,
-                                        ordType: "Market"
-                                    };
 
-                                // Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
-                                // and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
-                                postBody = JSON.stringify(data);
-
-                                signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires + postBody).digest('hex');
-
-                                headers = {
-                                    'content-type': 'application/json',
-                                    'Accept': 'application/json',
-                                    'X-Requested-With': 'XMLHttpRequest',
-                                    'api-expires': expires,
-                                    'api-key': apiKey,
-                                    'api-signature': signature
-                                };
-
-                                requestOptions = {
-                                    headers: headers,
-                                    url: 'https://www.bitmex.com' + path,
-                                    method: verb,
-                                    body: postBody
-                                };
-                                if (valid) {
-                                    if (valid) {
-
-                                        request(requestOptions, function(error, response, body) {
-                                            if (error) {
-                                                console.log(error);
-                                            }
-                                            console.log(body);
-                                            refreshMargin();
-                                        })
-                                    }
-                                }
-                            }
                             verb = 'DELETE',
                                 path = '/api/v1/order/all',
                                 expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
@@ -2544,9 +2497,7 @@ console.error((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-s
                     }
 
 
-                    if (marginperc < 0.15) {
-                        qty = qty / 5
-                    }
+
                     qty = Math.round(qty)
 
                     console.log(qty)
@@ -2777,50 +2728,7 @@ console.error((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-s
                                 stopLoss = Math.round(stopLoss * 2) / 2;
                             }
 
-                            if (marginperc < 0.095) {
-                                qty = qty / 2
-                                qty = Math.floor(qty)
-                                verb = 'POST',
-                                    path = '/api/v1/order',
-                                    expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
-                                    data = {
-                                        symbol: thepair.replace('BTCUSD', 'XBTUSD').replace('BTC', 'U19'),
-                                        orderQty: qty,
-                                        ordType: "Market"
-                                    };
-
-                                // Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
-                                // and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
-                                postBody = JSON.stringify(data);
-
-                                signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires + postBody).digest('hex');
-
-                                headers = {
-                                    'content-type': 'application/json',
-                                    'Accept': 'application/json',
-                                    'X-Requested-With': 'XMLHttpRequest',
-                                    'api-expires': expires,
-                                    'api-key': apiKey,
-                                    'api-signature': signature
-                                };
-
-                                requestOptions = {
-                                    headers: headers,
-                                    url: 'https://www.bitmex.com' + path,
-                                    method: verb,
-                                    body: postBody
-                                };
-                                if (valid) {
-
-                                    request(requestOptions, function(error, response, body) {
-                                        if (error) {
-                                            console.log(error);
-                                        }
-                                        console.log(body);
-                                        refreshMargin();
-                                    })
-                                }
-                            }
+                           
                             verb = 'DELETE',
                                 path = '/api/v1/order/all',
                                 expires = Math.round(new Date().getTime() / 1000) + 6660, // 1 min in the future
