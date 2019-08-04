@@ -1123,9 +1123,9 @@ setInterval(function() {
 
 function getVars() {
     ////console.error('getVars')
-    tp = parseFloat(localStorage.getItem('tp')) / 100
     lev = parseFloat(localStorage.getItem('leverage'))
     sl = (parseFloat(localStorage.getItem('sl')) / 100) / lev
+    tp = (parseFloat(localStorage.getItem('tp')) / 100) / lev
     crossconfirm = parseFloat(localStorage.getItem('crossconfirm')) / 100
     riskstop = parseFloat(localStorage.getItem('risk')) / 100
     ordermult = parseFloat(localStorage.getItem('ordermult'))

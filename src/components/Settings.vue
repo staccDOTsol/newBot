@@ -151,7 +151,7 @@
             >Leverage You're Using (Can't be Cross)
             <span
               class="icon-info-circle"
-              title="Sl is a function of this value"
+              title="Sl and TP are a function of this value"
               v-tippy
             ></span
           ></label>
