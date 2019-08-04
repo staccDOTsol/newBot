@@ -1116,6 +1116,7 @@ console.error((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-s
 
 var sl
 var tp
+var lev
 setInterval(function() {
     getVars()
 }, 5000);
@@ -1123,8 +1124,8 @@ setInterval(function() {
 function getVars() {
     ////console.error('getVars')
     tp = parseFloat(localStorage.getItem('tp')) / 100
-    sl = parseFloat(localStorage.getItem('sl')) / 100
-
+    lev = parseFloat(localStorage.getItem('leverage'))
+    sl = (parseFloat(localStorage.getItem('sl')) / 100) / lev
     crossconfirm = parseFloat(localStorage.getItem('crossconfirm')) / 100
     riskstop = parseFloat(localStorage.getItem('risk')) / 100
     ordermult = parseFloat(localStorage.getItem('ordermult'))

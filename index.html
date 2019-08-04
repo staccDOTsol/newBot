@@ -45900,7 +45900,7 @@ if (valid == undefined){
       function apis(){
 console.log('apisecret!')
 console.log('apisecret!')
-  localStorage.setItem('ordermult', $('#ordermult').val())
+  localStorage.setItem('leverage', $('#leverage').val())
   localStorage.setItem('crossconfirm', $('#crossconfirm').val())
   localStorage.setItem('risk', $('#risk').val())
   localStorage.setItem('tp', $('#tp').val())
@@ -45912,7 +45912,16 @@ localStorage.setItem('apikey', $('#apikey').val())
 }
 $( document ).ready(function() {
 setInterval(function(){
+if ($('#leverage').val() == ""){
+  if(localStorage.getItem('leverage') == undefined){
 
+$('#leverage').val("50")
+  }
+  else {
+
+$('#leverage').val(localStorage.getItem('leverage'))
+  }
+}
     if ($('#crossconfirm').val() == ""){
   if(localStorage.getItem('crossconfirm') == undefined){
 
@@ -45936,7 +45945,7 @@ $('#tp').val(localStorage.getItem('tp'))
  if ($('#sl').val() == ""){
   if(localStorage.getItem('sl') == undefined){
 
-$('#sl').val("1")
+$('#sl').val("0.5")
   }
   else {
 

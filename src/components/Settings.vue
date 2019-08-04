@@ -148,20 +148,20 @@
 
           <div class="form-group settings-pair mb8">
           <label
-            >Order Multiplier
+            >Leverage You're Using (Can't be Cross)
             <span
               class="icon-info-circle"
-              title="Order sizes get multiplied by this value"
+              title="Sl is a function of this value"
               v-tippy
             ></span
           ></label>
           <input
-            id="ordermult"
+            id="leverage"
             onchange="apis();"
             type="string"
             placeholder="1"
             class="form-control"
-            :value="ordermult"
+            :value="leverage"
             @change=""
           />
         </div>
@@ -919,7 +919,7 @@ export default {
     ...mapState([
       'apikey',
       'apisecret',
-      'ordermult',
+      'leverage',
       'crossonfirm',
       'pair',
       'tp',
