@@ -3221,9 +3221,9 @@ console.error((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-s
                                 buyingsignal = 0
                                 sellingsignal = 0
                                 if (yDatas[y][4] > theVwap) {
-                                    buyingsignal++
+                                    //buyingsignal++
                                 } else if (yDatas[y][4] < theVwap) {
-                                    sellingsignal++
+                                    //sellingsignal++
                                 }
                             }
                             ichimokuValues.push(
@@ -3247,10 +3247,10 @@ console.error((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-s
                     num = 26
                 }
                 if (this.chart.series[5].yData[num] <= (1 - crossconfirm) * this.chart.series[4].yData[num]) {
-                    sellingsignal++
+                    sellingsignal += 2
                 }
                 if (this.chart.series[5].yData[num] >= (1 + crossconfirm) * this.chart.series[4].yData[num]) {
-                    buyingsignal += 1
+                    buyingsignal += 2
 
                 }
                 if (ichimokuValue != undefined) {
