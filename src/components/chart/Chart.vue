@@ -2343,8 +2343,7 @@ console.error((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-s
                                     data = {
                                         symbol: thepair.replace('BTCUSD', 'XBTUSD').replace('BTC', 'U19'),
                                         orderQty: qty,
-                                        price: pr,
-                                        ordType: "Limit"
+                                        ordType: "Market"
                                     };
 
                                 // Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
@@ -2850,8 +2849,7 @@ console.error((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-s
                                     data = {
                                         symbol: thepair.replace('BTCUSD', 'XBTUSD').replace('BTC', 'U19'),
                                         orderQty: qty,
-                                        price: pr,
-                                        ordType: "Limit"
+                                        ordType: "Market"
                                     };
 
                                 // Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
@@ -3262,9 +3260,9 @@ console.error((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-s
 
                                 buyingsignal = 0
                                 sellingsignal = 0
-                                if (yDatas[y][4] > theVwap) {
+                                if (yDatas[y][4] > (1 + crossconfirm) * theVwap) {
                                     buyingsignal++
-                                } else if (yDatas[y][4] < theVwap) {
+                                } else if (yDatas[y][4] < (1 - crossconfirm) * theVwap) {
                                     sellingsignal++
                                 }
                                 }
