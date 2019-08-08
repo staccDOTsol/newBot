@@ -586,7 +586,7 @@ setInterval(function() {
                                     var stopQty;
                                     var trail;
                                     if (JSON.parse(body2)[j2].side == 'Sell') {
-                                        var stopQty = JSON.parse(body2)[j2].orderQty
+                                        var stopQty = pos * -1
 
                                         var trail = close * riskstop
                                         var stopPx = close * riskstop
@@ -594,7 +594,7 @@ setInterval(function() {
 
                                         var trail = close * riskstop * -1
                                         var stopPx = close * riskstop
-                                        var stopQty = JSON.parse(body2)[j2].orderQty * -1
+                                        var stopQty = pos * -1
                                     }
                                     var pr = close;
                                     if (thepair == 'BTCUSD') {
