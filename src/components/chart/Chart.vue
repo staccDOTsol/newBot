@@ -586,15 +586,56 @@ setInterval(function() {
                                     var stopQty;
                                     var trail;
                                     if (JSON.parse(body2)[j2].side == 'Sell') {
-                                        var stopQty = pos * -1
+                                    var lala;
+                                    if (JSON.parse(body2)[j2].orderQty < 0){
+                                        lala = JSON.parse(body2)[j2].orderQty * -1
+                                    }
+                                    else {
+                                    lala = JSON.parse(body2)[j2].orderQty
+                                    }
+                                    var thepos
+                                    if (pos < 0){
+                                    thepos = pos * -1
+                                    }
+                                    else {
+                                    thepos = pos
+                                    }
+                                    var stopQty
+                                    if (lala > pos){
+                                        stopQty = pos
+                                    }
+                                    else {
+                                    stopQty = pos - lala
+                                    }
+                            
 
                                         var trail = close * riskstop
                                         var stopPx = close * riskstop
                                     } else {
-
+var lala;
+                                    if (JSON.parse(body2)[j2].orderQty < 0){
+                                        lala = JSON.parse(body2)[j2].orderQty * -1
+                                    }
+                                    else {
+                                    lala = JSON.parse(body2)[j2].orderQty
+                                    }
+                                    var thepos
+                                    if (pos < 0){
+                                    thepos = pos * -1
+                                    }
+                                    else {
+                                    thepos = pos
+                                    }
+                                    var stopQty
+                                    if (lala > pos){
+                                        stopQty = pos
+                                    }
+                                    else {
+                                    stopQty = pos - lala
+                                    }
+                                        stopQty = stopQty * -1
                                         var trail = close * riskstop * -1
                                         var stopPx = close * riskstop
-                                        var stopQty = pos * -1
                                     }
                                     var pr = close;
                                     if (thepair == 'BTCUSD') {
