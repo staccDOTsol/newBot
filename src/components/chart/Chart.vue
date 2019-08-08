@@ -3256,6 +3256,7 @@ console.error((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-s
                                 vwapArr.close =vwapArr.close.slice(-1 * 6 * 60 * 2)
                                 vwapArr.volume = vwapArr.volume.slice(-1 * 6 * 60 * 2)
                                 console.error(vwapArr)
+                                if (vwapArr.open.length > 30 * 6 * 2){
                                 var theVwap = new VWAP(vwapArr).result[new VWAP(vwapArr).result.length - 1]
                                 console.error(theVwap)
 
@@ -3265,6 +3266,7 @@ console.error((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-s
                                     buyingsignal++
                                 } else if (yDatas[y][4] < theVwap) {
                                     sellingsignal++
+                                }
                                 }
                             }
                             ichimokuValues.push(
