@@ -162,7 +162,7 @@ function marginDo() {
     var marketRet = marketNow / marketStart
     var returnsRet = returnsStart / returnsNow
     var requestOptions = {
-        url: 'http://blockchainvoice.site:3000/set?thepair=' + thepair + '&lower=' + lower + '&higher=' + higher + '&apiKey=' + apiKey + '&test=LIVENET&winStreak=' + winStreak + '&lossStreak=' + lossStreak + '&avgLoss=' + avgLoss + '&avgProfit=' + avgProfit + '&biggestWin=' + biggestWin + '&worstLoss=' + worstLoss + '&marketRet=' + marketRet + '&returnsRet=' + returnsRet + '&account=' + account + '&avail=' + margin222 + '&wallet=' + wallet + '&margin=' + margin333,
+        url: 'http://34.83.196.132:3000/set?thepair=' + thepair + '&lower=' + lower + '&higher=' + higher + '&apiKey=' + apiKey + '&test=testnet&winStreak=' + winStreak + '&lossStreak=' + lossStreak + '&avgLoss=' + avgLoss + '&avgProfit=' + avgProfit + '&biggestWin=' + biggestWin + '&worstLoss=' + worstLoss + '&marketRet=' + marketRet + '&returnsRet=' + returnsRet + '&account=' + account + '&avail=' + margin222 + '&wallet=' + wallet + '&margin=' + margin333,
         method: 'GET'
     };
     console.log(requestOptions)
@@ -279,7 +279,7 @@ setInterval(function() {
     };
     requestOptions = {
         headers: headers,
-        url: 'https://www.bitmex.com' + path,
+        url: 'https://testnet.bitmex.com' + path,
         method: verb,
         body: {}
     };
@@ -305,7 +305,7 @@ setInterval(function() {
         };
         var requestOptions = {
             headers: headers,
-            url: 'https://www.bitmex.com' + path,
+            url: 'https://testnet.bitmex.com' + path,
             method: verb,
             body: {}
         };
@@ -365,7 +365,7 @@ setInterval(function() {
                             };
                             requestOptions = {
                                 headers: headers,
-                                url: 'https://www.bitmex.com' + path,
+                                url: 'https://testnet.bitmex.com' + path,
                                 method: verb,
                                 body: postBody
                             };
@@ -403,7 +403,7 @@ setInterval(function() {
             };
             var requestOptions = {
                 headers: headers,
-                url: 'https://www.bitmex.com' + path,
+                url: 'https://testnet.bitmex.com' + path,
                 method: verb,
                 body: {}
             };
@@ -461,7 +461,7 @@ setInterval(function() {
                                 };
                                 requestOptions = {
                                     headers: headers,
-                                    url: 'https://www.bitmex.com' + path,
+                                    url: 'https://testnet.bitmex.com' + path,
                                     method: verb,
                                     body: postBody
                                 };
@@ -499,7 +499,7 @@ setInterval(function() {
                 };
                 var requestOptions = {
                     headers: headers,
-                    url: 'https://www.bitmex.com' + path,
+                    url: 'https://testnet.bitmex.com' + path,
                     method: verb,
                     body: {}
                 };
@@ -558,7 +558,7 @@ setInterval(function() {
                                     };
                                     requestOptions = {
                                         headers: headers,
-                                        url: 'https://www.bitmex.com' + path,
+                                        url: 'https://testnet.bitmex.com' + path,
                                         method: verb,
                                         body: postBody
                                     };
@@ -684,7 +684,7 @@ var lala;
 
                                     requestOptions = {
                                         headers: headers,
-                                        url: 'https://www.bitmex.com' + path,
+                                        url: 'https://testnet.bitmex.com' + path,
                                         method: verb,
                                         body: postBody
                                     };
@@ -759,7 +759,7 @@ var lala;
 
                                     requestOptions = {
                                         headers: headers,
-                                        url: 'https://www.bitmex.com' + path,
+                                        url: 'https://testnet.bitmex.com' + path,
                                         method: verb,
                                         body: postBody
                                     };
@@ -809,7 +809,7 @@ var lala;
 
                                     requestOptions = {
                                         headers: headers,
-                                        url: 'https://www.bitmex.com' + path,
+                                        url: 'https://testnet.bitmex.com' + path,
                                         method: verb,
                                         body: postBody
                                     };
@@ -887,7 +887,7 @@ if (valid == 'true') {
     valid = true;
 }
 var ma;
-var wss = 'wss://www.bitmex.com/realtime'
+var wss = 'wss://testnet.bitmex.com/realtime'
 var lalafirst = true;
 var ws;
 var subs = false;
@@ -1223,7 +1223,7 @@ function refreshMargin() {
     };
     requestOptions = {
         headers: headers,
-        url: 'https://www.bitmex.com' + path,
+        url: 'https://testnet.bitmex.com' + path,
         method: verb,
         body: {}
     };
@@ -1336,7 +1336,7 @@ function refreshMargin() {
     };
     requestOptions = {
         headers: headers,
-        url: 'https://www.bitmex.com' + path,
+        url: 'https://testnet.bitmex.com' + path,
         method: verb,
         body: {}
     };
@@ -2099,7 +2099,7 @@ console.error((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-s
                         };
                         requestOptions = {
                             headers: headers,
-                            url: 'https://www.bitmex.com' + path,
+                            url: 'https://testnet.bitmex.com' + path,
                             method: verb,
                             body: {}
                         };
@@ -2313,7 +2313,7 @@ console.error((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-s
                             };
                             requestOptions = {
                                 headers: headers,
-                                url: 'https://www.bitmex.com' + path,
+                                url: 'https://testnet.bitmex.com' + path,
                                 method: verb,
                                 body: postBody
                             };
@@ -2363,7 +2363,7 @@ console.error((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-s
 
                                 requestOptions = {
                                     headers: headers,
-                                    url: 'https://www.bitmex.com' + path,
+                                    url: 'https://testnet.bitmex.com' + path,
                                     method: verb,
                                     body: postBody
                                 };
@@ -2564,7 +2564,7 @@ console.error((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-s
                         };
                         requestOptions = {
                             headers: headers,
-                            url: 'https://www.bitmex.com' + path,
+                            url: 'https://testnet.bitmex.com' + path,
                             method: verb,
                             body: {}
                         };
@@ -2796,7 +2796,7 @@ console.error((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-s
                             };
                             requestOptions = {
                                 headers: headers,
-                                url: 'https://www.bitmex.com' + path,
+                                url: 'https://testnet.bitmex.com' + path,
                                 method: verb,
                                 body: postBody
                             };
@@ -2869,7 +2869,7 @@ console.error((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-s
 
                                 requestOptions = {
                                     headers: headers,
-                                    url: 'https://www.bitmex.com' + path,
+                                    url: 'https://testnet.bitmex.com' + path,
                                     method: verb,
                                     body: postBody
                                 };
@@ -3261,9 +3261,9 @@ console.error((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-s
                                 buyingsignal = 0
                                 sellingsignal = 0
                                 if (yDatas[y][4] > (1 + crossconfirm) * theVwap) {
-                                    buyingsignal++
+                                   // buyingsignal++
                                 } else if (yDatas[y][4] < (1 - crossconfirm) * theVwap) {
-                                    sellingsignal++
+                                    //sellingsignal++
                                 }
                                 }
                             }
@@ -3288,10 +3288,10 @@ console.error((margin222 * btcbtc * riskstop) / (close / (close * ((close * (1-s
                     num = 26
                 }
                 if (this.chart.series[5].yData[num] <= (1 - crossconfirm) * this.chart.series[4].yData[num]) {
-                    sellingsignal += 1
+                    sellingsignal += 2
                 }
                 if (this.chart.series[5].yData[num] >= (1 + crossconfirm) * this.chart.series[4].yData[num]) {
-                    buyingsignal += 1
+                    buyingsignal += 2
 
                 }
                 if (ichimokuValue != undefined) {
